@@ -56,7 +56,7 @@ const invoices = [
 
 export function CustomTable() {
     return (
-        <Table className="max-w-[80%] m-auto my-20">
+        <Table className="max-w-[90%] m-auto my-20">
             <TableCaption>Order history</TableCaption>
             <TableHeader>
                 <TableRow>
