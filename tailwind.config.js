@@ -15,6 +15,7 @@ module.exports = {
       "accent-color-1": "#4682B4",
       "accent-color-2": "#A9A9A9",
       "background-color": "#F5F5F5",
+      "error-color": "#E74C3C",
     },
 
     container: {

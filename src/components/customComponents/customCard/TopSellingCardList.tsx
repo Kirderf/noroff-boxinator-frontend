@@ -28,7 +28,7 @@ const Products: Product[] = [
 
 function TopSellingCardList() {
     return (
-        <div className='flex gap-20 m-20 flex-wrap justify-center'>
+        <div className='flex gap-20 mt-10 flex-wrap justify-center'>
             {
                 Products.map((product, index) => (
                     <CustomCard key={index} {...product} />
