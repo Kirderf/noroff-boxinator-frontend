@@ -1,4 +1,4 @@
-import CustomCard from './customCard';
+import CustomCard from './CustomCard';
 
 
 
