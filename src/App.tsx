@@ -9,7 +9,7 @@ import SignUpPage from "./pages/SignUpPage";
 function App() {
 	return (
 		<BrowserRouter>
-			{window.location.pathname === "/signin" || "/signup" ? null : <Header />}
+			{window.location.pathname === "/signin" || window.location.pathname === "/signup" ? null : <Header />}
 			<Routes>
 				<Route path="/" element={<LandingPage />} />
 				<Route path="/signin" element={<SignInPage />} />

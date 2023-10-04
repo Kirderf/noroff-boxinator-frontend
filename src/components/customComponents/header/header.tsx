@@ -6,10 +6,10 @@ function Header() {
                 <a className='grow' href="/">
                     <h1 className='text-[2rem] font-bold text-green-color'>Boxinator</h1>
                 </a>
-                <a href="">
+                <a href="/cart">
                     <img src="./icons/cart-icon.png" alt="Cart" />
                 </a>
-                <a href="">
+                <a href="/signin">
                     <img src="./icons/loginicon.svg" alt="Login" />
                 </a>
             </div>
