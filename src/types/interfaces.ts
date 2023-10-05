@@ -8,7 +8,15 @@ interface Product {
 
 interface Order {
   id: number;
-  userId: number;
+  user: number;
   products: Product[];
   status: string;
+}
+
+interface User {
+  id: number;
+  address: string;
+  email: string;
+  roles: string;
+  username: string;
 }

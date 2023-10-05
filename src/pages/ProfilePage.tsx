@@ -9,7 +9,6 @@ function ProfilePage() {
                 <img className='rounded-full' src="./images/freddy.png" alt="" />
                 <h1 className='mt-10 font-bold text-2xl'>Freddy Freddison</h1>
                 <CustomDialog />
-
             </div>
             <CustomTable />
         </main>
