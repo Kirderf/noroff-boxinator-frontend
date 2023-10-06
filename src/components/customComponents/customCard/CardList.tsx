@@ -11,6 +11,9 @@ const Products: Product[] = [
         price: 100,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptatibus.',
         imageUrl: './images/productimage.png',
+        width: 100,
+        height: 100,
+        weight: 100,
     },
     {
         id: 2,
@@ -18,6 +21,9 @@ const Products: Product[] = [
         price: 100,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptatibus.',
         imageUrl: './images/productimage.png',
+        width: 100,
+        height: 100,
+        weight: 100,
     },
     {
         id: 3,
@@ -25,6 +31,9 @@ const Products: Product[] = [
         price: 100,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptatibus.',
         imageUrl: './images/productimage.png',
+        width: 100,
+        height: 100,
+        weight: 100,
     },
     {
         id: 4,
@@ -32,6 +41,9 @@ const Products: Product[] = [
         price: 100,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptatibus.',
         imageUrl: './images/productimage.png',
+        width: 100,
+        height: 100,
+        weight: 100,
     },
     {
         id: 5,
@@ -39,6 +51,9 @@ const Products: Product[] = [
         price: 100,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptatibus.',
         imageUrl: './images/productimage.png',
+        width: 100,
+        height: 100,
+        weight: 100,
     },
     {
         id: 6,
@@ -46,6 +61,9 @@ const Products: Product[] = [
         price: 100,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptatibus.',
         imageUrl: './images/productimage.png',
+        width: 100,
+        height: 100,
+        weight: 100,
     },
     {
         id: 7,
@@ -53,6 +71,9 @@ const Products: Product[] = [
         price: 100,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptatibus.',
         imageUrl: './images/productimage.png',
+        width: 100,
+        height: 100,
+        weight: 100,
     },
     {
         id: 8,
@@ -60,6 +81,9 @@ const Products: Product[] = [
         price: 100,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptatibus.',
         imageUrl: './images/productimage.png',
+        width: 100,
+        height: 100,
+        weight: 100,
     },
     {
         id: 9,
@@ -67,6 +91,9 @@ const Products: Product[] = [
         price: 100,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptatibus.',
         imageUrl: './images/productimage.png',
+        width: 100,
+        height: 100,
+        weight: 100,
     },
 ];
 

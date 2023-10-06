@@ -4,6 +4,9 @@ interface Product {
   price: number;
   description: string;
   imageUrl: string;
+  weight: number;
+  height: number;
+  width: number;
 }
 
 interface Order {
