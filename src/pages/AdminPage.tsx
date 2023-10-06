@@ -14,6 +14,9 @@ async function getProductData(): Promise<Product[]> {
             description: "This is a product",
             price: 100,
             imageUrl: "https://picsum.photos/200",
+            weight: 100,
+            height: 100,
+            width: 100,
         },
     ];
 }
@@ -79,7 +82,7 @@ function AdminPage() {
                 <Button onClick={() => getUser()} className="bg-accent-color-1 w-full"> User</Button>
                 <Button onClick={() => getOrder()} className="bg-accent-color-1 w-full"> Order</Button>
             </div>
-            <div className=" w-[70%] mx-auto">
+            <div className="w-[70%] mx-auto">
                 <DataTable columns={columns} data={data} />
             </div>
         </main>

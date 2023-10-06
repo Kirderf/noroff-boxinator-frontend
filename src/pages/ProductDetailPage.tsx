@@ -47,9 +47,7 @@ function ProductDetailPage() {
     }, [])
 
     console.log(product)
-
     console.log(id)
-
 
     return (
         <main className="bg-primary-color h-auto flex justify-center items-center ">

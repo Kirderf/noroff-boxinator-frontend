@@ -10,7 +10,10 @@ function ProfilePage() {
                 <h1 className='mt-10 font-bold text-2xl'>Freddy Freddison</h1>
                 <CustomDialog />
             </div>
-            <CustomTable />
+
+            <div className="w-[70%] mx-auto">
+                <CustomTable />
+            </div>
         </main>
     )
 }
