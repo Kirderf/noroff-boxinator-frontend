@@ -1,7 +1,7 @@
 import CustomCard from './CustomCard';
 
 
-
+///TODO: Make Fetch method in landing page
 const Products: Product[] = [
     {
         id: 1,

@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom"
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
@@ -15,8 +14,9 @@ import {
 //extract to service file?
 async function getSingleProduct(id: number): Promise<Product> {
     //Fetch singleProduct with id and store it in state. Redux?
+
     const product = {
-        id: 1,
+        id: id,
         name: "Arctic Adventure Box",
         description: "Exploration gear for the rugged adventurer, including a thermos, pocket knife, compass, warm gloves, and a guidebook to Arctic wildlife.",
         price: 100,
