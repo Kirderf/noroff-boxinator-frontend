@@ -1,7 +1,7 @@
 import CustomCard from './CustomCard';
 
 
-
+///TODO: Make Fetch method in landing page
 const Products: Product[] = [
     {
         id: 1,
@@ -9,6 +9,9 @@ const Products: Product[] = [
         price: 100,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptatibus.',
         imageUrl: './images/productimage.png',
+        width: 100,
+        height: 100,
+        weight: 100,
     },
     {
         id: 2,
@@ -16,6 +19,9 @@ const Products: Product[] = [
         price: 100,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptatibus.',
         imageUrl: './images/productimage.png',
+        width: 100,
+        height: 100,
+        weight: 100,
     },
     {
         id: 3,
@@ -23,6 +29,9 @@ const Products: Product[] = [
         price: 100,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptatibus.',
         imageUrl: './images/productimage.png',
+        width: 100,
+        height: 100,
+        weight: 100,
     },
 ];
 
