@@ -1,12 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { MoreHorizontal } from 'lucide-react'
-import React from 'react'
-
-
-
-
-
 
 function CustomDropDown(props: { action1: string, action2: string }) {
     return (
