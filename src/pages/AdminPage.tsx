@@ -4,6 +4,7 @@ import { DataTable } from "../components/customComponents/adminTable/data-table"
 import { Button } from "@/components/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
 
+//extract to service files?
 async function getProductData(): Promise<Product[]> {
     // Fetch data from your API here.
     return [
@@ -17,6 +18,7 @@ async function getProductData(): Promise<Product[]> {
     ];
 }
 
+//extract to service files?
 async function getOrderData(): Promise<Order[]> {
     // Fetch data from your API here.
     return [
@@ -24,6 +26,7 @@ async function getOrderData(): Promise<Order[]> {
     ]
 }
 
+//extract to service files?
 async function getUserData(): Promise<User[]> {
     // Fetch data from your API here.
     return [
