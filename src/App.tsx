@@ -7,6 +7,7 @@ import ProfilePage from "./pages/ProfilePage";
 import Footer from "./components/customComponents/footer/Footer";
 import AdminPage from "./pages/AdminPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 
 
@@ -21,6 +22,7 @@ function App() {
 				<Route path="/profile" element={<ProfilePage />} />
 				<Route path="/admin" element={<AdminPage />} />
 				<Route path="/product/:id" element={<ProductDetailPage />} />
+				<Route path="/checkout" element={<CheckoutPage />} />
 			</Routes>
 			{window.location.pathname === "/signin" || window.location.pathname === "/signup" ? null : <Footer />}
 		</BrowserRouter>

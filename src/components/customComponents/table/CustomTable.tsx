@@ -35,7 +35,7 @@ export function CustomTable(props: CustomTableProps) {
                         <TableCell>{order.status}</TableCell>
                         <TableCell>{order.products.length}</TableCell>
                         <TableCell className="text-right">{order.user}</TableCell>
-                        <TableCell className="text-center w-[10rem]">{<Button className="bg-accent-color-1 w-full">View Order</Button>} </TableCell>
+                        <TableCell className="text-center w-[10rem]">{<Button className="bg-accent-color-1 w-full hover:bg-accent-color-2 hover:bg-opacity-[.50]">View Order</Button>} </TableCell>
                     </TableRow>
                 ))}
             </TableBody>
