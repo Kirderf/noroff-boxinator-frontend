@@ -36,7 +36,6 @@ const products: Product[] = [
     },
 ];
 
-
 const countries = [
     {
         id: 1,
@@ -56,7 +55,6 @@ const countries = [
         shortName: "UK",
         shippingCost: 30,
     }
-
 ]
 
 

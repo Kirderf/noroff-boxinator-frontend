@@ -29,7 +29,7 @@ function CustomPopOver(props: CustomPopOverProps) {
                     >
                         {props.field.value
                             ? props.country.find(
-                                (country) => country.fullName === props.field.value
+                                (country) => country.shortName === props.field.value
                             )?.fullName
                             : "Select Country"}
                     </Button>
@@ -41,15 +41,15 @@ function CustomPopOver(props: CustomPopOverProps) {
                         {props.country.map((country) => (
                             <CommandItem
                                 value={country.fullName}
-                                key={country.shortName}
+                                key={country.id}
                                 onSelect={() => {
-                                    props.form.setValue("country", country.fullName)
+                                    props.form.setValue("country", country.shortName)
                                 }}
                             >
                                 <CheckIcon
                                     className={cn(
                                         "mr-2 h-4 w-4",
-                                        country.fullName === props.field.value
+                                        country.shortName === props.field.value
                                             ? "opacity-100"
                                             : "opacity-0"
                                     )}
