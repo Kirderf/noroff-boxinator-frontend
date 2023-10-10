@@ -1,4 +1,4 @@
-import CustomDialog from "@/components/customComponents/dialog/CustomDialog"
+import CustomDialog from "@/components/customComponents/editUserDialog/CustomDialog"
 import { CustomTable } from "@/components/customComponents/table/CustomTable"
 import { useEffect, useState } from "react";
 
@@ -10,27 +10,39 @@ async function getOrderByUser(): Promise<Order[]> {
         {
             id: 1,
             user: 1,
-            products: [
+            ordersProducts: [
                 {
-                    id: 1,
-                    name: "Product 1",
-                    description: "This is a product",
-                    price: 100,
-                    image: "https://picsum.photos/200",
-                   
+
+                    quantity: 2,
+                    product: {
+                        id: 1,
+                        name: "Product 1",
+                        description: "This is a product",
+                        price: 100,
+                        imageUrl: "https://picsum.photos/200",
+                        weight: 100,
+                        height: 100,
+                        width: 100,
+                    },
                 },
                 {
-                    id: 2,
-                    name: "Product 2",
-                    description: "This is a product",
-                    price: 100,
-                    image: "https://picsum.photos/200",
-                
+                    quantity: 3,
+                    product: {
+                        id: 2,
+                        name: "Product 2",
+                        description: "This is a product",
+                        price: 100,
+                        imageUrl: "https://picsum.photos/200",
+                        weight: 100,
+                        height: 100,
+                        width: 100,
+                    },
                 },
             ],
             status: "Pending",
-        }
-    ]
+            timeStamp: "2021-10-10",
+        },
+    ];
 }
 
 function ProfilePage() {

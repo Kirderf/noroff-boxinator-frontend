@@ -8,6 +8,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import ShipmentDialog from "../shipmentDialog/ShipmentDialog"
 
 
 interface CustomTableProps {
@@ -33,9 +34,9 @@ export function CustomTable(props: CustomTableProps) {
                     <TableRow key={order.id}>
                         <TableCell className="font-medium">{order.id}</TableCell>
                         <TableCell>{order.status}</TableCell>
-                        <TableCell>{order.products.length}</TableCell>
+                        <TableCell>{order.ordersProducts?.length}</TableCell>
                         <TableCell className="text-right">{order.user}</TableCell>
-                        <TableCell className="text-center w-[10rem]">{<Button className="bg-accent-color-1 w-full hover:bg-accent-color-2 hover:bg-opacity-[.50]">View Order</Button>} </TableCell>
+                        <TableCell className="text-center w-[10rem]">{<ShipmentDialog {...order} />} </TableCell>
                     </TableRow>
                 ))}
             </TableBody>
