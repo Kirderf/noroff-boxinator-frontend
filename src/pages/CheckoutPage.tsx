@@ -1,7 +1,6 @@
 import CustomCheckoutForm from '@/components/customComponents/checkoutForm/CustomCheckoutForm'
 import ProductCartCard from '@/components/customComponents/productCartCard/ProductCartCard';
 import { Separator } from '@/components/ui/separator';
-import { useState } from 'react';
 
 
 const products: Product[] = [
@@ -38,7 +37,7 @@ const products: Product[] = [
 ];
 
 
-const country = [
+const countries = [
     {
         id: 1,
         fullName: "United States",
@@ -57,6 +56,7 @@ const country = [
         shortName: "UK",
         shippingCost: 30,
     }
+
 ]
 
 
@@ -69,9 +69,9 @@ function checkoutPage() {
     }
 
     return (
-        <main className='min-h-screen flex justify-center items-center bg-background-color'>
-            <div className='border border-primary-color p-10 flex justify-center md:flex-nowrap flex-wrap'>
-                <CustomCheckoutForm onValueChange={handleValue} country={country} />
+        <main className=' flex justify-center items-center bg-background-color'>
+            <div className=' p-10 flex justify-center md:flex-nowrap flex-wrap'>
+                <CustomCheckoutForm onValueChange={handleValue} country={countries} />
                 <div className='flex flex-col gap-5 p-20 w-full items-start'>
                     {
                         products.map((product, index) => (
@@ -100,13 +100,13 @@ function checkoutPage() {
 
                     </div>
                     <Separator className='bg-primary-color opacity-20' />
-                    <div className='flex text-primary-color'>
-                        <h1 className=' font-bold'>Total</h1>
-                        <p className='font-bold'>{ }</p>
+                    <div className='flex text-primary-color justify-between w-full'>
+                        <h1 className='font-bold'>Total</h1>
+                        <p className='font-bold'>test</p>
                     </div>
                 </div>
             </div>
-        </main>
+        </main >
     )
 }
 

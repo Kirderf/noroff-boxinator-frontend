@@ -1,5 +1,3 @@
-import React from 'react'
-
 function ProductCartCard(props: Product) {
 
     let NOK = new Intl.NumberFormat('NO', {
