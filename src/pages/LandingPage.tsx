@@ -3,11 +3,24 @@ import TopSellingCardList from "@/components/customComponents/customCard/TopSell
 import Footer from "@/components/customComponents/footer/Footer"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-
-
-
+import { useGetAllProducts, useGetProductById } from "@/services/product/productGet"
+import { useEffect, useState } from "react"
 
 function LandingPage() {
+   
+    const [products, setProducts] = useState<Product[]>([])
+    const getAllProductsHook = useGetAllProducts()
+    const getProductByIdHook = useGetProductById(2)
+
+    useEffect(() => {
+        if(!getAllProductsHook.isLoading)
+            setProducts(getAllProductsHook.data as Product[])
+    }, [getAllProductsHook.data])
+    
+    useEffect(() => {
+        if(!getProductByIdHook.isLoading)
+            console.log(getProductByIdHook.data)
+    }, [getProductByIdHook.data])
     return (
         <main className="flex flex-col">
             <div className='min-h-screen  w-full flex flex-col items-center justify-center bg-primary-color'>
@@ -32,7 +45,12 @@ function LandingPage() {
                 <TopSellingCardList />
                 <Separator className="my-20 bg-background-color" />
                 <h1 className="text-center pt-10 text-[2rem] font-bold"><span className="text-green-color">Other</span> great Products to look at!</h1>
-                <CardList />
+                {getAllProductsHook.isLoading  ?
+                <></> 
+                :
+                <CardList product={products}/>
+                }
+                
             </div>
 
 
