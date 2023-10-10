@@ -2,11 +2,20 @@ import CardList from "@/components/customComponents/customCard/CardList"
 import TopSellingCardList from "@/components/customComponents/customCard/TopSellingCardList"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-
-
-
+import { useGetAllProducts } from "@/services/product/productGet"
+import { useEffect, useState } from "react"
 
 function LandingPage() {
+   
+    const [products, setProducts] = useState<Product[]>([])
+    const getAllProductsHook = useGetAllProducts()
+
+    useEffect(() => {
+        if(!getAllProductsHook.isLoading)
+            setProducts(getAllProductsHook.data as Product[])
+    }, [getAllProductsHook.data])
+    
+
     return (
         <main className="flex flex-col">
             <div className='min-h-screen  w-full flex flex-col items-center justify-center bg-primary-color'>
@@ -31,7 +40,12 @@ function LandingPage() {
                 <TopSellingCardList />
                 <Separator className="my-20 bg-background-color" />
                 <h1 className="text-center pt-10 text-[2rem] font-bold"><span className="text-green-color">Other</span> great Products to look at!</h1>
-                <CardList />
+                {getAllProductsHook.isLoading  ?
+                <></> 
+                :
+                <CardList product={products}/>
+                }
+                
             </div>
 
         </main>

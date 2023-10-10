@@ -12,6 +12,7 @@ async function getOrderByUser(): Promise<Order[]> {
             user: 1,
             ordersProducts: [
                 {
+
                     quantity: 2,
                     product: {
                         id: 1,

@@ -3,12 +3,8 @@ interface Product {
   name: string;
   price: number;
   description: string;
-  imageUrl: string;
-  weight: number;
-  height: number;
-  width: number;
+  image: string;
 }
-
 interface Order {
   id: number;
   status: string;

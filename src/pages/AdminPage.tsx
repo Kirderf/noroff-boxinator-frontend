@@ -13,10 +13,8 @@ async function getProductData(): Promise<Product[]> {
             name: "Product 1",
             description: "This is a product",
             price: 100,
-            imageUrl: "https://picsum.photos/200",
-            weight: 100,
-            height: 100,
-            width: 100,
+            image: "https://picsum.photos/200",
+
         },
     ];
 }
