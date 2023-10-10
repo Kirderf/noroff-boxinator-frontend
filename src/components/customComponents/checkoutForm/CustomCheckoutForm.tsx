@@ -24,9 +24,9 @@ const formSchema = z.object({
     city: z.string().min(3, {
         message: "City must be at least 3 characters.",
     }),
-    country: z.string().min(3, {
-        message: "Country must be at least 3 characters.",
-    }),
+    country: z.string().min(2, {
+        message: "Select country",
+    }).optional(),
     postalCode: z.string().min(4, {
         message: "Please enter a valid postal code.",
     }),

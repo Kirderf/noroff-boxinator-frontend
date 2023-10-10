@@ -1,6 +1,7 @@
 import CustomCheckoutForm from '@/components/customComponents/checkoutForm/CustomCheckoutForm'
 import ProductCartCard from '@/components/customComponents/productCartCard/ProductCartCard';
 import { Separator } from '@/components/ui/separator';
+import { useState } from 'react';
 
 
 const products: Product[] = [
@@ -34,6 +35,7 @@ const products: Product[] = [
         height: 12,
         width: 6
     },
+
 ];
 
 const countries = [
@@ -62,18 +64,24 @@ const countries = [
 
 function checkoutPage() {
 
-    function handleValue(value: string) {
+    const [productCounter, setProductCounter] = useState({});
+
+    function handleUpdateCounter(id: number, counter: number) {
+        setProductCounter({ ...productCounter, [id]: counter });
+    }
+
+    function handleCountryValue(value: string) {
         console.log(value);
     }
 
     return (
         <main className=' flex justify-center items-center bg-background-color'>
             <div className=' p-10 flex justify-center md:flex-nowrap flex-wrap'>
-                <CustomCheckoutForm onValueChange={handleValue} country={countries} />
+                <CustomCheckoutForm onValueChange={handleCountryValue} country={countries} />
                 <div className='flex flex-col gap-5 p-20 w-full items-start'>
                     {
                         products.map((product, index) => (
-                            <ProductCartCard key={index} {...product} />
+                            <ProductCartCard product={product} key={index} onUpdateCounter={handleUpdateCounter} />
                         ))
                     }
                     <Separator className='bg-primary-color opacity-20' />
