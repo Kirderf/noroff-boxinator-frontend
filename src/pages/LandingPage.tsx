@@ -9,17 +9,13 @@ function LandingPage() {
    
     const [products, setProducts] = useState<Product[]>([])
     const getAllProductsHook = useGetAllProducts()
-    const getProductByIdHook = useGetProductById(2)
 
     useEffect(() => {
         if(!getAllProductsHook.isLoading)
             setProducts(getAllProductsHook.data as Product[])
     }, [getAllProductsHook.data])
     
-    useEffect(() => {
-        if(!getProductByIdHook.isLoading)
-            console.log(getProductByIdHook.data)
-    }, [getProductByIdHook.data])
+
     return (
         <main className="flex flex-col">
             <div className='min-h-screen  w-full flex flex-col items-center justify-center bg-primary-color'>
