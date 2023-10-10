@@ -1,3 +1,4 @@
+import { DropdownMenu } from "@radix-ui/react-dropdown-menu"
 
 function Header() {
     return (
@@ -9,6 +10,7 @@ function Header() {
                 <div className="flex gap-7">
                     <a href="/cart">
                         <img src="./icons/cart-icon.png" alt="Cart" />
+                        <DropdownMenu />
                     </a>
                     <a href="/signin">
                         <img src="./icons/loginicon.svg" alt="Login" />

@@ -10,30 +10,23 @@ const products: Product[] = [
         name: "Product A",
         price: 29.99,
         description: "This is a wonderful product that solves all your problems.",
-        imageUrl: "https://via.placeholder.com/150",
-        weight: 1.2,
-        height: 10,
-        width: 5
+        image: "https://via.placeholder.com/150",
     },
     {
         id: 2,
         name: "Product B",
         price: 19.99,
         description: "An amazing product at an unbeatable price.",
-        imageUrl: "https://via.placeholder.com/150",
-        weight: 0.8,
-        height: 8,
-        width: 4
+        image: "https://via.placeholder.com/150",
+     
     },
     {
         id: 3,
         name: "Product C",
         price: 39.99,
         description: "The premium product in our lineup, for discerning customers.",
-        imageUrl: "https://via.placeholder.com/150",
-        weight: 1.5,
-        height: 12,
-        width: 6
+        image: "https://via.placeholder.com/150",
+     
     },
 
 ];

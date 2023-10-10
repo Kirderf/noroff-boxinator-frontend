@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 
-const apiUrl = import.meta.env.BACKEND_API_URL;
 
 const fetchAllShipments = async () => {
     return await fetch("https://boxinator2.azurewebsites.net/api/v1/shipment")

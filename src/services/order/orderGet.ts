@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-const apiUrl = import.meta.env.BACKEND_API_URL;
+
 let fullProductParam = ""
 
 const fetchAllOrders = async () => {

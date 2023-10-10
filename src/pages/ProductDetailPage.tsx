@@ -9,51 +9,23 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-
-
-//extract to service file?
-async function getSingleProduct(id: number): Promise<Product> {
-    //Fetch singleProduct with id and store it in state. Redux?
-
-    const product = {
-        id: id,
-        name: "Arctic Adventure Box",
-        description: "Exploration gear for the rugged adventurer, including a thermos, pocket knife, compass, warm gloves, and a guidebook to Arctic wildlife.",
-        price: 100,
-        imageUrl: "../images/productimage.png",
-        weight: 100,
-        height: 100,
-        width: 100,
-    }
-
-    return product
-}
-
+import { useGetProductById } from "@/services/product/productGet"
 
 function ProductDetailPage() {
-
-
-    const { id } = useParams<{ id: string }>()
-
-    const [product, setProduct] = useState<Product | undefined>()
-
-    async function getProduct() {
-        const productData = await getSingleProduct(Number(id))
-        setProduct(productData)
-    }
-
+    const { id } = useParams()
+    const [product, setProduct] = useState<Product>()
+    const getProductByIdHook = useGetProductById(id as unknown as number)
+    
     useEffect(() => {
-        getProduct()
-    }, [])
-
-    console.log(product)
-    console.log(id)
+        if(!getProductByIdHook.isLoading)
+            setProduct(getProductByIdHook.data as Product)
+    }, [getProductByIdHook.isLoading])
 
     return (
         <main className="bg-primary-color h-auto flex justify-center items-center ">
             <div className="bg-background-color w-full max-w-[70rem] h-auto flex flex-col md:flex-row items-center justify-center rounded-lg text-primary-color p-4 m-10">
                 <div className="flex flex-col items-start mb-4 md:mb-0 w-full order-2">
-                    <img src={product?.imageUrl} alt={product?.name} className="object-cover max-w-[40rem] w-full h-[20rem]" />
+                    <img src={product?.image} alt={product?.name} className="object-cover max-w-[40rem] w-full h-[20rem]" />
                     <Table className="max-w-[40rem]">
                         <TableHeader>
                             <TableRow>
@@ -63,15 +35,15 @@ function ProductDetailPage() {
                         <TableBody className="odd:bg-">
                             <TableRow >
                                 <TableCell>Weight</TableCell>
-                                <TableCell>{product?.weight} kg</TableCell>
+                                <TableCell>10 kg</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>Height</TableCell>
-                                <TableCell>{product?.height} cm</TableCell>
+                                <TableCell>10 cm</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>Width</TableCell>
-                                <TableCell>{product?.width} cm</TableCell>
+                                <TableCell>20 cm</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
