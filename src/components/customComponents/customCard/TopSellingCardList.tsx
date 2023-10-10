@@ -1,7 +1,7 @@
 import CustomCard from './CustomCard';
 
 
-
+///TODO: Make Fetch method in landing page
 const Products: Product[] = [
     {
         id: 1,
@@ -28,7 +28,7 @@ const Products: Product[] = [
 
 function TopSellingCardList() {
     return (
-        <div className='flex gap-20 mt-10 flex-wrap justify-center'>
+        <div className='flex gap-20 mt-10 flex-wrap justify-center max-w-[80%] mx-auto'>
             {
                 Products.map((product, index) => (
                     <CustomCard key={index} {...product} />

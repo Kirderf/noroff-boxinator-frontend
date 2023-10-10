@@ -1,6 +1,5 @@
 import CardList from "@/components/customComponents/customCard/CardList"
 import TopSellingCardList from "@/components/customComponents/customCard/TopSellingCardList"
-import Footer from "@/components/customComponents/footer/Footer"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { useGetAllProducts, useGetProductById } from "@/services/product/productGet"
@@ -53,8 +52,6 @@ function LandingPage() {
                 
             </div>
 
-
-            <Footer />
         </main>
 
     )

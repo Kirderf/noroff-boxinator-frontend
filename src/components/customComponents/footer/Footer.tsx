@@ -1,6 +1,6 @@
 function Footer() {
     return (
-        <footer className="mt-20 w-full py-10 px-4 bg-primary-color text-center relative">
+        <footer className=" w-full py-10 px-4 bg-primary-color text-center relative">
             <div className="flex flex-col md:flex-row justify-center items-center">
                 <div className=" absolute left-10">
                     <a className="flex-none text-xl font-semibold text-black dark:text-white" href="/" aria-label="Brand">

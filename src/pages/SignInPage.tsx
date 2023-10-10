@@ -63,7 +63,7 @@ function SignInPage() {
                         name="password"
                         render={({ field }) => (
                             <FormItem className='text-primary-color'>
-                                <FormLabel>Username</FormLabel>
+                                <FormLabel>Password</FormLabel>
                                 <FormControl>
                                     <Input placeholder="Password" {...field} />
                                 </FormControl>
