@@ -14,9 +14,15 @@ interface ProductsInCart {
 }
 interface Order {
   id: number;
-  user: number;
-  products: Product[];
   status: string;
+  user: number;
+  ordersProducts: OrderProducts[];
+  timeStamp: string;
+}
+
+interface OrderProducts {
+  quantity: number;
+  product: Product;
 }
 
 interface Country {
@@ -34,7 +40,7 @@ interface User {
   username: string;
 }
 
-interface shipment {
+interface Shipment {
   id: number;
   email: string;
   destination: string;
