@@ -1,4 +1,5 @@
-import { DropdownMenu } from "@radix-ui/react-dropdown-menu"
+import DropDownProducts from "../dropDown/DropDownProducts"
+
 
 function Header() {
     return (
@@ -8,10 +9,11 @@ function Header() {
                     <h1 className='text-[2rem] font-bold text-green-color'>Boxinator</h1>
                 </a>
                 <div className="flex gap-7">
-                    <a href="/cart">
-                        <img src="./icons/cart-icon.png" alt="Cart" />
-                        <DropdownMenu />
+
+                    <a>
+                        <DropDownProducts />
                     </a>
+
                     <a href="/signin">
                         <img src="./icons/loginicon.svg" alt="Login" />
                     </a>

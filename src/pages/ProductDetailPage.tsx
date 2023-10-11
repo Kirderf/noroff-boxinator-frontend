@@ -10,19 +10,22 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { useGetProductById } from "@/services/product/productGet"
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../redux/chartSlice';
 
 function ProductDetailPage() {
+    const dispatch = useDispatch()
     const { id } = useParams()
     const [product, setProduct] = useState<Product>()
     const getProductByIdHook = useGetProductById(id as unknown as number)
-    
+
     useEffect(() => {
-        if(!getProductByIdHook.isLoading)
+        if (!getProductByIdHook.isLoading)
             setProduct(getProductByIdHook.data as Product)
     }, [getProductByIdHook.isLoading])
 
     return (
-        <main className="bg-primary-color h-auto flex justify-center items-center ">
+        <main className="bg-primary-color h-auto flex justify-evenly w-full items-center ">
             <div className="bg-background-color w-full max-w-[70rem] h-auto flex flex-col md:flex-row items-center justify-center rounded-lg text-primary-color p-4 m-10">
                 <div className="flex flex-col items-start mb-4 md:mb-0 w-full order-2">
                     <img src={product?.image} alt={product?.name} className="object-cover max-w-[40rem] w-full h-[20rem]" />
@@ -54,7 +57,11 @@ function ProductDetailPage() {
                         <p className="">{product?.description}</p>
                     </div>
                     <div className="flex gap-10 w-full mt-10 text-background-color">
-                        <Button className="bg-accent-color-1 w-full font-bold" > Add to cart</Button>
+                        <Button className="bg-accent-color-1 w-full font-bold" onClick={() => {
+                            dispatch(addToCart({
+                                product
+                            }))
+                        }} > Add to cart</Button>
                         <Button className="bg-error-color w-full font-bold" > Buy Now</Button>
                     </div>
                 </div>

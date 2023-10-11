@@ -37,8 +37,11 @@ const formSchema = z.object({
         message: "Delivery Instruction must be at least 3 characters.",
     }).optional(),
 })
-
-function CustomCheckoutForm(props: { country: Country[], onValueChange: any }) {
+interface Props {
+    country: Country[],
+    setShippingCost: React.Dispatch<React.SetStateAction<number>>
+}
+function CustomCheckoutForm(props: Props) {
 
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -54,19 +57,16 @@ function CustomCheckoutForm(props: { country: Country[], onValueChange: any }) {
             deliveryInstruction: "",
         },
     })
-
-
-    const { watch } = form
-    const countryValue = watch("country")
-
     useEffect(() => {
-        props.onValueChange(countryValue);
-    }, [countryValue, props]);
+        const c = props.country.filter(c => c.shortName === form.getValues("country"))
+        if (c.length == 1) {
+            props.setShippingCost(c[0].shippingCost)
+        }
 
+    }, [form.watch("country")])
     const { toast } = useToast()
 
     function onSubmit(data: z.infer<typeof formSchema>) {
-        console.log(data)
         toast({
             title: "You submitted the following values:",
             description: (
