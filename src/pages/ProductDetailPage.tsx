@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import {
     Table,
     TableBody,
@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/chartSlice';
 
 function ProductDetailPage() {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const { id } = useParams()
     const [product, setProduct] = useState<Product>()
@@ -74,7 +75,12 @@ function ProductDetailPage() {
                                 product
                             }))
                         }} > Add to cart</Button>
-                        <Button className="bg-error-color w-full font-bold" > Buy Now</Button>
+                        <Button className="bg-error-color w-full font-bold" onClick={() => {
+                            dispatch(addToCart({
+                                product
+                            }))
+                            navigate("/checkout")
+                        }} > Buy Now</Button>
                     </div>
                 </div>
             </div>
