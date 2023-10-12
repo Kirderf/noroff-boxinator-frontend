@@ -20,7 +20,6 @@ async function getOrderByUser(): Promise<Order[]> {
                         description: "This is a product",
                         price: 100,
                         image: "https://picsum.photos/200",
-
                     },
                 },
                 {
@@ -31,7 +30,6 @@ async function getOrderByUser(): Promise<Order[]> {
                         description: "This is a product",
                         price: 100,
                         image: "https://picsum.photos/200",
-
                     },
                 },
             ],
