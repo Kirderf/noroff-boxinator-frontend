@@ -1,80 +1,34 @@
 import CustomCheckoutForm from '@/components/customComponents/checkoutForm/CustomCheckoutForm'
 import ProductCartCard from '@/components/customComponents/productCartCard/ProductCartCard';
 import { Separator } from '@/components/ui/separator';
-import { useState } from 'react';
-
-
-const products: Product[] = [
-    {
-        id: 1,
-        name: "Product A",
-        price: 29.99,
-        description: "This is a wonderful product that solves all your problems.",
-        image: "https://via.placeholder.com/150",
-    },
-    {
-        id: 2,
-        name: "Product B",
-        price: 19.99,
-        description: "An amazing product at an unbeatable price.",
-        image: "https://via.placeholder.com/150",
-     
-    },
-    {
-        id: 3,
-        name: "Product C",
-        price: 39.99,
-        description: "The premium product in our lineup, for discerning customers.",
-        image: "https://via.placeholder.com/150",
-     
-    },
-
-];
-
-const countries = [
-    {
-        id: 1,
-        fullName: "United States",
-        shortName: "US",
-        shippingCost: 10,
-    },
-    {
-        id: 2,
-        fullName: "Canada",
-        shortName: "CA",
-        shippingCost: 20,
-    },
-    {
-        id: 3,
-        fullName: "United Kingdom",
-        shortName: "UK",
-        shippingCost: 30,
-    }
-]
-
-
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux'
+import { useGetAllCountries } from '@/services/countries/countriesGet';
 
 
 function checkoutPage() {
+    const cart = useSelector((state: { product: Product, quantity: number }[]) => state)
+    const [shippingCost, setShippingCost] = useState(0);
 
-    const [productCounter, setProductCounter] = useState({});
+    const [countries, setCountries] = useState<Country[]>([])
+    const getAllCountriesHook = useGetAllCountries()
 
-    function handleUpdateCounter(id: number, counter: number) {
-        setProductCounter({ ...productCounter, [id]: counter });
-    }
+    useEffect(() => {
+        if (!getAllCountriesHook.isLoading)
+            setCountries(getAllCountriesHook.data as Country[])
+    }, [getAllCountriesHook.data])
 
-    function handleCountryValue(value: string) {
-        console.log(value);
-    }
 
     return (
         <main className=' flex justify-center items-center bg-background-color'>
             <div className=' p-10 flex justify-center md:flex-nowrap flex-wrap'>
-                <CustomCheckoutForm onValueChange={handleCountryValue} country={countries} />
+                <CustomCheckoutForm country={countries} setShippingCost={setShippingCost} />
                 <div className='flex flex-col gap-5 p-20 w-full items-start'>
                     {
-                        products.map((product, index) => (
-                            <ProductCartCard product={product} key={index} onUpdateCounter={handleUpdateCounter} />
+                        cart.map((item, index) => (
+                            <div key={index} className='w-full'>
+                                <ProductCartCard productWithCount={item} />
+                            </div>
                         ))
                     }
                     <Separator className='bg-primary-color opacity-20' />
@@ -86,14 +40,19 @@ function checkoutPage() {
                                     new Intl.NumberFormat('NO', {
                                         style: 'currency',
                                         currency: 'NOK',
-                                    }).format(products.reduce((a, b) => a + b.price, 0))
+                                    }).format(cart.reduce((a, b) => a + b.product.price * b.quantity, 0))
                                 }
                             </p>
                         </div>
                         <div className='flex justify-between'>
                             <h1>Shipping</h1>
                             <p className='font-bold'>
-
+                                {
+                                    new Intl.NumberFormat('NO', {
+                                        style: 'currency',
+                                        currency: 'NOK',
+                                    }).format(shippingCost)
+                                }
                             </p>
                         </div>
 
@@ -101,7 +60,14 @@ function checkoutPage() {
                     <Separator className='bg-primary-color opacity-20' />
                     <div className='flex text-primary-color justify-between w-full'>
                         <h1 className='font-bold'>Total</h1>
-                        <p className='font-bold'>test</p>
+                        <p className='font-bold'>
+                            {
+                                new Intl.NumberFormat('NO', {
+                                    style: 'currency',
+                                    currency: 'NOK',
+                                }).format(cart.reduce((a, b) => a + b.product.price * b.quantity, shippingCost))
+                            }
+                        </p>
                     </div>
                 </div>
             </div>

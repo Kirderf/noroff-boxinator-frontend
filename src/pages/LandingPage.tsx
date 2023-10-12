@@ -3,18 +3,23 @@ import TopSellingCardList from "@/components/customComponents/customCard/TopSell
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { useGetAllProducts } from "@/services/product/productGet"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 function LandingPage() {
-   
+
     const [products, setProducts] = useState<Product[]>([])
     const getAllProductsHook = useGetAllProducts()
-
+    const productListRef = useRef<null | HTMLDivElement>(null)
     useEffect(() => {
-        if(!getAllProductsHook.isLoading)
+        if (!getAllProductsHook.isLoading)
             setProducts(getAllProductsHook.data as Product[])
     }, [getAllProductsHook.data])
-    
+
+    const scrollToProducts = () => {
+        if (productListRef.current)
+            window.scrollTo({ top: productListRef.current.offsetTop - 100, behavior: 'smooth' })
+    }
+
 
     return (
         <main className="flex flex-col">
@@ -28,24 +33,24 @@ function LandingPage() {
                                 a world of imaginative possibilities one box at a time, crafted to inspire and delight.
                             </span>
                         </h2>
-                        <Button className="bg-accent-color-1 w-[80%]">
+                        <Button className="bg-accent-color-1 w-[80%]" onClick={() => scrollToProducts()}>
                             <h1>Get started</h1>
                         </Button>
                     </div>
                 </div>
             </div>
 
-            <div className=" h-auto w-[90%] mx-auto my-20 bg-primary-color rounded-lg">
+            <div ref={productListRef} className=" h-auto w-[90%] mx-auto my-20 bg-primary-color rounded-lg">
                 <h1 className="text-center pt-10 text-[2rem] font-bold"><span className="text-green-color">Top</span> Selling Products!</h1>
                 <TopSellingCardList />
                 <Separator className="my-20 bg-background-color" />
                 <h1 className="text-center pt-10 text-[2rem] font-bold"><span className="text-green-color">Other</span> great Products to look at!</h1>
-                {getAllProductsHook.isLoading  ?
-                <></> 
-                :
-                <CardList product={products}/>
+                {getAllProductsHook.isLoading ?
+                    <></>
+                    :
+                    <CardList product={products} />
                 }
-                
+
             </div>
 
         </main>

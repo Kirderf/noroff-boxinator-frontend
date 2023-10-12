@@ -14,7 +14,6 @@ interface CustomPopOverProps {
 
 
 function CustomPopOver(props: CustomPopOverProps) {
-
     return (
         <Popover>
             <PopoverTrigger asChild>
@@ -35,13 +34,13 @@ function CustomPopOver(props: CustomPopOverProps) {
                     </Button>
                 </FormControl>
             </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0 bg-background-color text-primary-color">
+            <PopoverContent className="w-[200px] p-0 bg-background-color text-primary-color max-h-64 overflow-auto">
                 <Command>
                     <CommandGroup>
-                        {props.country.map((country) => (
+                        {props.country.map((country, index) => (
                             <CommandItem
                                 value={country.fullName}
-                                key={country.id}
+                                key={index}
                                 onSelect={() => {
                                     props.form.setValue("country", country.shortName)
                                 }}

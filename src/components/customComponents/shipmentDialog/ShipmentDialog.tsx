@@ -2,22 +2,21 @@ import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { Progress } from "@/components/ui/progress"
 import { Separator } from "@/components/ui/separator"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 function ShipmentDialog(props: Order) {
 
 
-    const [progress, setProgress] = useState(13)
+
 
     useEffect(() => {
-        const timer = setTimeout(() => setProgress(66), 500)
+
+        const timer = setTimeout(() => 66, 500)
         return () => clearTimeout(timer)
     }, [])
 

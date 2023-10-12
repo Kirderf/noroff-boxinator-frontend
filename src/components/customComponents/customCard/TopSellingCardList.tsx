@@ -31,7 +31,7 @@ function TopSellingCardList() {
         <div className='flex gap-20 mt-10 flex-wrap justify-center max-w-[80%] mx-auto'>
             {
                 Products.map((product, index) => (
-                    <CustomCard key={index} {...product} />
+                    <CustomCard key={index} product={product} />
                 ))
             }
         </div>

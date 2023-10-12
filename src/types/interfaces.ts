@@ -5,6 +5,13 @@ interface Product {
   description: string;
   image: string;
 }
+interface ProductsInCart {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  quantity: number;
+}
 interface Order {
   id: number;
   status: string;
