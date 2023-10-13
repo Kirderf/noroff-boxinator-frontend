@@ -75,7 +75,7 @@ function AdminPage() {
     return (
         <main className="min-h-screen bg-primary-color flex flex-col gap-10 items-center justify-center">
             <h1 className="text-4xl text-background-color text-center mt-10">Welcome Admin!</h1>
-            <div className="flex gap-10 max-w-md w-[50%] mx-auto">
+            <div className="flex md:flex-nowrap flex-wrap gap-10 max-w-md w-[50%] mx-auto">
                 <Button onClick={() => getProducts()} className="bg-accent-color-1 w-full"> Products</Button>
                 <Button onClick={() => getUser()} className="bg-accent-color-1 w-full"> User</Button>
                 <Button onClick={() => getOrder()} className="bg-accent-color-1 w-full"> Order</Button>

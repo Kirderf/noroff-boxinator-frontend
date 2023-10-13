@@ -14,17 +14,23 @@ import CheckoutPage from "./pages/CheckoutPage";
 function App() {
 	return (
 		<BrowserRouter>
-			{window.location.pathname === "/signin" || window.location.pathname === "/signup" ? null : <Header />}
-			<Routes>
-				<Route path="/" element={<LandingPage />} />
-				<Route path="/signin" element={<SignInPage />} />
-				<Route path="/signup" element={<SignUpPage />} />
-				<Route path="/profile" element={<ProfilePage />} />
-				<Route path="/admin" element={<AdminPage />} />
-				<Route path="/product/:id" element={<ProductDetailPage />} />
-				<Route path="/checkout" element={<CheckoutPage />} />
-			</Routes>
-			{window.location.pathname === "/signin" || window.location.pathname === "/signup" ? null : <Footer />}
+			<div className="flex flex-col min-h-screen">
+				{window.location.pathname === "/signin" || window.location.pathname === "/signup" ? null : <Header />}
+				<div className="grow bg-primary-color">
+					<Routes>
+						<Route path="/" element={<LandingPage />} />
+						<Route path="/signin" element={<SignInPage />} />
+						<Route path="/signup" element={<SignUpPage />} />
+						<Route path="/profile" element={<ProfilePage />} />
+						<Route path="/admin" element={<AdminPage />} />
+						<Route path="/product/:id" element={<ProductDetailPage />} />
+						<Route path="/checkout" element={<CheckoutPage />} />
+					</Routes>
+				</div>
+				{window.location.pathname === "/signin" || window.location.pathname === "/signup" ? null : <Footer />}
+
+			</div>
+
 		</BrowserRouter>
 	);
 }

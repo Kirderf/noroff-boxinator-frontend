@@ -17,7 +17,7 @@ export const productColumns: ColumnDef<Product>[] = [
         header: ({ column }) => {
             return (
                 <Button
-                    className="hover:bg-accent-color-2 hover:bg-opacity-[.50]"
+                    className="hover:bg-accent-color-2 px-0 hover:bg-opacity-[.50]"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Name
@@ -33,7 +33,7 @@ export const productColumns: ColumnDef<Product>[] = [
     },
     {
         accessorKey: "price",
-        header: () => <div className="text-right">Amount</div>,
+        header: () => <div className="text-left">Amount</div>,
         cell: ({ row }) => {
             const amount = parseFloat(row.getValue("price"))
             const formatted = new Intl.NumberFormat("no", {
@@ -41,7 +41,7 @@ export const productColumns: ColumnDef<Product>[] = [
                 currency: "NOK",
             }).format(amount)
 
-            return <div className="text-right font-medium">{formatted}</div>
+            return <div className="text-left font-medium">{formatted}</div>
         },
     },
     {

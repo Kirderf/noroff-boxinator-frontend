@@ -30,7 +30,7 @@ function ProductDetailPage() {
    :Surprise Element: 
    A collection of stunning Northern Lights photographs or a video message from a Scandinavian adventurer.`
     return (
-        <main className="bg-primary-color h-auto flex justify-evenly w-full items-center ">
+        <main className="bg-primary-color flex justify-center w-full items-center h-auto">
             <div className="bg-background-color max-w-[70rem] w-fit h-auto flex items-center rounded-lg text-primary-color p-4 m-10 flex-wrap justify-center">
                 <div className="flex items-start mb-4 md:mb-0 w-full order-2 max-w-[30rem] flex-wrap">
                     <img src={product?.image} alt={product?.name} className="object-cover max-w-[40rem] w-full min-w-[15rem] h-[20rem]" />
@@ -59,10 +59,10 @@ function ProductDetailPage() {
                 <div className="flex flex-col justify-between items-center max-w-[25rem] m-10  ">
                     <div className="text-center mb-20">
                         <h1 className="text-2xl mb-2 font-bold">{product?.name}</h1>
-                        <p className="">{pdesEx.split(":").map((word) => {
+                        <p className="">{pdesEx.split(":").map((word, index) => {
                             console.log(word)
                             if (word == "Contents" || word == "Surprise Element") {
-                                return <span className=" text-green-color text-lg"><br />{word}:<br /></span>
+                                return <span key={index} className=" text-green-color text-lg"><br />{word}:<br /></span>
                             } else {
                                 return word + " "
                             }
