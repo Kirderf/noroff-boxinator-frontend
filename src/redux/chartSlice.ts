@@ -10,7 +10,6 @@ export const CartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      console.log(action.payload);
       const itemInCart = state.find(
         (item) => item.product.id === action.payload.product.id
       );
@@ -40,9 +39,19 @@ export const CartSlice = createSlice({
       );
       state = removeItem;
     },
+    removeAllItems: (state) => {
+      while (state.length > 0) {
+        state.pop();
+      }
+    },
   },
 });
 
 export const cartReducer = CartSlice.reducer;
-export const { addToCart, incrementQuantity, decrementQuantity, removeItem } =
-  CartSlice.actions;
+export const {
+  addToCart,
+  incrementQuantity,
+  decrementQuantity,
+  removeItem,
+  removeAllItems,
+} = CartSlice.actions;
