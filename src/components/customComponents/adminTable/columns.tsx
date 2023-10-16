@@ -2,7 +2,15 @@ import { Button } from "@/components/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 import CustomDropDown from "../dropDown/CustomDropDown"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
 
+
+
+function handleDeleteProduct() {
+    return () => {
+        console.log("delete product")
+    }
+}
 
 //Column structure for product and order table
 // This is how you build the columns and rows for the tables
@@ -17,7 +25,7 @@ export const productColumns: ColumnDef<Product>[] = [
         header: ({ column }) => {
             return (
                 <Button
-                    className="hover:bg-accent-color-2 hover:bg-opacity-[.50]"
+                    className="hover:bg-accent-color-2 px-0 hover:bg-opacity-[.50]"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Name
@@ -33,7 +41,7 @@ export const productColumns: ColumnDef<Product>[] = [
     },
     {
         accessorKey: "price",
-        header: () => <div className="text-right">Amount</div>,
+        header: () => <div className="text-left">Amount</div>,
         cell: ({ row }) => {
             const amount = parseFloat(row.getValue("price"))
             const formatted = new Intl.NumberFormat("no", {
@@ -41,7 +49,7 @@ export const productColumns: ColumnDef<Product>[] = [
                 currency: "NOK",
             }).format(amount)
 
-            return <div className="text-right font-medium">{formatted}</div>
+            return <div className="text-left font-medium">{formatted}</div>
         },
     },
     {
@@ -49,7 +57,24 @@ export const productColumns: ColumnDef<Product>[] = [
         enableHiding: false,
         cell: () => {
             return (
-                <CustomDropDown action1="Delete product" action2="Edit product" />
+                <CustomDropDown>
+                    <Button onClick={handleDeleteProduct()} className="bg-accent-color-1">
+                        Delete product
+                    </Button>
+                    <Select>
+                        <SelectTrigger className="w-[180px] bg-accent-color-1 flex justify-center gap-2 h-auto border-none">
+                            <h1>Active:</h1>
+                            <SelectValue className="" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-accent-color-1">
+                            <SelectGroup>
+                                <SelectLabel>Active</SelectLabel>
+                                <SelectItem value="true">True</SelectItem>
+                                <SelectItem value="false">False</SelectItem>
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
+                </CustomDropDown>
             )
         },
     },
@@ -77,7 +102,14 @@ export const orderColumns: ColumnDef<Order>[] = [
         enableHiding: false,
         cell: () => {
             return (
-                <CustomDropDown action1="Delete order" action2="Edit order" />
+                <CustomDropDown>
+                    <Button className="bg-accent-color-1">
+                        Delete product
+                    </Button>
+                    <Button className="bg-accent-color-1">
+                        Edit product
+                    </Button>
+                </CustomDropDown>
             )
         },
     },
@@ -109,7 +141,14 @@ export const userColumns: ColumnDef<User>[] = [
         enableHiding: false,
         cell: () => {
             return (
-                <CustomDropDown action1="Delete user" action2="Edit user" />
+                <CustomDropDown>
+                    <Button className="bg-accent-color-1">
+                        Delete product
+                    </Button>
+                    <Button className="bg-accent-color-1">
+                        Edit product
+                    </Button>
+                </CustomDropDown>
             )
         },
     },

@@ -1,8 +1,9 @@
 import { Button } from '@/components/ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { MoreHorizontal } from 'lucide-react'
+import React from 'react'
 
-function CustomDropDown(props: { action1: string, action2: string }) {
+function CustomDropDown(props: { children: React.ReactNode }) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -13,8 +14,11 @@ function CustomDropDown(props: { action1: string, action2: string }) {
             <DropdownMenuContent className="bg-primary-color">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="hover:cursor-pointer">{props.action1}</DropdownMenuItem>
-                <DropdownMenuItem className="hover:cursor-pointer">{props.action2}</DropdownMenuItem>
+
+                <div className='flex flex-col gap-3 m-2'>
+                    {props.children}
+                </div>
+
             </DropdownMenuContent>
         </DropdownMenu>
     )

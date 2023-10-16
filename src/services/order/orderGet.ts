@@ -1,39 +1,44 @@
+/** @format */
+
 import { useQuery } from "@tanstack/react-query";
 
-
-let fullProductParam = ""
+let fullorderParam = "";
 
 const fetchAllOrders = async () => {
-    return await fetch("https://boxinator2.azurewebsites.net/api/v1/order" + fullProductParam)
-    .then(data => data.json())
-}
-const fetchOrderById = async (id: number) => {
-    return await fetch("https://boxinator2.azurewebsites.net/api/v1/order/"+ id + fullProductParam)
-    .then(data => data.json())
-}
-const fetchOrdersFromUser = async (userId: number) => {
-    return await fetch("https://boxinator2.azurewebsites.net/api/v1/order?userId="+userId + fullProductParam)
-    .then(data => data.json())
-}
+  return await fetch(
+    "https://boxinator2.azurewebsites.net/api/v1/order" + fullorderParam
+  ).then((data) => data.json());
+};
 
-export const useGetAllProducts = (fullProduct?: boolean) => {
-    if(fullProduct) fullProductParam = "?fullProduct=true"
-    return useQuery({
-        queryKey: ["getAllOrders"], 
-        queryFn: fetchAllOrders
-    })
-}
-export const useGetOrdertById = (id: number, fullProduct?: boolean) => {
-    if(fullProduct) fullProductParam = "?fullProduct=true"
-    return useQuery(
-        ["getOrderById", id], 
-        () => fetchOrderById(id)
-    )
-}
-export const useGetOrdersForUser = (userId: number, fullProduct?: boolean) => {
-    if(fullProduct) fullProductParam = "&fullProduct=true"
-    return useQuery(
-        ["getOrdersFromUser", userId], 
-        () => fetchOrdersFromUser(userId)
-    )
-} 
+const fetchOrderById = async (id: number) => {
+  return await fetch(
+    "https://boxinator2.azurewebsites.net/api/v1/order/" + id + fullorderParam
+  ).then((data) => data.json());
+};
+
+const fetchOrdersFromUser = async (userId: number) => {
+  return await fetch(
+    "https://boxinator2.azurewebsites.net/api/v1/order?userId=" +
+      userId +
+      fullorderParam
+  ).then((data) => data.json());
+};
+
+export const useGetAllOrder = (fullorder?: boolean) => {
+  if (fullorder) fullorderParam = "?fullorder=true";
+  return useQuery({
+    queryKey: ["getAllOrders"],
+    queryFn: fetchAllOrders,
+  });
+};
+
+export const useGetOrdertById = (id: number, fullorder?: boolean) => {
+  if (fullorder) fullorderParam = "?fullorder=true";
+  return useQuery(["getOrderById", id], () => fetchOrderById(id));
+};
+export const useGetOrdersForUser = (userId: number, fullorder?: boolean) => {
+  if (fullorder) fullorderParam = "&fullorder=true";
+  return useQuery(["getOrdersFromUser", userId], () =>
+    fetchOrdersFromUser(userId)
+  );
+};

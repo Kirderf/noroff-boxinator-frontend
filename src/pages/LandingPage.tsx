@@ -25,8 +25,8 @@ function LandingPage() {
         <main className="flex flex-col">
             <div className='min-h-screen  w-full flex flex-col items-center justify-center bg-primary-color'>
                 <div className='flex gap-32 bg-primary-color flex-wrap items-center justify-center pb-20 md:pr-32'>
-                    <img src="./images/BoxinatorLogo.png" className='object-fit h-[35rem] w-[35rem]' alt="" />
-                    <div className='flex flex-col items-center justify-center max-w-[20rem] text-center gap-10'>
+                    <img src="./images/BoxinatorLogo.png" className='object-fit h-[35rem] w-[35rem] animate-fade-up' alt="" />
+                    <div className='flex flex-col items-center justify-center max-w-[20rem] text-center gap-10 animate-fade-left'>
                         <h2>
                             <span className='text-green-color text-[2rem] font-bold'>Explore </span>
                             <span className='text-white text-[1.3rem] font-bold italic'>
