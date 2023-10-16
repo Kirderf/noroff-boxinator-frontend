@@ -11,13 +11,12 @@ import {
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux';
 import { decrementQuantity, incrementQuantity, removeAllItems } from '../../../redux/chartSlice';
-import { useNavigate } from "react-router-dom";
+
 
 
 const DropDownProducts = () => {
     const cart = useSelector((state: { product: Product, quantity: number }[]) => state)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
