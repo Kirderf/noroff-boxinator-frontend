@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { productColumns, orderColumns, userColumns } from "../components/customComponents/adminTable/columns"
 import { DataTable } from "../components/customComponents/adminTable/data-table"
 import { Button } from "@/components/ui/button"
