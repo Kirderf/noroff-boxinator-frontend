@@ -39,6 +39,13 @@ interface User {
   roles: string;
   username: string;
 }
+interface UserPost {
+  id: string;
+  address: string;
+  email: string;
+  roles: string;
+  username: string;
+}
 
 interface Shipment {
   id: number;
