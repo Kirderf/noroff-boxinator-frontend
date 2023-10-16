@@ -53,14 +53,13 @@ export function DataTable<TData, TValue>({
             <div className="flex items-center py-4 text-primary-color">
                 <Input
                     placeholder="Filter by name...."
-                    value={(table.getColumn("name" || "user" || "status")?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
                         table.getColumn("name" || "user" || "status")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
                 />
             </div>
-            <div className="rounded-md border h-[44rem] bg-accent-color-1">
+            <div className="rounded-md border flex justify-start h-auto bg-accent-color-1">
                 <Table>
                     <TableHeader className="bg-accent-color-2">
                         {table.getHeaderGroups().map((headerGroup) => (

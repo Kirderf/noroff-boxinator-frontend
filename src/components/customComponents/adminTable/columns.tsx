@@ -133,10 +133,6 @@ export const userColumns: ColumnDef<User>[] = [
         header: "Email",
     },
     {
-        accessorKey: "roles",
-        header: "Roles",
-    },
-    {
         id: "actions",
         enableHiding: false,
         cell: () => {
