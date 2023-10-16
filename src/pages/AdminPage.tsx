@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { productColumns, orderColumns, userColumns } from "../components/customComponents/adminTable/columns"
 import { DataTable } from "../components/customComponents/adminTable/data-table"
 import { Button } from "@/components/ui/button"
@@ -6,6 +6,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { useGetAllProducts } from "@/services/product/productGet"
 import { useGetAllOrder } from "@/services/order/orderGet"
 import { useGetAllUsers } from "@/services/user/userGet"
+import useKeyCloak from "@/services/keycloak/keyclokAdapter"
 
 
 type DataItem = Product | Order | User
@@ -15,12 +16,19 @@ type ColumnItem = ColumnDef<DataItem>
 
 function AdminPage() {
 
+    const keycloak = useKeyCloak()
     const [data, setData] = useState<DataItem[]>([])
     const [columns, setColumns] = useState<ColumnItem[]>(productColumns as ColumnItem[])
 
+    const [fetchUsers, setFetchUsers] = useState(false);
+    const [fetchOrders, setFetchOrders] = useState(false);
+
+
+    const token = keycloak?.token || ''
+
     const getAllProductsHook = useGetAllProducts()
-    const getAllUsersHook = useGetAllUsers()
-    const getAllOrderHook = useGetAllOrder()
+    const getAllUsersHook = useGetAllUsers(token, fetchUsers)
+    const getAllOrderHook = useGetAllOrder(true, token, fetchOrders)
 
     function getProducts() {
         if (!getAllProductsHook.isLoading) {
@@ -30,6 +38,8 @@ function AdminPage() {
     }
 
     function getUsers() {
+        setFetchUsers(true);
+
         if (!getAllUsersHook.isLoading) {
             setData(getAllUsersHook.data as User[])
             setColumns(userColumns as ColumnItem[])
@@ -37,15 +47,27 @@ function AdminPage() {
     }
 
     function getOrder() {
+        setFetchOrders(true);
         if (!getAllOrderHook.isLoading) {
             setData(getAllOrderHook.data as Order[])
             setColumns(orderColumns as ColumnItem[])
         }
     }
 
+    useEffect(() => {
+        if (!getAllUsersHook.isLoading) {
+            getUsers()
+        }
+    }, [getAllUsersHook.isLoading])
+
+    useEffect(() => {
+        if (!getAllProductsHook.isLoading) {
+            getOrder()
+        }
+    }, [getAllOrderHook.isLoading])
 
     return (
-        <main className="min-h-screen bg-primary-color flex flex-col gap-10 items-center justify-center">
+        <main className="min-h-screen bg-primary-color flex flex-col gap-10 items-center justify-start">
             <h1 className="text-4xl text-background-color text-center mt-10">Welcome Admin!</h1>
             <div className="flex md:flex-nowrap flex-wrap gap-10 max-w-md w-[50%] mx-auto">
                 <Button onClick={() => getProducts()} className="bg-accent-color-1 w-full"> Products</Button>

@@ -30,7 +30,6 @@ function App() {
 				{window.location.pathname === "/signin" || window.location.pathname === "/signup" ? null : <Footer />}
 
 			</div>
-
 		</BrowserRouter>
 	);
 }

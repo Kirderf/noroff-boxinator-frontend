@@ -4,11 +4,29 @@ import { useQuery } from "@tanstack/react-query";
 
 let fullorderParam = "";
 
-const fetchAllOrders = async () => {
-  return await fetch(
-    "https://boxinator2.azurewebsites.net/api/v1/order" + fullorderParam
-  ).then((data) => data.json());
-};
+async function fetchAllOrders(token?: string) {
+  try {
+    const response = await fetch(
+      "https://boxinator2.azurewebsites.net/api/v1/order" + fullorderParam,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          authorization: "bearer " + token,
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch orders");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
 
 const fetchOrderById = async (id: number) => {
   return await fetch(
@@ -24,11 +42,16 @@ const fetchOrdersFromUser = async (userId: number) => {
   ).then((data) => data.json());
 };
 
-export const useGetAllOrder = (fullorder?: boolean) => {
+export const useGetAllOrder = (
+  fullorder?: boolean,
+  token?: string,
+  enabled = false
+) => {
   if (fullorder) fullorderParam = "?fullorder=true";
   return useQuery({
-    queryKey: ["getAllOrders"],
-    queryFn: fetchAllOrders,
+    queryKey: ["getAllOrder"],
+    queryFn: () => fetchAllOrders(token as string),
+    enabled: enabled,
   });
 };
 
