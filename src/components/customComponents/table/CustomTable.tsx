@@ -30,12 +30,12 @@ export function CustomTable(props: CustomTableProps) {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {props.shipments.map((shipment) => (
-                    <TableRow key={shipment.id}>
-                        <TableCell className="font-medium">{shipment.id}</TableCell>
-                        <TableCell>{shipment.status}</TableCell>
+                {props.shipments?.map((shipment) => (
+                    <TableRow key={shipment?.id}>
+                        <TableCell className="font-medium">{shipment?.id}</TableCell>
+                        <TableCell>{shipment?.status}</TableCell>
                         <TableCell>{shipment.shipmentProducts?.length}</TableCell>
-                        <TableCell className="text-right">{shipment.user}</TableCell>
+                        <TableCell className="text-right">{shipment?.user}</TableCell>
                         <TableCell className="text-center w-[10rem]">{<ShipmentDialog {...shipment} />} </TableCell>
                     </TableRow>
                 ))}

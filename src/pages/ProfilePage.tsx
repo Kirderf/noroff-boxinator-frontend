@@ -13,16 +13,16 @@ function ProfilePage() {
     const [shipment, setShipment] = useState<Shipment[]>([])
     const [user, setUser] = useState<KeycloakProfile | undefined>(undefined)
 
-    const orderByUserHook = useGetShipmentsForUser(user?.id ?? '', true)
+    const shipmentByUserHook = useGetShipmentsForUser(user?.id ?? '', true, keycloak.keycloak?.token ?? '')
 
     useEffect(() => {
         keycloak.keycloak?.loadUserProfile().then((profile) => {
             setUser(profile)
         })
-        if (!orderByUserHook.isLoading) {
-            setShipment(orderByUserHook.data as Shipment[])
+        if (!shipmentByUserHook.isLoading) {
+            setShipment(shipmentByUserHook.data as Shipment[])
         }
-    }, [keycloak.keycloak?.authenticated])
+    }, [keycloak.keycloak?.authenticated, shipmentByUserHook.data])
 
 
     return (

@@ -9,6 +9,12 @@ const Products: Product[] = [
         price: 100,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptatibus.',
         image: './images/productimage.png',
+        stock: 10,
+        isActive: true,
+        width: 10,
+        depth: 10,
+        height: 10,
+        weight: 10
     },
     {
         id: 2,
@@ -16,6 +22,12 @@ const Products: Product[] = [
         price: 100,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptatibus.',
         image: './images/productimage.png',
+        stock: 10,
+        isActive: true,
+        width: 10,
+        depth: 10,
+        height: 10,
+        weight: 10
     },
     {
         id: 3,
@@ -23,6 +35,12 @@ const Products: Product[] = [
         price: 100,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptatibus.',
         image: './images/productimage.png',
+        stock: 10,
+        isActive: true,
+        width: 10,
+        depth: 10,
+        height: 10,
+        weight: 10
     },
 ];
 

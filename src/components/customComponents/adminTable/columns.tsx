@@ -77,19 +77,26 @@ export const productColumns: ColumnDef<Product>[] = [
 
 
 
-export const orderColumns: ColumnDef<Order>[] = [
+export const orderColumns: ColumnDef<Shipment>[] = [
     {
         accessorKey: "id",
         header: "Id",
     },
     {
-        accessorKey: "user",
+        accessorKey: "email",
         header: "User",
     },
     {
         accessorKey: "status",
-        header: () => <div className="text-right">Status</div>,
-        cell: () => <div className="text-right font-medium">Status</div>
+        header: "Status",
+    },
+    {
+        accessorKey: "shippingAddress",
+        header: "Shipping Address",
+    },
+    {
+        accessorKey: "postalCode",
+        header: "Postal Code",
     },
     {
         id: "actions",
