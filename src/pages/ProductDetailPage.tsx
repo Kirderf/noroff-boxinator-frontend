@@ -43,15 +43,19 @@ function ProductDetailPage() {
                         <TableBody className="odd:bg-">
                             <TableRow >
                                 <TableCell>Weight</TableCell>
-                                <TableCell>10 kg</TableCell>
+                                <TableCell>{product?.weight}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>Height</TableCell>
-                                <TableCell>10 cm</TableCell>
+                                <TableCell>{product?.height}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>Width</TableCell>
-                                <TableCell>20 cm</TableCell>
+                                <TableCell>{product?.width}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>Depth</TableCell>
+                                <TableCell>{product?.depth}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>

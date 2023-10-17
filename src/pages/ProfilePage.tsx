@@ -14,10 +14,12 @@ function ProfilePage() {
 
 
 
+
+
+
     useEffect(() => {
         keycloak.keycloak?.loadUserProfile().then((profile) => {
             setUser(profile)
-            console.log(profile)
         })
     }, [keycloak.keycloak?.authenticated])
 
