@@ -8,26 +8,33 @@ import Footer from "./components/customComponents/footer/Footer";
 import AdminPage from "./pages/AdminPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import CheckoutPage from "./pages/CheckoutPage";
-
+import useKeyCloak from "./services/keycloak/keyclokAdapter";
+import { createContext } from "react";
+import Keycloak from 'keycloak-js';
+import { KeyCLoakProvider } from "./context/KeyCloakContext";
 
 
 function App() {
+
 	return (
 		<BrowserRouter>
 			<div className="flex flex-col min-h-screen">
-				{window.location.pathname === "/signin" || window.location.pathname === "/signup" ? null : <Header />}
-				<div className="grow bg-primary-color">
-					<Routes>
-						<Route path="/" element={<LandingPage />} />
-						<Route path="/signin" element={<SignInPage />} />
-						<Route path="/signup" element={<SignUpPage />} />
-						<Route path="/profile" element={<ProfilePage />} />
-						<Route path="/admin" element={<AdminPage />} />
-						<Route path="/product/:id" element={<ProductDetailPage />} />
-						<Route path="/checkout" element={<CheckoutPage />} />
-					</Routes>
-				</div>
-				{window.location.pathname === "/signin" || window.location.pathname === "/signup" ? null : <Footer />}
+
+				<KeyCLoakProvider>
+					{window.location.pathname === "/signin" || window.location.pathname === "/signup" ? null : <Header />}
+					<div className="grow bg-background-color">
+						<Routes>
+							<Route path="/" element={<LandingPage />} />
+							<Route path="/signin" element={<SignInPage />} />
+							<Route path="/signup" element={<SignUpPage />} />
+							<Route path="/profile" element={<ProfilePage />} />
+							<Route path="/admin" element={<AdminPage />} />
+							<Route path="/product/:id" element={<ProductDetailPage />} />
+							<Route path="/checkout" element={<CheckoutPage />} />
+						</Routes>
+					</div>
+					{window.location.pathname === "/signin" || window.location.pathname === "/signup" ? null : <Footer />}
+				</KeyCLoakProvider>
 
 			</div>
 
