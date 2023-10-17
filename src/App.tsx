@@ -37,7 +37,7 @@ function App() {
 							} />
 							<Route path="/product/:id" element={<ProductDetailPage />} />
 							<Route path="/checkout" element={<CheckoutPage />} />
-							<Route path="/not-authorized" element={<h1 className="font-bold text-3xl">No permission!</h1>} />
+							<Route path="/not-authorized" element={<h1 className="font-bold text-3xl text-primary-color flex w-full justify-center items-center pt-10">No permission!</h1>} />
 						</Routes>
 					</div>
 					{window.location.pathname === "/signin" || window.location.pathname === "/signup" ? null : <Footer />}

@@ -1,4 +1,4 @@
-import CustomDialog from "@/components/customComponents/editUserDialog/CustomDialog"
+import CustomDialog from "@/components/customComponents/CustomDialogForm/CustomDialogForm"
 import { CustomTable } from "@/components/customComponents/table/CustomTable"
 import { KeyCloakContext } from "@/context/KeyCloakContext";
 import { useContext, useEffect, useState } from "react";
@@ -13,27 +13,44 @@ function ProfilePage() {
     const [shipment, setShipment] = useState<Shipment[]>([])
     const [user, setUser] = useState<KeycloakProfile | undefined>(undefined)
 
-    const shipmentByUserHook = useGetShipmentsForUser(user?.id ?? '', true, keycloak.keycloak?.token ?? '')
+    const shipmentByUserHook = useGetShipmentsForUser(user?.id ?? "", true, keycloak.keycloak?.token ?? '')
 
     useEffect(() => {
         keycloak.keycloak?.loadUserProfile().then((profile) => {
             setUser(profile)
         })
         if (!shipmentByUserHook.isLoading) {
+            console.log(shipmentByUserHook.data)
             setShipment(shipmentByUserHook.data as Shipment[])
         }
     }, [keycloak.keycloak?.authenticated, shipmentByUserHook.data])
 
 
+    function handleSave(values: Record<string, string>) {
+        console.log(values)
+    }
+
     return (
         <div>
             {keycloak.keycloak && keycloak.keycloak?.authenticated && (
                 <main className='flex flex-col justify-start items-center pt-20 text-background-color bg-primary-color min-h-screen'>
-                    <div className="min-w-[10rem] flex flex-col items-center justify-center gap-2">
+                    <div className="min-w-[10rem] flex flex-col items-center justify-center">
                         <img className='rounded-full' src="./images/freddy.png" alt="" />
                         <h1 className='mt-10 font-bold text-2xl'>{user?.username}</h1>
-                        <CustomDialog />
-                        <Button onClick={() => keycloak.keycloak?.logout()} className="bg-error-color w-full">Logout</Button>
+                        <CustomDialog
+                            title="Edit Product"
+                            description="Edit your product details below."
+                            fields={[
+                                { id: 'name', label: 'Name', defaultValue: keycloak.keycloak.profile?.username as string },
+                                { id: 'email', label: 'Email', defaultValue: keycloak.keycloak.profile?.email as string },
+                                { id: 'address', label: 'Address', defaultValue: '' },
+
+                            ]}
+                            onSubmit={handleSave}
+                        >
+                            <Button variant="outline">Edit Product</Button>
+                        </CustomDialog>
+                        <Button onClick={() => keycloak.keycloak?.logout()} className="bg-error-color w-full mt-5">Logout</Button>
                     </div>
                     <div className="w-[70%] mx-auto">
                         <CustomTable shipments={shipment} />
