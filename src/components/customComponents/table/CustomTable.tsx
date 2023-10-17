@@ -12,7 +12,7 @@ import ShipmentDialog from "../shipmentDialog/ShipmentDialog"
 
 
 interface CustomTableProps {
-    orders: Order[]
+    shipments: Shipment[]
 }
 
 export function CustomTable(props: CustomTableProps) {
@@ -30,13 +30,13 @@ export function CustomTable(props: CustomTableProps) {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {props.orders.map((order) => (
-                    <TableRow key={order.id}>
-                        <TableCell className="font-medium">{order.id}</TableCell>
-                        <TableCell>{order.status}</TableCell>
-                        <TableCell>{order.ordersProducts?.length}</TableCell>
-                        <TableCell className="text-right">{order.user}</TableCell>
-                        <TableCell className="text-center w-[10rem]">{<ShipmentDialog {...order} />} </TableCell>
+                {props.shipments.map((shipment) => (
+                    <TableRow key={shipment.id}>
+                        <TableCell className="font-medium">{shipment.id}</TableCell>
+                        <TableCell>{shipment.status}</TableCell>
+                        <TableCell>{shipment.shipmentProducts?.length}</TableCell>
+                        <TableCell className="text-right">{shipment.user}</TableCell>
+                        <TableCell className="text-center w-[10rem]">{<ShipmentDialog {...shipment} />} </TableCell>
                     </TableRow>
                 ))}
             </TableBody>

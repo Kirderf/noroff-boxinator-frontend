@@ -9,7 +9,7 @@ import { useGetShipmentsForUser } from "@/services/shipment/shipmentGet";
 
 function ProfilePage() {
     const keycloak = useContext(KeyCloakContext);
-    const [orders, setOrders] = useState<Shipment[]>([])
+    const [shipment, setShipment] = useState<Shipment[]>([])
     const [user, setUser] = useState<KeycloakProfile | undefined>(undefined)
 
     const orderByUserHook = useGetShipmentsForUser(user?.id ?? '', true)
@@ -19,7 +19,7 @@ function ProfilePage() {
             setUser(profile)
         })
         if (!orderByUserHook.isLoading) {
-            setOrders(orderByUserHook.data as Shipment[])
+            setShipment(orderByUserHook.data as Shipment[])
         }
     }, [keycloak.keycloak?.authenticated])
 
@@ -34,7 +34,7 @@ function ProfilePage() {
                         <CustomDialog />
                     </div>
                     <div className="w-[70%] mx-auto">
-                        <CustomTable orders={orders} />
+                        <CustomTable shipments={shipment} />
                     </div>
                 </main>
             )}
