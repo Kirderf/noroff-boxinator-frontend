@@ -1,25 +1,26 @@
+/** @format */
+
 import { useQuery } from "@tanstack/react-query";
 
-
 const fetchAllProduct = async () => {
-    return await fetch("https://boxinator2.azurewebsites.net/api/v1/product")
-    .then(data => data.json())
-}
-const fetchProductById = async (id: number) => {
-    return await fetch("https://boxinator2.azurewebsites.net/api/v1/product/"+id)
-    .then(data => data.json())
-}
+  return await fetch(
+    "https://boxinator2.azurewebsites.net/api/v1/product?active=true"
+  ).then((data) => data.json());
+};
 
+const fetchProductById = async (id: number) => {
+  return await fetch(
+    "https://boxinator2.azurewebsites.net/api/v1/product/" + id
+  ).then((data) => data.json());
+};
 
 export const useGetAllProducts = () => {
-    return useQuery({
-        queryKey: ["getAllProduct"], 
-        queryFn: fetchAllProduct
-    })
-}
+  return useQuery({
+    queryKey: ["getAllProduct"],
+    queryFn: fetchAllProduct,
+  });
+};
+
 export const useGetProductById = (id: number) => {
-    return useQuery(
-        ["getProductById", id], 
-        () => fetchProductById(id)
-    )
-} 
+  return useQuery(["getProductById", id], () => fetchProductById(id));
+};

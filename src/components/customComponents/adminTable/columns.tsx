@@ -15,7 +15,6 @@ function handleDeleteProduct() {
 //Column structure for product and order table
 // This is how you build the columns and rows for the tables
 export const productColumns: ColumnDef<Product>[] = [
-
     {
         accessorKey: "id",
         header: "Id",
@@ -104,10 +103,10 @@ export const orderColumns: ColumnDef<Order>[] = [
             return (
                 <CustomDropDown>
                     <Button className="bg-accent-color-1">
-                        Delete product
+                        Edit Order
                     </Button>
-                    <Button className="bg-accent-color-1">
-                        Edit product
+                    <Button className="bg-error-color">
+                        Delete Order
                     </Button>
                 </CustomDropDown>
             )
@@ -139,10 +138,10 @@ export const userColumns: ColumnDef<User>[] = [
             return (
                 <CustomDropDown>
                     <Button className="bg-accent-color-1">
-                        Delete product
+                        Edit User
                     </Button>
-                    <Button className="bg-accent-color-1">
-                        Edit product
+                    <Button className="bg-error-color">
+                        Delete User
                     </Button>
                 </CustomDropDown>
             )

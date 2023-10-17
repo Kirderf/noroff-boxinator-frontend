@@ -1,10 +1,19 @@
+/** @format */
+
 interface Product {
   id: number;
   name: string;
-  price: number;
-  description: string;
   image: string;
+  description: string;
+  stock: number;
+  price: number;
+  isActive: boolean;
+  width: number;
+  depth: number;
+  height: number;
+  weight: number;
 }
+
 interface ProductsInCart {
   id: number;
   name: string;
