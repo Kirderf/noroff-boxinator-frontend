@@ -4,7 +4,7 @@ import { DataTable } from "../components/customComponents/adminTable/data-table"
 import { Button } from "@/components/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
 import { useGetAllProducts } from "@/services/product/productGet"
-import { useGetAllOrder } from "@/services/order/orderGet"
+import { useGetAllShipment } from "@/services/shipment/shipmentGet"
 import { useGetAllUsers } from "@/services/user/userGet"
 import { KeyCloakContext } from "@/context/KeyCloakContext"
 
@@ -23,12 +23,11 @@ function AdminPage() {
     const [fetchUsers, setFetchUsers] = useState(false);
     const [fetchOrders, setFetchOrders] = useState(false);
 
-
     const token = keycloak.keycloak?.token || ''
 
     const getAllProductsHook = useGetAllProducts()
     const getAllUsersHook = useGetAllUsers(token, fetchUsers)
-    const getAllOrderHook = useGetAllOrder(true, token, fetchOrders)
+    const getAllOrderHook = useGetAllShipment(true, token, fetchOrders)
 
     function getProducts() {
         if (!getAllProductsHook.isLoading) {

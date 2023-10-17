@@ -3,7 +3,7 @@ import { CustomTable } from "@/components/customComponents/table/CustomTable"
 import { KeyCloakContext } from "@/context/KeyCloakContext";
 import { useContext, useEffect, useState } from "react";
 import { KeycloakProfile } from "keycloak-js";
-import { useGetOrdersForUser } from "@/services/order/orderGet";
+import { useGetShipmentsForUser } from "@/services/shipment/shipmentGet";
 
 
 
@@ -12,7 +12,7 @@ function ProfilePage() {
     const [orders, setOrders] = useState<Shipment[]>([])
     const [user, setUser] = useState<KeycloakProfile | undefined>(undefined)
 
-    const orderByUserHook = useGetOrdersForUser(user?.id ?? '', true)
+    const orderByUserHook = useGetShipmentsForUser(user?.id ?? '', true)
 
     useEffect(() => {
         keycloak.keycloak?.loadUserProfile().then((profile) => {
