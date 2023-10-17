@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext } from "react";
 import Keycloak from 'keycloak-js';
 import useKeyCloak from "@/services/keycloak/keyclokAdapter";
 

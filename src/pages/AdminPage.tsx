@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { productColumns, orderColumns, userColumns } from "../components/customComponents/adminTable/columns"
 import { DataTable } from "../components/customComponents/adminTable/data-table"
 import { Button } from "@/components/ui/button"
@@ -6,7 +6,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { useGetAllProducts } from "@/services/product/productGet"
 import { useGetAllOrder } from "@/services/order/orderGet"
 import { useGetAllUsers } from "@/services/user/userGet"
-import useKeyCloak from "@/services/keycloak/keyclokAdapter"
+import { KeyCloakContext } from "@/context/KeyCloakContext"
 
 
 type DataItem = Product | Order | User
@@ -16,7 +16,7 @@ type ColumnItem = ColumnDef<DataItem>
 
 function AdminPage() {
 
-    const keycloak = useKeyCloak()
+    const keycloak = useContext(KeyCloakContext);
     const [data, setData] = useState<DataItem[]>([])
     const [columns, setColumns] = useState<ColumnItem[]>(productColumns as ColumnItem[])
 
@@ -24,7 +24,7 @@ function AdminPage() {
     const [fetchOrders, setFetchOrders] = useState(false);
 
 
-    const token = keycloak?.token || ''
+    const token = keycloak.keycloak?.token || ''
 
     const getAllProductsHook = useGetAllProducts()
     const getAllUsersHook = useGetAllUsers(token, fetchUsers)
@@ -39,7 +39,6 @@ function AdminPage() {
 
     function getUsers() {
         setFetchUsers(true);
-
         if (!getAllUsersHook.isLoading) {
             setData(getAllUsersHook.data as User[])
             setColumns(userColumns as ColumnItem[])
