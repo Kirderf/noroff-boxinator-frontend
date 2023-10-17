@@ -1,28 +1,25 @@
+/** @format */
+
 interface Product {
   id: number;
   name: string;
-  price: number;
-  description: string;
   image: string;
+  description: string;
+  stock: number;
+  price: number;
+  isActive: boolean;
+  width: number;
+  depth: number;
+  height: number;
+  weight: number;
 }
+
 interface ProductsInCart {
   id: number;
   name: string;
   price: number;
   image: string;
   quantity: number;
-}
-interface Order {
-  id: number;
-  status: string;
-  user: number;
-  ordersProducts: OrderProducts[];
-  timeStamp: string;
-}
-
-interface OrderProducts {
-  quantity: number;
-  product: Product;
 }
 
 interface Country {
@@ -40,23 +37,24 @@ interface User {
   username: string;
 }
 interface UserPost {
-  id: string;
+  id: number;
   address: string;
   email: string;
   roles: string;
   username: string;
 }
-
 interface Shipment {
   id: number;
   email: string;
-  destination: string;
+  order: number;
   billingAddress: string;
-  city: string;
-  postalCode: string;
-  phoneNumber: string;
   deliveryInstruction: string;
-  country: Country;
-  order: Order;
+  shippingAddress: string;
+  city: string;
+  phoneNumber: string;
+  postalCode: string;
+  status: string;
+  timestamp: string;
   gift: boolean;
+  user: number;
 }

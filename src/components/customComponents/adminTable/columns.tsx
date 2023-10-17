@@ -6,16 +6,9 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 
 
 
-function handleDeleteProduct() {
-    return () => {
-        console.log("delete product")
-    }
-}
-
 //Column structure for product and order table
 // This is how you build the columns and rows for the tables
 export const productColumns: ColumnDef<Product>[] = [
-
     {
         accessorKey: "id",
         header: "Id",
@@ -40,6 +33,10 @@ export const productColumns: ColumnDef<Product>[] = [
         header: "Description",
     },
     {
+        accessorKey: "active",
+        header: "Active",
+    },
+    {
         accessorKey: "price",
         header: () => <div className="text-left">Amount</div>,
         cell: ({ row }) => {
@@ -58,9 +55,6 @@ export const productColumns: ColumnDef<Product>[] = [
         cell: () => {
             return (
                 <CustomDropDown>
-                    <Button onClick={handleDeleteProduct()} className="bg-accent-color-1">
-                        Delete product
-                    </Button>
                     <Select>
                         <SelectTrigger className="w-[180px] bg-accent-color-1 flex justify-center gap-2 h-auto border-none">
                             <h1>Active:</h1>
@@ -104,10 +98,10 @@ export const orderColumns: ColumnDef<Order>[] = [
             return (
                 <CustomDropDown>
                     <Button className="bg-accent-color-1">
-                        Delete product
+                        Edit Order
                     </Button>
-                    <Button className="bg-accent-color-1">
-                        Edit product
+                    <Button className="bg-error-color">
+                        Delete Order
                     </Button>
                 </CustomDropDown>
             )
@@ -133,20 +127,16 @@ export const userColumns: ColumnDef<User>[] = [
         header: "Email",
     },
     {
-        accessorKey: "roles",
-        header: "Roles",
-    },
-    {
         id: "actions",
         enableHiding: false,
         cell: () => {
             return (
                 <CustomDropDown>
                     <Button className="bg-accent-color-1">
-                        Delete product
+                        Edit User
                     </Button>
-                    <Button className="bg-accent-color-1">
-                        Edit product
+                    <Button className="bg-error-color">
+                        Delete User
                     </Button>
                 </CustomDropDown>
             )

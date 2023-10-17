@@ -51,7 +51,7 @@ const DropDownProducts = () => {
                     <Button className=" bg-error-color right-0 w-full" onClick={() => {
                         dispatch(removeAllItems())
                     }}>Empty Cart</Button>
-                    <Button className="bg-accent-color-1 right-0" onClick={() => {
+                    <Button className="bg-accent-color-1 right-0 w-full" onClick={() => {
                         location.href = "/checkout"
                     }}>Go to Checkout</Button>
                 </div>
