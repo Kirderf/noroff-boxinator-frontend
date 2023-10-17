@@ -63,21 +63,32 @@ function AdminPage() {
         if (!getAllProductsHook.isLoading) {
             getOrder()
         }
+        console.log(keycloak.keycloak?.hasRealmRole("ADMIN") || undefined);
     }, [getAllOrderHook.isLoading])
 
     return (
         <main className="min-h-screen bg-primary-color flex flex-col gap-10 items-center justify-start">
-            <h1 className="text-4xl text-background-color text-center mt-10">Welcome Admin!</h1>
-            <div className="flex md:flex-nowrap flex-wrap gap-10 max-w-md w-[50%] mx-auto">
-                <Button onClick={() => getProducts()} className="bg-accent-color-1 w-full"> Products</Button>
-                <Button onClick={() => getUsers()} className="bg-accent-color-1 w-full"> User</Button>
-                <Button onClick={() => getOrder()} className="bg-accent-color-1 w-full"> Order</Button>
-            </div>
-            <div className="w-[70%] mx-auto">
-                <DataTable columns={columns} data={data} />
-            </div>
+            {keycloak.keycloak?.hasRealmRole("ADMIN") ? (
+                // JSX for admin user
+                <>
+                    <h1 className="text-4xl text-background-color text-center mt-10">Welcome Admin!</h1>
+                    <div className="flex md:flex-nowrap flex-wrap gap-10 max-w-md w-[50%] mx-auto">
+                        <Button onClick={() => getProducts()} className="bg-accent-color-1 w-full"> Products</Button>
+                        <Button onClick={() => getUsers()} className="bg-accent-color-1 w-full"> User</Button>
+                        <Button onClick={() => getOrder()} className="bg-accent-color-1 w-full"> Order</Button>
+                    </div>
+                    <div className="w-[70%] mx-auto">
+                        <DataTable columns={columns} data={data} />
+                    </div>
+                </>
+            ) : (
+                // JSX for non-admin user
+                <h1 className="text-4xl text-background-color text-center mt-10">Not Admin</h1>
+            )}
         </main>
     )
+
+
 }
 
 export default AdminPage

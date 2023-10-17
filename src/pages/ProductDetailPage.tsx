@@ -60,7 +60,6 @@ function ProductDetailPage() {
                     <div className="text-center mb-20">
                         <h1 className="text-2xl mb-2 font-bold">{product?.name}</h1>
                         <p className="">{pdesEx.split(":").map((word, index) => {
-                            console.log(word)
                             if (word == "Contents" || word == "Surprise Element") {
                                 return <span key={index} className=" text-green-color text-lg"><br />{word}:<br /></span>
                             } else {
