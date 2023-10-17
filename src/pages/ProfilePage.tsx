@@ -38,8 +38,8 @@ function ProfilePage() {
                         <img className='rounded-full' src="./images/freddy.png" alt="" />
                         <h1 className='mt-10 font-bold text-2xl'>{user?.username}</h1>
                         <CustomDialog
-                            title="Edit Product"
-                            description="Edit your product details below."
+                            title="Edit User"
+                            description="Edit your User details below."
                             fields={[
                                 { id: 'name', label: 'Name', defaultValue: keycloak.keycloak.profile?.username as string },
                                 { id: 'email', label: 'Email', defaultValue: keycloak.keycloak.profile?.email as string },
