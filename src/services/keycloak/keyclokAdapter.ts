@@ -12,9 +12,14 @@ function useKeyCloak() {
       realm: "boxinator2",
       clientId: "clientazure",
     });
-    _keycloak.init({ onLoad: "login-required" }).then(() => {
-      setKeycloak(_keycloak);
-    });
+    _keycloak
+      .init({
+        checkLoginIframe: false,
+        onLoad: "check-sso",
+      })
+      .then(() => {
+        setKeycloak(_keycloak);
+      });
 
     const post = async () => {
       const user = (await keycloak?.loadUserInfo()) as any;
