@@ -34,7 +34,7 @@ function LandingPage() {
                                 a world of imaginative possibilities one box at a time, crafted to inspire and delight.
                             </span>
                         </h2>
-                        <Button className="bg-accent-color-1 w-[80%]" onClick={() => scrollToProducts()}>
+                        <Button className="bg-accent-color-1 w-[80%] mb-20" onClick={() => scrollToProducts()}>
                             <h1>Get started</h1>
                         </Button>
                     </div>
