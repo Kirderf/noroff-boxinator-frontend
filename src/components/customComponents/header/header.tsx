@@ -3,6 +3,7 @@ import DropDownProducts from "../dropDown/DropDownProducts"
 import { useContext } from "react";
 import { KeyCloakContext } from "@/context/KeyCloakContext";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 
 function Header() {
@@ -19,9 +20,24 @@ function Header() {
                     <a className="hover:cursor-pointer">
                         <DropDownProducts />
                     </a>
-                    <Button onClick={() => keycloak.keycloak?.login()}>
-                        <img src="./icons/loginicon.svg" alt="Login" />
-                    </Button>
+                    {
+                        keycloak.keycloak?.authenticated ? (
+                            <div className="flex gap-7 items-center">
+                                <a onClick={() => navigate("/profile")} className="hover:cursor-pointer">
+                                    <Avatar className="border">
+                                        <AvatarImage src="../images/freddy.png" alt="@shadcn" />
+                                        <AvatarFallback>{keycloak.keycloak.profile?.username?.substring(0, 1)}</AvatarFallback>
+                                    </Avatar>
+                                </a>
+                            </div>
+                        ) : (
+                            <div className="flex gap-7 items-center">
+                                <Button onClick={() => keycloak.keycloak?.login()}>
+                                    <img src="./icons/loginicon.svg" alt="Login" />
+                                </Button>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </header>
