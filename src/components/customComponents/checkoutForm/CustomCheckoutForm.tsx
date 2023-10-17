@@ -40,6 +40,8 @@ const formSchema = z.object({
 interface Props {
     country: Country[],
     setShippingCost: React.Dispatch<React.SetStateAction<number>>
+    onFormSubmit: (data: any) => void
+    user?: any
 }
 function CustomCheckoutForm(props: Props) {
 
@@ -64,9 +66,19 @@ function CustomCheckoutForm(props: Props) {
         }
 
     }, [form.watch("country")])
+
+    //TODO lægg tel felt
+    useEffect(() => {
+        const putUserData = async () => {
+            const userData = await props.user
+            form.setValue("email", userData.email)
+        }
+        putUserData()
+    }, [props.user])
     const { toast } = useToast()
 
     function onSubmit(data: z.infer<typeof formSchema>) {
+        props.onFormSubmit(data)
         toast({
             title: "You submitted the following values:",
             description: (

@@ -1,7 +1,7 @@
 import CustomDialog from "@/components/customComponents/editUserDialog/CustomDialog"
 import { CustomTable } from "@/components/customComponents/table/CustomTable"
-import useKeyCloak from "@/services/keycloak/keyclokAdapter";
-import { useEffect, useState } from "react";
+import { KeyCloakContext } from "@/context/KeyCloakContext";
+import { useContext, useEffect, useState } from "react";
 
 
 
@@ -42,26 +42,21 @@ async function getOrderByUser(): Promise<Order[]> {
 }
 
 function ProfilePage() {
-    const keycloak = useKeyCloak()
-    const [orders, setOrders] = useState<Order[]>([])
 
+    const [orders, setOrders] = useState<Order[]>([])
+    const keycloak = useContext(KeyCloakContext);
     async function getOrdersByUser() {
         const orderData = await getOrderByUser();
         setOrders(orderData);
     }
     useEffect(() => {
-        if (keycloak?.authenticated) {
-            console.log(keycloak.loadUserProfile())
-        }
-    }, [keycloak?.authenticated])
-    useEffect(() => {
         getOrdersByUser()
     }, [])
 
-
     return (
+
         <div>
-            {keycloak && keycloak.authenticated && (
+            {keycloak.keycloak?.authenticated ?
                 <main className='flex flex-col justify-center items-center pt-20 text-background-color bg-primary-color min-h-screen'>
                     <div className="min-w-[10rem] flex flex-col items-center justify-center">
                         <img className='rounded-full' src="./images/freddy.png" alt="" />
@@ -73,7 +68,12 @@ function ProfilePage() {
                         <CustomTable orders={orders} />
                     </div>
                 </main>
-            )}
+
+                :
+                <div>Hei</div>
+            }
+
+
 
         </div>
     )

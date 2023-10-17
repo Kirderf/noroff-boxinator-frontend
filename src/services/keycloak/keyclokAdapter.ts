@@ -5,43 +5,7 @@ function useKeyCloak() {
     let [keycloak, setKeycloak] = useState<Keycloak>();
     //TODO må va ein annæ måte :/
     
-    useEffect(() => {
-        const post = async () => {
-            const user = await keycloak?.loadUserInfo() as any
-          
-            const u: UserPost = {
-                "id": user.sub,
-                "username": user.name,
-                "address": "",
-                "email": user.email,
-                "roles": ""
-            }
-            try{ 
-                await fetch("https://boxinator2.azurewebsites.net/api/v1/user", {
-                method: "POST",
-              //  mode: 'no-cors',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'authorization': "bearer " + keycloak?.token
-                },
-                body: JSON.stringify(u),
-               
-            }).then((data) => {
-                if(data?.ok){
-                    console.log("user made in db!")
-                }else{
-                    console.log("error")
-                }
-            })
-        }catch(e){
-            console.log(e)
-        }
-        }
-        if(keycloak){
-           post()
-        }
-    },[keycloak?.clientId])
+ 
     useEffect(() => {
         var _keycloak = new Keycloak({
             url: 'https://lemur-10.cloud-iam.com/auth/',
@@ -55,6 +19,42 @@ function useKeyCloak() {
         })
             .then(()  => {
                 setKeycloak(_keycloak)
+
+                const post = async () => {
+                    const user = await keycloak?.loadUserInfo() as any
+                  
+                    const u: UserPost = {
+                        "id": user.sub,
+                        "username": user.name,
+                        "address": "",
+                        "email": user.email,
+                        "roles": ""
+                    }
+                    try{ 
+                        await fetch("https://boxinator2.azurewebsites.net/api/v1/user", {
+                        method: "POST",
+                      //  mode: 'no-cors',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'authorization': "bearer " + keycloak?.token
+                        },
+                        body: JSON.stringify(u),
+                       
+                    }).then((data) => {
+                        if(data?.ok){
+                            console.log("user made in db!")
+                        }else{
+                            console.log("error")
+                        }
+                    })
+                }catch(e){
+                    console.log(e)
+                }
+                }
+                if(keycloak){
+                   post()
+                }
             });
        
     }, []);

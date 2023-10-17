@@ -8,9 +8,6 @@ import Footer from "./components/customComponents/footer/Footer";
 import AdminPage from "./pages/AdminPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import CheckoutPage from "./pages/CheckoutPage";
-import useKeyCloak from "./services/keycloak/keyclokAdapter";
-import { createContext } from "react";
-import Keycloak from 'keycloak-js';
 import { KeyCLoakProvider } from "./context/KeyCloakContext";
 
 
