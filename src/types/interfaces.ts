@@ -21,18 +21,6 @@ interface ProductsInCart {
   image: string;
   quantity: number;
 }
-interface Order {
-  id: number;
-  status: string;
-  user: number;
-  ordersProducts: OrderProducts[];
-  timeStamp: string;
-}
-
-interface OrderProducts {
-  quantity: number;
-  product: Product;
-}
 
 interface Country {
   id: number;
@@ -48,24 +36,19 @@ interface User {
   roles: string;
   username: string;
 }
-interface UserPost {
-  id: string;
-  address: string;
-  email: string;
-  roles: string;
-  username: string;
-}
 
 interface Shipment {
   id: number;
   email: string;
-  destination: string;
+  order: number;
   billingAddress: string;
-  city: string;
-  postalCode: string;
-  phoneNumber: string;
   deliveryInstruction: string;
-  country: Country;
-  order: Order;
+  shippingAddress: string;
+  city: string;
+  phoneNumber: string;
+  postalCode: string;
+  status: string;
+  timestamp: string;
   gift: boolean;
+  user: number;
 }

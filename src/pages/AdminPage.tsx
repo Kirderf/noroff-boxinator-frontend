@@ -9,7 +9,7 @@ import { useGetAllUsers } from "@/services/user/userGet"
 import { KeyCloakContext } from "@/context/KeyCloakContext"
 
 
-type DataItem = Product | Order | User
+type DataItem = Product | Shipment | User
 
 type ColumnItem = ColumnDef<DataItem>
 
@@ -48,7 +48,7 @@ function AdminPage() {
     function getOrder() {
         setFetchOrders(true);
         if (!getAllOrderHook.isLoading) {
-            setData(getAllOrderHook.data as Order[])
+            setData(getAllOrderHook.data as Shipment[])
             setColumns(orderColumns as ColumnItem[])
         }
     }

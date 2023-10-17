@@ -34,7 +34,7 @@ const fetchOrderById = async (id: number) => {
   ).then((data) => data.json());
 };
 
-const fetchOrdersFromUser = async (userId: number) => {
+const fetchOrdersFromUser = async (userId: string) => {
   return await fetch(
     "https://boxinator2.azurewebsites.net/api/v1/order?userId=" +
       userId +
@@ -59,7 +59,8 @@ export const useGetOrdertById = (id: number, fullorder?: boolean) => {
   if (fullorder) fullorderParam = "?fullorder=true";
   return useQuery(["getOrderById", id], () => fetchOrderById(id));
 };
-export const useGetOrdersForUser = (userId: number, fullorder?: boolean) => {
+
+export const useGetOrdersForUser = (userId: string, fullorder?: boolean) => {
   if (fullorder) fullorderParam = "&fullorder=true";
   return useQuery(["getOrdersFromUser", userId], () =>
     fetchOrdersFromUser(userId)
