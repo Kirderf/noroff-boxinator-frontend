@@ -2,9 +2,13 @@ import { Button } from "@/components/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 import CustomDropDown from "../dropDown/CustomDropDown"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
+import CustomDialog from "../CustomDialogForm/CustomDialogForm"
 
 
+
+function handleProductSave(product: Record<string, string>) {
+    console.log(product)
+}
 
 //Column structure for product and order table
 // This is how you build the columns and rows for the tables
@@ -52,23 +56,29 @@ export const productColumns: ColumnDef<Product>[] = [
     {
         id: "actions",
         enableHiding: false,
-        cell: () => {
+        cell: ({ row }) => {
+            const product = row.original
             return (
                 <CustomDropDown>
-                    <Select>
-                        <SelectTrigger className="w-[180px] bg-accent-color-1 flex justify-center gap-2 h-auto border-none">
-                            <h1>Active:</h1>
-                            <SelectValue className="" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-accent-color-1">
-                            <SelectGroup>
-                                <SelectLabel>Active</SelectLabel>
-                                <SelectItem value="true">True</SelectItem>
-                                <SelectItem value="false">False</SelectItem>
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
+                    <CustomDialog
+                        title="Edit Product"
+                        description="Edit your Product details below."
+                        fields={[
+                            { id: 'name', label: 'Name', defaultValue: product.name },
+                            { id: 'description', label: 'Description', defaultValue: product.description },
+                            { id: 'active', label: 'Active', defaultValue: product.isActive as unknown as string },
+                            { id: 'stock', label: 'Stock', defaultValue: product.stock.toString() },
+                            { id: 'width', label: 'Width', defaultValue: product.width.toString() },
+                            { id: 'depth', label: 'Depth', defaultValue: product.depth.toString() },
+                            { id: 'height', label: 'Height', defaultValue: product.height.toString() },
+                            { id: 'weight', label: 'Weight', defaultValue: product.weight.toString() },
+                        ]}
+                        onSubmit={handleProductSave}
+                    >
+                        <Button className="bg-accent-color-1">Edit Product</Button>
+                    </CustomDialog>
                 </CustomDropDown>
+
             )
         },
     },

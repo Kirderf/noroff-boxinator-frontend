@@ -44,7 +44,6 @@ function ProfilePage() {
                                 { id: 'name', label: 'Name', defaultValue: keycloak.keycloak.profile?.username as string },
                                 { id: 'email', label: 'Email', defaultValue: keycloak.keycloak.profile?.email as string },
                                 { id: 'address', label: 'Address', defaultValue: '' },
-
                             ]}
                             onSubmit={handleSave}
                         >
