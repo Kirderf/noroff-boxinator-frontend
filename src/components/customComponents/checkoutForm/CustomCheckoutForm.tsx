@@ -79,14 +79,14 @@ function CustomCheckoutForm(props: Props) {
 
     function onSubmit(data: z.infer<typeof formSchema>) {
         props.onFormSubmit(data)
-        toast({
-            title: "You submitted the following values:",
-            description: (
-                <pre className="mt-2 w-[340px] rounded-md bg-secondary-color p-4">
-                    <code className="text-black">{JSON.stringify(data, null, 2)}</code>
-                </pre>
-            ),
-        })
+        /* toast({
+             title: "You submitted the following values:",
+             description: (
+                 <pre className="mt-2 w-[340px] rounded-md bg-secondary-color p-4">
+                     <code className="text-black">{JSON.stringify(data, null, 2)}</code>
+                 </pre>
+             ),
+         }) */
     }
 
     return (

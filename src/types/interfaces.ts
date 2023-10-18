@@ -58,3 +58,17 @@ interface Shipment {
   gift: boolean;
   user: number;
 }
+interface ShipmentPost {
+  user?: string,
+  shipmentProducts: {productId: number, quantity: number}[],
+  email: string,
+  billingAddress: string,
+  deliveryInstruction: string,
+  shippingAddress: string,
+  countries: string,
+  city: string,
+  phoneNumber: string,
+  postalCode: number,
+  status: string,
+  gift: boolean
+}

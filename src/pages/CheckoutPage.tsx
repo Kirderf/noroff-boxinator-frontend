@@ -2,7 +2,7 @@ import CustomCheckoutForm from '@/components/customComponents/checkoutForm/Custo
 import ProductCartCard from '@/components/customComponents/productCartCard/ProductCartCard';
 import { Separator } from '@/components/ui/separator';
 import { useContext, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useGetAllCountries } from '@/services/countries/countriesGet';
 import { KeyCloakContext } from '@/context/KeyCloakContext';
 import {
@@ -14,33 +14,96 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-    AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
+import { shipmentPostWithUser } from '@/services/shipment/shipmentPost';
+import { useToast } from '@/components/ui/use-toast';
+import { useNavigate } from 'react-router-dom';
+import { removeAllItems } from '@/redux/chartSlice';
 
 function checkoutPage() {
     const cart = useSelector((state: { product: Product, quantity: number }[]) => state)
     const [shippingCost, setShippingCost] = useState(0);
-
+    const navigate = useNavigate()
     const keycloak = useContext(KeyCloakContext);
+    const userData = keycloak.keycloak?.loadUserInfo()
     const [loggedIn, setLoggedIn] = useState<boolean>();
+    const dispatch = useDispatch()
     useEffect(() => {
-        setLoggedIn(keycloak.keycloak?.authenticated)
+        if (loggedIn != undefined)
+            setLoggedIn(keycloak.keycloak?.authenticated)
         console.log(loggedIn)
     }, [keycloak.keycloak])
+
     const [guest, setGuest] = useState<boolean>(false)
 
     const [countries, setCountries] = useState<Country[]>([])
     const getAllCountriesHook = useGetAllCountries()
+    const { toast } = useToast()
 
+    useEffect(() => {
+        if (cart.length == 0) {
+            navigate("/")
+        }
+    }, [cart.length])
     useEffect(() => {
         if (!getAllCountriesHook.isLoading)
             setCountries(getAllCountriesHook.data as Country[])
     }, [getAllCountriesHook.data])
-    const onFormSubmit = (data: any) => {
-        console.log(data)
 
+    const onFormSubmit = async (data: any) => {
+        let productQuantity: { productId: number, quantity: number }[] = []
+        cart.map(item => {
+            const productId = item.product.id
+            const quantity = item.quantity
+            productQuantity.push({ productId, quantity })
+        })
+        const shipment: ShipmentPost = {
+            user: undefined,
+            shipmentProducts: productQuantity,
+            email: data.email,
+            billingAddress: data.billingAddress,
+            deliveryInstruction: data.deliveryInstruction,
+            shippingAddress: data.destination,
+            countries: data.country,
+            city: data.city,
+            phoneNumber: data.phoneNumber,
+            postalCode: data.postalCode as number,
+            status: "ORDER_PLACED",
+            gift: false
+        }
+        if (keycloak.keycloak?.tokenParsed) {
+            const user: any = await userData
+            if (userData) {
+                shipment.user = user.sub
+
+            }
+        }
+        shipmentPostWithUser(shipment).then(async (r) => {
+            if (!r.ok) {
+                toast({
+                    variant: "error",
+                    title: "Error",
+                    description: (
+                        <div className="mt-2 w-[340px] rounded-md  p-4">
+                            Oops! It seems our magical ordering elves are taking an unexpected nap. ^_^
+                        </div>
+                    ),
+                })
+                navigate("/")
+            } else {
+                toast({
+                    variant: "success",
+                    title: "Success <3",
+                    description: (
+                        <div className="mt-2 w-[340px] rounded-md p-4">
+                            The shipment was successfully placed, and will soon arrive. ^_^
+                        </div>
+                    ),
+                })
+                navigate("/")
+                dispatch(removeAllItems())
+            }
+        })
     }
 
     return (
