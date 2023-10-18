@@ -3,7 +3,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 import CustomDropDown from "../dropDown/CustomDropDown"
 import CustomDialog from "../CustomDialogForm/CustomDialogForm"
-import updateShipment from "@/services/shipment/shipmentPatch"
+import { updateShipment } from "@/services/shipment/shipmentPatch"
 
 
 function handleProductSave(values: Record<string, string>, token?: string, shipment?: Shipment, product?: Product) {
@@ -14,8 +14,6 @@ function handleProductSave(values: Record<string, string>, token?: string, shipm
 }
 
 function handleShipmentSave(shipmentValues: Record<string, string>, token?: string, shipment?: Shipment) {
-    console.log(shipmentValues)
-    console.log(token)
     updateShipment(token, shipment, shipmentValues)
 }
 
@@ -84,11 +82,6 @@ export const productColumns: ColumnDef<Product>[] = [
                         fields={[
                             { type: 'text', id: 'name', label: 'Name', defaultValue: product.name },
                             { type: 'text', id: 'description', label: 'Description', defaultValue: product.description },
-                            { type: 'text', id: 'stock', label: 'Stock', defaultValue: product.stock.toString() },
-                            { type: 'text', id: 'width', label: 'Width', defaultValue: product.width.toString() },
-                            { type: 'text', id: 'depth', label: 'Depth', defaultValue: product.depth.toString() },
-                            { type: 'text', id: 'height', label: 'Height', defaultValue: product.height.toString() },
-                            { type: 'text', id: 'weight', label: 'Weight', defaultValue: product.weight.toString() },
                         ]}
                         onSubmit={handleProductSave}
                     >
@@ -139,8 +132,11 @@ export const orderColumns: ColumnDef<Shipment>[] = [
                         fields={[
                             { type: 'text', id: 'billingAddress', label: 'BillingAddress', defaultValue: shipment.billingAddress },
                             { type: 'text', id: 'deliveryInstruction', label: 'DeliveryInstruction', defaultValue: shipment.deliveryInstruction },
-                            { type: 'text', id: 'phoneNumber', label: 'PhoneNumber', defaultValue: shipment.phoneNumber },
+                            { type: 'text', id: 'email', label: 'Email', defaultValue: shipment.email },
+                            { type: 'text', id: 'city', label: 'City', defaultValue: shipment.city },
+                            { type: 'text', id: 'countries', label: 'Countries', defaultValue: shipment.countries },
                             { type: 'text', id: 'postalCode', label: 'PostalCode', defaultValue: shipment.postalCode },
+                            { type: 'text', id: 'phoneNumber', label: 'PhoneNumber', defaultValue: shipment.phoneNumber },
                             { type: 'text', id: 'shippingAddress', label: 'ShippingAddress', defaultValue: shipment.shippingAddress },
                         ]}
                         onSubmit={handleShipmentSave}

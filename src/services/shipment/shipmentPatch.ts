@@ -1,28 +1,11 @@
 /** @format */
 
-//TODO: Fix this
-export default async function updateShipment(
+export async function updateShipment(
   token?: string,
   shipment?: Shipment,
   shipmentValues?: Record<string, string>
 ) {
   try {
-    console.log({
-      id: shipment?.id,
-      email: shipment?.email,
-      billingAddress: shipmentValues?.billingAddress,
-      deliveryInstruction: shipmentValues?.deliveryInstruction,
-      shippingAddress: shipmentValues?.shippingAddress,
-      countries: shipment?.countries,
-      city: shipment?.city,
-      phoneNumber: shipmentValues?.phoneNumber,
-      postalCode: shipment?.postalCode,
-      status: shipment?.status,
-      timestamp: shipment?.timestamp,
-      gift: shipment?.gift,
-      user: shipment?.user,
-      shipmentProducts: shipment?.shipmentProducts,
-    });
     const response = await fetch(
       "https://boxinator2.azurewebsites.net/api/v1/shipment",
       {
@@ -34,15 +17,15 @@ export default async function updateShipment(
         },
         body: JSON.stringify({
           id: shipment?.id,
-          email: shipment?.email,
+          email: shipmentValues?.email,
           billingAddress: shipmentValues?.billingAddress,
           deliveryInstruction: shipmentValues?.deliveryInstruction,
           shippingAddress: shipmentValues?.shippingAddress,
-          countries: shipment?.countries,
-          city: shipment?.city,
+          countries: shipmentValues?.countries,
+          city: shipmentValues?.city,
           phoneNumber: shipmentValues?.phoneNumber,
-          postalCode: shipment?.postalCode,
-          status: "ORDER_PROCESSING",
+          postalCode: shipmentValues?.postalCode,
+          status: shipment?.status,
           timestamp: shipment?.timestamp,
           gift: shipment?.gift,
           user: shipment?.user,
@@ -50,13 +33,12 @@ export default async function updateShipment(
         }),
       }
     );
+    if (response.status === 401) {
+      throw new Error("Unauthorized");
+    }
     if (!response.ok) {
       throw new Error("Failed to update Shipment");
     }
-
-    const data = await response.json();
-    console.log(data);
-    return data;
   } catch (error) {
     console.log(error);
     throw error;
