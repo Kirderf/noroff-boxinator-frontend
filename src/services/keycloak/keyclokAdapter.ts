@@ -52,7 +52,7 @@ function useKeyCloak() {
         console.log(e);
       }
     };
-    if (keycloak) {
+    if (keycloak?.tokenParsed) {
       post();
     }
   }, []);

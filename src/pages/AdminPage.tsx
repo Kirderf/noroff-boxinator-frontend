@@ -27,7 +27,7 @@ function AdminPage() {
 
     const getAllProductsHook = useGetAllProducts()
     const getAllUsersHook = useGetAllUsers(token, fetchUsers)
-    const getAllOrderHook = useGetAllShipment(true, token, fetchOrders)
+    const getAllShipmentHook = useGetAllShipment(true, token, fetchOrders)
 
     function getProducts() {
         if (!getAllProductsHook.isLoading) {
@@ -44,10 +44,10 @@ function AdminPage() {
         }
     }
 
-    function getOrder() {
+    function getShipment() {
         setFetchOrders(true);
-        if (!getAllOrderHook.isLoading) {
-            setData(getAllOrderHook.data as Shipment[])
+        if (!getAllShipmentHook.isLoading) {
+            setData(getAllShipmentHook.data as Shipment[])
             setColumns(orderColumns as ColumnItem[])
         }
     }
@@ -60,10 +60,10 @@ function AdminPage() {
 
     useEffect(() => {
         if (!getAllProductsHook.isLoading) {
-            getOrder()
+            getShipment()
         }
         console.log(keycloak.keycloak?.hasRealmRole("ADMIN") || undefined);
-    }, [getAllOrderHook.isLoading])
+    }, [getAllShipmentHook.isLoading])
 
     return (
         <main className="min-h-screen bg-primary-color flex flex-col gap-10 items-center justify-start">
@@ -74,7 +74,7 @@ function AdminPage() {
                     <div className="flex md:flex-nowrap flex-wrap gap-10 max-w-md w-[50%] mx-auto">
                         <Button onClick={() => getProducts()} className="bg-accent-color-1 w-full"> Products</Button>
                         <Button onClick={() => getUsers()} className="bg-accent-color-1 w-full"> User</Button>
-                        <Button onClick={() => getOrder()} className="bg-accent-color-1 w-full"> Order</Button>
+                        <Button onClick={() => getShipment()} className="bg-accent-color-1 w-full"> Shipment</Button>
                     </div>
                     <div className="w-[70%] mx-auto">
                         <DataTable columns={columns} data={data} />

@@ -11,13 +11,15 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { FunctionComponent } from "react";
+import { boolean } from "zod";
 
 
 
 interface Field {
     id: string;
     label: string;
-    defaultValue: string;
+    type: string;
+    defaultValue?: string;
     className?: string;
 }
 
@@ -47,6 +49,7 @@ const CustomDialog: FunctionComponent<CustomDialogProps> = ({ title, description
                                 {field.label}
                             </Label>
                             <Input
+                                type={field.type}
                                 id={field.id}
                                 defaultValue={field.defaultValue}
                                 className={`col-span-3 text-primary-color ${field.className}`}

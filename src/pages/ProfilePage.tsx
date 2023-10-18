@@ -41,13 +41,13 @@ function ProfilePage() {
                             title="Edit User"
                             description="Edit your User details below."
                             fields={[
-                                { id: 'name', label: 'Name', defaultValue: keycloak.keycloak.profile?.username as string },
-                                { id: 'email', label: 'Email', defaultValue: keycloak.keycloak.profile?.email as string },
-                                { id: 'address', label: 'Address', defaultValue: '' },
+                                { type: 'text', id: 'name', label: 'Name', defaultValue: keycloak.keycloak.profile?.username as string },
+                                { type: 'text', id: 'email', label: 'Email', defaultValue: keycloak.keycloak.profile?.email as string },
+                                { type: 'text', id: 'address', label: 'Address', defaultValue: '' },
                             ]}
                             onSubmit={handleSave}
                         >
-                            <Button variant="outline">Edit Product</Button>
+                            <Button variant="outline">Edit Profile</Button>
                         </CustomDialog>
                         <Button onClick={() => keycloak.keycloak?.logout()} className="bg-error-color w-full mt-5">Logout</Button>
                     </div>
