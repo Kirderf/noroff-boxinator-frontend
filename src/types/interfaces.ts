@@ -57,6 +57,12 @@ interface Shipment {
   timestamp: string;
   gift: boolean;
   user: number;
+  shipmentProducts: ShipmentProducts[];
+}
+
+interface ShipmentProducts {
+  productId: number;
+  quantity: number;
 }
 interface ShipmentPost {
   user?: string,

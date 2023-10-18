@@ -2,9 +2,25 @@ import { Button } from "@/components/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 import CustomDropDown from "../dropDown/CustomDropDown"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
+import CustomDialog from "../CustomDialogForm/CustomDialogForm"
 
 
+
+function handleProductSave(product: Record<string, string>) {
+    console.log(product)
+}
+
+function handleShipmentSave(shipment: Record<string, string>) {
+    console.log(shipment)
+}
+
+function deleteUser() {
+    console.log("delete user")
+}
+
+function deleteShipment() {
+    console.log("delete shipment")
+}
 
 //Column structure for product and order table
 // This is how you build the columns and rows for the tables
@@ -52,23 +68,28 @@ export const productColumns: ColumnDef<Product>[] = [
     {
         id: "actions",
         enableHiding: false,
-        cell: () => {
+        cell: ({ row }) => {
+            const product = row.original
             return (
                 <CustomDropDown>
-                    <Select>
-                        <SelectTrigger className="w-[180px] bg-accent-color-1 flex justify-center gap-2 h-auto border-none">
-                            <h1>Active:</h1>
-                            <SelectValue className="" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-accent-color-1">
-                            <SelectGroup>
-                                <SelectLabel>Active</SelectLabel>
-                                <SelectItem value="true">True</SelectItem>
-                                <SelectItem value="false">False</SelectItem>
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
+                    <CustomDialog
+                        title="Edit Product"
+                        description="Edit your Product details below."
+                        fields={[
+                            { type: 'text', id: 'name', label: 'Name', defaultValue: product.name },
+                            { type: 'text', id: 'description', label: 'Description', defaultValue: product.description },
+                            { type: 'text', id: 'stock', label: 'Stock', defaultValue: product.stock.toString() },
+                            { type: 'text', id: 'width', label: 'Width', defaultValue: product.width.toString() },
+                            { type: 'text', id: 'depth', label: 'Depth', defaultValue: product.depth.toString() },
+                            { type: 'text', id: 'height', label: 'Height', defaultValue: product.height.toString() },
+                            { type: 'text', id: 'weight', label: 'Weight', defaultValue: product.weight.toString() },
+                        ]}
+                        onSubmit={handleProductSave}
+                    >
+                        <Button className="bg-accent-color-1">Edit Product</Button>
+                    </CustomDialog>
                 </CustomDropDown>
+
             )
         },
     },
@@ -77,31 +98,53 @@ export const productColumns: ColumnDef<Product>[] = [
 
 
 
-export const orderColumns: ColumnDef<Order>[] = [
+export const orderColumns: ColumnDef<Shipment>[] = [
     {
         accessorKey: "id",
         header: "Id",
     },
     {
-        accessorKey: "user",
+        accessorKey: "email",
         header: "User",
     },
     {
         accessorKey: "status",
-        header: () => <div className="text-right">Status</div>,
-        cell: () => <div className="text-right font-medium">Status</div>
+        header: "Status",
+    },
+    {
+        accessorKey: "shippingAddress",
+        header: "Shipping Address",
+    },
+    {
+        accessorKey: "postalCode",
+        header: "Postal Code",
     },
     {
         id: "actions",
         enableHiding: false,
-        cell: () => {
+        cell: ({ row }) => {
+
+            const order = row.original
             return (
                 <CustomDropDown>
-                    <Button className="bg-accent-color-1">
-                        Edit Order
-                    </Button>
-                    <Button className="bg-error-color">
-                        Delete Order
+                    <CustomDialog
+                        title="Edit Shipment"
+                        description="Edit your Shipment details below."
+                        fields={[
+                            { type: 'text', id: 'billingAddress', label: 'BillingAddress', defaultValue: order.billingAddress },
+                            { type: 'text', id: 'deliveryInstruction', label: 'DeliveryInstruction', defaultValue: order.deliveryInstruction },
+                            { type: 'text', id: 'city', label: 'City', defaultValue: order.city },
+                            { type: 'text', id: 'phoneNumber', label: 'PhoneNumber', defaultValue: order.phoneNumber },
+                            { type: 'text', id: 'postalCode', label: 'PostalCode', defaultValue: order.postalCode },
+                            { type: 'text', id: 'shippingAddress', label: 'ShippingAddress', defaultValue: order.shippingAddress },
+                            { type: 'text', id: 'status', label: 'Status', defaultValue: order.status },
+                        ]}
+                        onSubmit={handleShipmentSave}
+                    >
+                        <Button className="bg-accent-color-1">Edit Shipment</Button>
+                    </CustomDialog>
+                    <Button onClick={deleteShipment} className="bg-error-color">
+                        Delete Shipment
                     </Button>
                 </CustomDropDown>
             )
@@ -132,10 +175,7 @@ export const userColumns: ColumnDef<User>[] = [
         cell: () => {
             return (
                 <CustomDropDown>
-                    <Button className="bg-accent-color-1">
-                        Edit User
-                    </Button>
-                    <Button className="bg-error-color">
+                    <Button onClick={deleteUser} className="bg-error-color">
                         Delete User
                     </Button>
                 </CustomDropDown>

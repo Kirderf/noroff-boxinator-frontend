@@ -9,6 +9,7 @@ import AdminPage from "./pages/AdminPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import { KeyCLoakProvider } from "./context/KeyCloakContext";
+import ProtectedElement from "./lib/ProtectedRoute";
 
 
 function App() {
@@ -24,10 +25,19 @@ function App() {
 							<Route path="/" element={<LandingPage />} />
 							<Route path="/signin" element={<SignInPage />} />
 							<Route path="/signup" element={<SignUpPage />} />
-							<Route path="/profile" element={<ProfilePage />} />
-							<Route path="/admin" element={<AdminPage />} />
+							<Route path="/profile" element={
+								<ProtectedElement>
+									<ProfilePage />
+								</ProtectedElement>
+							} />
+							<Route path="/admin" element={
+								<ProtectedElement roles={['ADMIN']}>
+									<AdminPage />
+								</ProtectedElement>
+							} />
 							<Route path="/product/:id" element={<ProductDetailPage />} />
 							<Route path="/checkout" element={<CheckoutPage />} />
+							<Route path="/not-authorized" element={<h1 className="font-bold text-3xl text-primary-color flex w-full justify-center items-center pt-10">No permission!</h1>} />
 						</Routes>
 					</div>
 					{window.location.pathname === "/signin" || window.location.pathname === "/signup" ? null : <Footer />}
