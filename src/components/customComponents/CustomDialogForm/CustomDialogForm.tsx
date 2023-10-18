@@ -10,10 +10,8 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { FunctionComponent } from "react";
-import { boolean } from "zod";
-
-
+import { KeyCloakContext } from "@/context/KeyCloakContext";
+import { FunctionComponent, useContext } from "react";
 
 interface Field {
     id: string;
@@ -27,11 +25,15 @@ interface CustomDialogProps {
     title: string;
     description: string;
     fields: Field[];
-    onSubmit: (values: Record<string, string>) => void;
+    shipment?: Shipment;
+    product?: Product;
+    onSubmit: (values: Record<string, string>, token: string, shipment?: Shipment, product?: Product) => void;
     children: React.ReactNode;
 }
 
-const CustomDialog: FunctionComponent<CustomDialogProps> = ({ title, description, fields, onSubmit, children, ...rest }) => {
+const CustomDialog: FunctionComponent<CustomDialogProps> = ({ title, description, fields, shipment, product, onSubmit, children, ...rest }) => {
+    const keycloak = useContext(KeyCloakContext);
+
     return (
         <Dialog {...rest}>
             <DialogTrigger asChild className="bg-accent-color-1 border-none w-full mt-5 text-background-color">
@@ -64,7 +66,7 @@ const CustomDialog: FunctionComponent<CustomDialogProps> = ({ title, description
                             acc[field.id] = element.value;
                             return acc;
                         }, {} as Record<string, string>);
-                        onSubmit(values);
+                        onSubmit(values, keycloak.keycloak?.token as string, shipment, product);
                     }}>Save changes</Button>
                 </DialogFooter>
             </DialogContent>

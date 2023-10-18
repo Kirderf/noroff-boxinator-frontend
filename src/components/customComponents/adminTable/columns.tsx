@@ -3,15 +3,20 @@ import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 import CustomDropDown from "../dropDown/CustomDropDown"
 import CustomDialog from "../CustomDialogForm/CustomDialogForm"
+import updateShipment from "@/services/shipment/shipmentPatch"
 
 
-
-function handleProductSave(product: Record<string, string>) {
+function handleProductSave(values: Record<string, string>, token?: string, shipment?: Shipment, product?: Product) {
     console.log(product)
+    console.log(token)
+    console.log(values)
+    // updateProduct(token, product)
 }
 
-function handleShipmentSave(shipment: Record<string, string>) {
-    console.log(shipment)
+function handleShipmentSave(shipmentValues: Record<string, string>, token?: string, shipment?: Shipment) {
+    console.log(shipmentValues)
+    console.log(token)
+    updateShipment(token, shipment, shipmentValues)
 }
 
 function deleteUser() {
@@ -75,6 +80,7 @@ export const productColumns: ColumnDef<Product>[] = [
                     <CustomDialog
                         title="Edit Product"
                         description="Edit your Product details below."
+                        product={product}
                         fields={[
                             { type: 'text', id: 'name', label: 'Name', defaultValue: product.name },
                             { type: 'text', id: 'description', label: 'Description', defaultValue: product.description },
@@ -123,21 +129,19 @@ export const orderColumns: ColumnDef<Shipment>[] = [
         id: "actions",
         enableHiding: false,
         cell: ({ row }) => {
-
-            const order = row.original
+            const shipment = row.original
             return (
                 <CustomDropDown>
                     <CustomDialog
                         title="Edit Shipment"
                         description="Edit your Shipment details below."
+                        shipment={shipment}
                         fields={[
-                            { type: 'text', id: 'billingAddress', label: 'BillingAddress', defaultValue: order.billingAddress },
-                            { type: 'text', id: 'deliveryInstruction', label: 'DeliveryInstruction', defaultValue: order.deliveryInstruction },
-                            { type: 'text', id: 'city', label: 'City', defaultValue: order.city },
-                            { type: 'text', id: 'phoneNumber', label: 'PhoneNumber', defaultValue: order.phoneNumber },
-                            { type: 'text', id: 'postalCode', label: 'PostalCode', defaultValue: order.postalCode },
-                            { type: 'text', id: 'shippingAddress', label: 'ShippingAddress', defaultValue: order.shippingAddress },
-                            { type: 'text', id: 'status', label: 'Status', defaultValue: order.status },
+                            { type: 'text', id: 'billingAddress', label: 'BillingAddress', defaultValue: shipment.billingAddress },
+                            { type: 'text', id: 'deliveryInstruction', label: 'DeliveryInstruction', defaultValue: shipment.deliveryInstruction },
+                            { type: 'text', id: 'phoneNumber', label: 'PhoneNumber', defaultValue: shipment.phoneNumber },
+                            { type: 'text', id: 'postalCode', label: 'PostalCode', defaultValue: shipment.postalCode },
+                            { type: 'text', id: 'shippingAddress', label: 'ShippingAddress', defaultValue: shipment.shippingAddress },
                         ]}
                         onSubmit={handleShipmentSave}
                     >

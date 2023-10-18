@@ -44,6 +44,7 @@ interface Shipment {
   billingAddress: string;
   deliveryInstruction: string;
   shippingAddress: string;
+  countries: string;
   city: string;
   phoneNumber: string;
   postalCode: string;
@@ -55,6 +56,7 @@ interface Shipment {
 }
 
 interface ShipmentProducts {
+  shipmentId: number;
   productId: number;
   quantity: number;
 }
