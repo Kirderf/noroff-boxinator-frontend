@@ -30,7 +30,17 @@ function deleteShipment() {
 export const productColumns: ColumnDef<Product>[] = [
     {
         accessorKey: "id",
-        header: "Id",
+        header: ({ column }) => {
+            return (
+                <Button
+                    className="hover:bg-accent-color-2 px-0 hover:bg-opacity-[.50]"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Id
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
     },
     {
         accessorKey: "name",
@@ -82,6 +92,8 @@ export const productColumns: ColumnDef<Product>[] = [
                         fields={[
                             { type: 'text', id: 'name', label: 'Name', defaultValue: product.name },
                             { type: 'text', id: 'description', label: 'Description', defaultValue: product.description },
+                            { type: 'text', id: 'price', label: 'Price', defaultValue: product.price.toString() },
+                            { type: 'text', id: 'stock', label: 'Stock', defaultValue: product.stock.toString() },
                         ]}
                         onSubmit={handleProductSave}
                     >
@@ -100,7 +112,17 @@ export const productColumns: ColumnDef<Product>[] = [
 export const orderColumns: ColumnDef<Shipment>[] = [
     {
         accessorKey: "id",
-        header: "Id",
+        header: ({ column }) => {
+            return (
+                <Button
+                    className="hover:bg-accent-color-2 px-0 hover:bg-opacity-[.50]"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Id
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
     },
     {
         accessorKey: "email",
@@ -155,7 +177,17 @@ export const orderColumns: ColumnDef<Shipment>[] = [
 export const userColumns: ColumnDef<User>[] = [
     {
         accessorKey: "id",
-        header: "Id",
+        header: ({ column }) => {
+            return (
+                <Button
+                    className="hover:bg-accent-color-2 px-0 hover:bg-opacity-[.50]"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Id
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
     },
     {
         accessorKey: "username",
