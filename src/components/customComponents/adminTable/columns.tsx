@@ -8,7 +8,7 @@ import { updateProduct } from "@/services/product/productPatch"
 import ToggleActiveButton from "../toggleActiveButton/toggleActiveButton"
 
 
-function handleProductSave(productValues: Record<string, string>, token?: string, shipment?: Shipment, product?: Product) {
+function handleProductSave(productValues: Record<string, string>, token?: string, _shipment?: Shipment, product?: Product) {
     updateProduct(token, product, productValues)
         .then(() => {
             window.location.reload();

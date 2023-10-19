@@ -58,7 +58,7 @@ function AdminPage() {
             setFilterValue("email")
         }
     }
-    const addProduct = async (values: Record<string, string>, token: string, shipment?: Shipment, product?: Product | undefined) => {
+    const addProduct = async (values: Record<string, string>, token: string, _shipment?: Shipment, _product?: Product | undefined) => {
         const productPost: ProductPost = {
             name: values.name,
             description: values.description,
