@@ -73,12 +73,12 @@ function ProductDetailPage() {
                         })}</p>
                     </div>
                     <div className="flex gap-10 w-full mt-10 text-background-color">
-                        <Button className="bg-accent-color-1 w-full font-bold" onClick={() => {
+                        <Button className="hover:animate-pop-up bg-accent-color-1 hover:bg-accent-color-1-focus w-full font-bold" onClick={() => {
                             dispatch(addToCart({
                                 product
                             }))
                         }} > Add to cart</Button>
-                        <Button className="bg-error-color w-full font-bold" onClick={() => {
+                        <Button className="hover:animate-pop-up bg-error-color hover:bg-error-color-focus w-full font-bold" onClick={() => {
                             dispatch(addToCart({
                                 product
                             }))
