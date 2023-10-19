@@ -4,7 +4,7 @@ function Footer() {
             <div className="flex flex-col md:flex-row justify-center items-center">
                 <div className=" absolute left-10">
                     <a className="flex-none text-xl font-semibold text-black dark:text-white" href="/" aria-label="Brand">
-                        <img src="./images/BoxinatorLogo.png" alt="Boxinator Logo" className="w-32" />  {/* Assuming you have a logo image */}
+                        <img src="/./images/BoxinatorLogo.png" alt="Boxinator Logo" className="w-32" />  {/* Assuming you have a logo image */}
                     </a>
                 </div>
                 <nav className="">
