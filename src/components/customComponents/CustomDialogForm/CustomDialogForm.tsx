@@ -63,7 +63,11 @@ const CustomDialog: FunctionComponent<CustomDialogProps> = ({ title, description
                     <Button type="submit" onClick={() => {
                         const values = fields.reduce((acc, field) => {
                             const element = document.getElementById(field.id) as HTMLInputElement;
-                            acc[field.id] = element.value;
+                            if (element.type == "checkbox") {
+                                console.log(element.checked)
+                                acc[field.id] = `${element.checked}`
+                            } else acc[field.id] = element.value;
+
                             return acc;
                         }, {} as Record<string, string>);
                         onSubmit(values, keycloak.keycloak?.token as string, shipment, product);
