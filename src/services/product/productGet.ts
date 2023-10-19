@@ -8,10 +8,27 @@ const fetchAllProduct = async () => {
   ).then((data) => data.json());
 };
 
+const fetchAllProductAll = async (token?: string) => {
+  return await fetch("https://boxinator2.azurewebsites.net/api/v1/product", {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      authorization: "bearer " + token,
+    },
+  }).then((data) => data.json());
+};
+
 const fetchProductById = async (id: number) => {
   return await fetch(
     "https://boxinator2.azurewebsites.net/api/v1/product/" + id
   ).then((data) => data.json());
+};
+
+export const useGetAllProductAll = (token?: string) => {
+  return useQuery({
+    queryKey: ["getAllProductAll"],
+    queryFn: () => fetchAllProductAll(token),
+  });
 };
 
 export const useGetAllProducts = () => {

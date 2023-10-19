@@ -5,23 +5,23 @@ import CustomDropDown from "../dropDown/CustomDropDown"
 import CustomDialog from "../CustomDialogForm/CustomDialogForm"
 import { updateShipment } from "@/services/shipment/shipmentPatch"
 import { updateProduct } from "@/services/product/productPatch"
+import ToggleActiveButton from "../toggleActiveButton/toggleActiveButton"
 
 
 function handleProductSave(productValues: Record<string, string>, token?: string, shipment?: Shipment, product?: Product) {
     updateProduct(token, product, productValues)
+        .then(() => {
+            window.location.reload();
+        })
 }
 
 function handleShipmentSave(shipmentValues: Record<string, string>, token?: string, shipment?: Shipment) {
     updateShipment(token, shipment, shipmentValues)
+        .then(() => {
+            window.location.reload();
+        })
 }
 
-function deleteUser() {
-    console.log("delete user")
-}
-
-function deleteShipment() {
-    console.log("delete shipment")
-}
 
 //Column structure for product and order table
 // This is how you build the columns and rows for the tables
@@ -62,6 +62,16 @@ export const productColumns: ColumnDef<Product>[] = [
     {
         accessorKey: "active",
         header: "Active",
+        cell: ({ row }) => {
+            const product = row.original
+            const active = row.getValue("active") as boolean
+            return (
+                <div className="text-center font-medium">
+                    {active ? "Active" : "Inactive"}
+                    <ToggleActiveButton active={active} product={product} />
+                </div>
+            )
+        },
     },
     {
         accessorKey: "price",
@@ -90,8 +100,9 @@ export const productColumns: ColumnDef<Product>[] = [
                         fields={[
                             { type: 'text', id: 'name', label: 'Name', defaultValue: product.name },
                             { type: 'text', id: 'description', label: 'Description', defaultValue: product.description },
-                            { type: 'text', id: 'price', label: 'Price', defaultValue: product.price.toString() },
-                            { type: 'text', id: 'stock', label: 'Stock', defaultValue: product.stock.toString() },
+                            { type: 'number', id: 'price', label: 'Price', defaultValue: product.price.toString() },
+                            { type: 'number', id: 'stock', label: 'Stock', defaultValue: product.stock.toString() },
+
                         ]}
                         onSubmit={handleProductSave}
                     >
@@ -163,9 +174,6 @@ export const orderColumns: ColumnDef<Shipment>[] = [
                     >
                         <Button className="bg-accent-color-1">Edit Shipment</Button>
                     </CustomDialog>
-                    <Button onClick={deleteShipment} className="bg-error-color">
-                        Delete Shipment
-                    </Button>
                 </CustomDropDown>
             )
         },
@@ -198,19 +206,6 @@ export const userColumns: ColumnDef<User>[] = [
     {
         accessorKey: "email",
         header: "Email",
-    },
-    {
-        id: "actions",
-        enableHiding: false,
-        cell: () => {
-            return (
-                <CustomDropDown>
-                    <Button onClick={deleteUser} className="bg-error-color">
-                        Delete User
-                    </Button>
-                </CustomDropDown>
-            )
-        },
     },
 ]
 

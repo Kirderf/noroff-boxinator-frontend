@@ -3,7 +3,7 @@ import { productColumns, orderColumns, userColumns } from "../components/customC
 import { DataTable } from "../components/customComponents/adminTable/data-table"
 import { Button } from "@/components/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
-import { useGetAllProducts } from "@/services/product/productGet"
+import { useGetAllProductAll } from "@/services/product/productGet"
 import { useGetAllShipment } from "@/services/shipment/shipmentGet"
 import { useGetAllUsers } from "@/services/user/userGet"
 import { KeyCloakContext } from "@/context/KeyCloakContext"
@@ -12,12 +12,8 @@ import { isProductValid } from "@/lib/isProductValid"
 import { productPostWithAdmin } from "@/services/product/productPost"
 import { useToast } from "@/components/ui/use-toast"
 
-
-
 type DataItem = Product | Shipment | User
-
 type ColumnItem = ColumnDef<DataItem>
-
 
 function AdminPage() {
 
@@ -33,7 +29,7 @@ function AdminPage() {
 
     const token = keycloak.keycloak?.token || ''
 
-    const getAllProductsHook = useGetAllProducts()
+    const getAllProductsHook = useGetAllProductAll(token)
     const getAllUsersHook = useGetAllUsers(token, fetchUsers)
     const getAllShipmentHook = useGetAllShipment(true, token, fetchOrders)
 
@@ -113,6 +109,12 @@ function AdminPage() {
         }
 
     }
+    useEffect(() => {
+        if (!getAllProductsHook.isLoading) {
+            getProducts()
+        }
+    }, [getAllProductsHook.isLoading])
+
     useEffect(() => {
         if (!getAllUsersHook.isLoading) {
             getUsers()
