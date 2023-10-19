@@ -73,20 +73,11 @@ function CustomCheckoutForm(props: Props) {
             const userData = await props.user
             form.setValue("email", userData.email)
         }
-        putUserData()
+        if (props.user) putUserData()
     }, [props.user])
-    const { toast } = useToast()
 
     function onSubmit(data: z.infer<typeof formSchema>) {
         props.onFormSubmit(data)
-        /* toast({
-             title: "You submitted the following values:",
-             description: (
-                 <pre className="mt-2 w-[340px] rounded-md bg-secondary-color p-4">
-                     <code className="text-black">{JSON.stringify(data, null, 2)}</code>
-                 </pre>
-             ),
-         }) */
     }
 
     return (
@@ -189,7 +180,7 @@ function CustomCheckoutForm(props: Props) {
                         </FormItem>
                     )}
                 />
-                <Button className='bg-accent-color-1 w-full' type="submit">Continue to Payment</Button>
+                <Button className='bg-accent-color-1 w-full hover:bg-accent-color-1-focus hover:animate-pop-up' type="submit">Continue to Payment</Button>
             </form>
         </Form>
     )
