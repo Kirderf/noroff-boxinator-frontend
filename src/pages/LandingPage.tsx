@@ -2,6 +2,7 @@ import CardList from "@/components/customComponents/customCard/CardList"
 import TopSellingCardList from "@/components/customComponents/customCard/TopSellingCardList"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import ColorReplaceImage from "@/lib/colorChangeImage"
 import { useGetAllProducts } from "@/services/product/productGet"
 import { useEffect, useRef, useState } from "react"
 
@@ -10,6 +11,7 @@ function LandingPage() {
     const [products, setProducts] = useState<Product[]>([])
     const getAllProductsHook = useGetAllProducts()
     const productListRef = useRef<null | HTMLDivElement>(null)
+
     useEffect(() => {
         if (!getAllProductsHook.isLoading)
             setProducts(getAllProductsHook.data as Product[])
@@ -25,16 +27,18 @@ function LandingPage() {
     return (
         <main className="flex flex-col">
             <div className='min-h-screen  w-full flex flex-col items-center justify-center bg-primary-color'>
-                <div className='flex gap-32 bg-primary-color flex-wrap items-center justify-center'>
-                    <img src="./images/BoxinatorLogo.png" className='object-fit h-[35rem] w-[35rem] 2xl:h-[50rem] 2xl:w-[50rem] animate-fade-up' alt="" />
+                <div className='flex gap-32 bg-primary-color flex-wrap items-center pb-52 justify-center'>
+                    <div className="blob-cont bg-green-color w-[15rem] sm:w-[30rem]">
+                        <img src="./images/gif.gif" className=' rounded-full object-fit  animate-fade-up' alt="" />
+                    </div>
                     <div className='flex flex-col items-center justify-center max-w-[20rem] text-center gap-10 animate-fade-left'>
-                        <h2>
+                        <h2 className=" ">
                             <span className='text-green-color text-[2rem] font-bold'>Explore </span>
                             <span className='text-white text-[1.3rem] font-bold italic'>
                                 a world of imaginative possibilities one box at a time, crafted to inspire and delight.
                             </span>
                         </h2>
-                        <Button className="bg-accent-color-1 w-[80%] mb-20" onClick={() => scrollToProducts()}>
+                        <Button className="bg-accent-color-1 w-[80%] mb-20 hover:bg-accent-color-1-focus" onClick={() => scrollToProducts()}>
                             <h1>Get started</h1>
                         </Button>
                     </div>
@@ -54,7 +58,7 @@ function LandingPage() {
 
             </div>
 
-        </main>
+        </main >
 
     )
 }

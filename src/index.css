@@ -15,5 +15,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
 }
-
+.blob-cont{
+    border-radius: 61% 39% 28% 72% / 50% 39% 61% 50%
+}
 
