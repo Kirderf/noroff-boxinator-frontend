@@ -11,16 +11,23 @@ import {
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux';
 import { decrementQuantity, incrementQuantity, removeAllItems } from '../../../redux/chartSlice';
+import { Badge } from "@/components/ui/badge";
 
 
 
 const DropDownProducts = () => {
     const cart = useSelector((state: { product: Product, quantity: number }[]) => state)
     const dispatch = useDispatch()
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <img src="./icons/cart-icon.png" alt="Cart" />
+                <div className="relative hover:animate-pop-up">
+                    <img src="/./icons/cart-icon.png" alt="Cart" className="w-10" />
+                    <Badge className="absolute -top-2 -right-4 bg-green-color text-background-color">{cart.reduce((acc, val) => acc + val.quantity, 0)}</Badge>
+                </div>
+
+
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-[27rem] bg-primary-color">
                 <DropdownMenuLabel>Products</DropdownMenuLabel>
@@ -30,18 +37,24 @@ const DropDownProducts = () => {
                         <DropdownMenuItem key={index}>
                             <div className="flex flex-row gap-10" >
                                 <a href={"/product/" + item.product?.id}>{item.product?.name}</a>
-                                <div className="flex flex-row justify-center text-center content-center top-0 right-0" onClick={(e: any) => e.preventDefault()}>
-                                    <Button className="py-0 pb-5" onClick={() => {
+                                <div className="flex flex-row justify-center h-[20px] text-center content-center top-0 right-0 bg-accent-color-1 rounded-xl" onClick={(e: any) => e.preventDefault()}>
+                                    <Button className="h-[20px]" onClick={() => {
                                         dispatch(incrementQuantity(
                                             item?.product
                                         ))
                                     }}>+</Button>
-                                    <p>{item?.quantity}</p>
-                                    <Button className="py-0 pb-5" onClick={() => {
+                                    {item?.quantity}
+                                    <Button className="h-[20px]" onClick={() => {
                                         dispatch(decrementQuantity(
                                             item?.product
                                         ))
                                     }}>-</Button>
+                                </div>
+                                <div>
+                                    Price : {(item.product.price).toFixed(2)}
+                                </div>
+                                <div>
+                                    Price Total : {(item.quantity * item.product.price).toFixed(2)}
                                 </div>
                             </div>
                         </DropdownMenuItem>
