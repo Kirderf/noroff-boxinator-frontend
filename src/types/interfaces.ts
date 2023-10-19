@@ -66,6 +66,17 @@ interface ShipmentProducts {
   productId: number;
   quantity: number;
 }
+interface ProductPost{
+  name: string;
+  description: string; 
+  image: string; 
+  price: number; 
+  stock: number; 
+  active: boolean; 
+  weight: number;
+  depth: number; 
+  height: number;
+}
 interface ShipmentPost {
   user?: string,
   shipmentProducts: {productId: number, quantity: number}[],
