@@ -25,7 +25,7 @@ function checkoutPage() {
     const [shippingCost, setShippingCost] = useState(0);
     const navigate = useNavigate()
     const keycloak = useContext(KeyCloakContext);
-    const userData = keycloak.keycloak?.loadUserInfo()
+
     const [loggedIn, setLoggedIn] = useState<boolean>();
     const dispatch = useDispatch()
     useEffect(() => {
@@ -72,8 +72,9 @@ function checkoutPage() {
             gift: false
         }
         if (keycloak.keycloak?.tokenParsed) {
+            const userData = keycloak.keycloak?.loadUserInfo()
             const user: any = await userData
-            if (userData) {
+            if (user) {
                 shipment.user = user.sub
 
             }
@@ -105,7 +106,6 @@ function checkoutPage() {
             }
         })
     }
-
     return (
         <main className=' flex justify-center items-center bg-background-color'>
             {keycloak.keycloak?.authenticated == undefined ?
