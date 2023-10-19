@@ -7,19 +7,6 @@ export async function updateProduct(
   productValues?: Record<string, string>
 ) {
   try {
-    console.log({
-      id: product?.id,
-      price: product?.price,
-      stock: product?.stock,
-      description: productValues?.description,
-      name: productValues?.name,
-      image: product?.image,
-      width: product?.width,
-      height: product?.height,
-      depth: product?.depth,
-      weight: product?.weight,
-      active: product?.active,
-    });
     const response = await fetch(
       "https://boxinator2.azurewebsites.net/api/v1/product",
       {
