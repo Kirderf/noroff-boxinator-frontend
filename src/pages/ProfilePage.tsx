@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { KeycloakProfile } from "keycloak-js";
 import { useGetShipmentsForUser } from "@/services/shipment/shipmentGet";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -12,6 +13,8 @@ function ProfilePage() {
     const keycloak = useContext(KeyCloakContext);
     const [shipment, setShipment] = useState<Shipment[]>([])
     const [user, setUser] = useState<KeycloakProfile | undefined>(undefined)
+    const navigate = useNavigate()
+
 
     const shipmentByUserHook = useGetShipmentsForUser(user?.id ?? "", true, keycloak.keycloak?.token ?? '')
 
@@ -50,6 +53,9 @@ function ProfilePage() {
                             <Button variant="outline">Edit Profile</Button>
                         </CustomDialog>
                         <Button onClick={() => keycloak.keycloak?.logout()} className="bg-error-color w-full mt-5">Logout</Button>
+                        {keycloak.keycloak?.hasRealmRole("ADMIN") && (
+                            <Button onClick={() => navigate('/admin')} className="bg-error-color w-full mt-5">Admin</Button>
+                        )}
                     </div>
                     <div className="w-[70%] mx-auto">
                         <CustomTable shipments={shipment} />

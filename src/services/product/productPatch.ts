@@ -40,3 +40,44 @@ export async function updateProduct(
     throw error;
   }
 }
+
+export async function updateProductActive(
+  token?: string,
+  product?: Product,
+  active?: boolean
+) {
+  try {
+    console.log(active);
+    const response = await fetch(
+      "https://boxinator2.azurewebsites.net/api/v1/product",
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          id: product?.id,
+          price: product?.price,
+          stock: product?.stock,
+          description: product?.description,
+          name: product?.name,
+          image: product?.image,
+          width: product?.width,
+          height: product?.height,
+          depth: product?.depth,
+          weight: product?.weight,
+          active: active,
+        }),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          authorization: "bearer " + token,
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to update Shipment");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}

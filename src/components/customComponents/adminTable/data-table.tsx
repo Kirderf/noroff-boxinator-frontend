@@ -54,7 +54,7 @@ export function DataTable<TData, TValue>({
         <div className="">
             <div className="flex items-center py-4 text-primary-color">
                 <Input
-                    value={(table.getColumn(filterValue as string)?.getFilterValue() as string)}
+                    value={(table.getColumn(filterValue as string)?.getFilterValue() as string) ?? ""}
                     placeholder={`Filter by ${filterValue}`}
                     onChange={(event) =>
                         table.getColumn(filterValue as string)?.setFilterValue(event.target.value)
@@ -74,7 +74,7 @@ export function DataTable<TData, TValue>({
                                                 ? null
                                                 : flexRender(
                                                     header.column.columnDef.header,
-                                                    header.getContext()
+                                                    header.getContext(),
                                                 )}
                                         </TableHead>
                                     )

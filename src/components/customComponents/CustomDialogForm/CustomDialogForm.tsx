@@ -36,7 +36,7 @@ const CustomDialog: FunctionComponent<CustomDialogProps> = ({ title, description
 
     return (
         <Dialog {...rest}>
-            <DialogTrigger asChild className="bg-accent-color-1 border-none w-full mt-5 text-background-color">
+            <DialogTrigger asChild className="bg-accent-color-1 border-none w-full text-background-color">
                 {children}
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px] bg-primary-color">
