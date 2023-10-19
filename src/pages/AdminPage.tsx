@@ -7,6 +7,10 @@ import { useGetAllProducts } from "@/services/product/productGet"
 import { useGetAllShipment } from "@/services/shipment/shipmentGet"
 import { useGetAllUsers } from "@/services/user/userGet"
 import { KeyCloakContext } from "@/context/KeyCloakContext"
+import CustomDialog from "@/components/customComponents/CustomDialogForm/CustomDialogForm"
+import { isProductValid } from "@/lib/isProductValid"
+import { productPostWithAdmin } from "@/services/product/productPost"
+import { useToast } from "@/components/ui/use-toast"
 
 
 
@@ -24,6 +28,8 @@ function AdminPage() {
     const [fetchUsers, setFetchUsers] = useState(false);
     const [fetchOrders, setFetchOrders] = useState(false);
     const [filterValue, setFilterValue] = useState("");
+
+    const { toast } = useToast()
 
     const token = keycloak.keycloak?.token || ''
 
@@ -56,7 +62,57 @@ function AdminPage() {
             setFilterValue("email")
         }
     }
+    const addProduct = async (values: Record<string, string>, token: string, shipment?: Shipment, product?: Product | undefined) => {
+        const productPost: ProductPost = {
+            name: values.name,
+            description: values.description,
+            image: values.image,
+            price: Number(values.price),
+            stock: Number(values.stock),
+            active: (values.active == "true"),
+            height: Number(values.height),
+            weight: Number(values.weight),
+            depth: Number(values.depth),
+        }
+        console.log(productPost)
+        if (isProductValid(productPost)) {
+            await productPostWithAdmin(productPost, token).then((r) => {
+                console.log(r)
+                if (r.ok) {
+                    toast({
+                        variant: "success",
+                        title: "Success <3",
+                        description: (
+                            <div className="mt-2 w-[340px] rounded-md p-4">
+                                The shipment was successfully placed, and will soon arrive. ^_^
+                            </div>
+                        ),
+                    })
+                } else {
+                    toast({
+                        variant: "error",
+                        title: "Error",
+                        description: (
+                            <div className="mt-2 w-[340px] rounded-md  p-4">
+                                Oops! It seems our magical ordering elves are taking an unexpected nap. ^_^
+                            </div>
+                        ),
+                    })
+                }
+            })
+        } else {
+            toast({
+                variant: "error",
+                title: "Error",
+                description: (
+                    <div className="mt-2 w-[340px] rounded-md  p-4">
+                        input error.
+                    </div>
+                ),
+            })
+        }
 
+    }
     useEffect(() => {
         if (!getAllUsersHook.isLoading) {
             getUsers()
@@ -80,10 +136,29 @@ function AdminPage() {
                         <Button onClick={() => getUsers()} className="bg-accent-color-1 w-full"> User</Button>
                         <Button onClick={() => getShipment()} className="bg-accent-color-1 w-full"> Shipment</Button>
                     </div>
+                    <CustomDialog
+                        title="Edit Shipment"
+                        description="Edit your Shipment details below."
+                        fields={[
+                            { type: 'text', id: 'name', label: 'Name' },
+                            { type: 'text', id: 'description', label: 'Description' },
+                            { type: 'url', id: 'image', label: 'Image' },
+                            { type: 'number', id: 'price', label: 'Price' },
+                            { type: 'number', id: 'stock', label: 'Stock' },
+                            { type: 'checkbox', id: 'active', label: 'Active' },
+                            { type: 'number', id: 'height', label: 'Height' },
+                            { type: 'number', id: 'depth', label: 'Depth' },
+                            { type: 'number', id: 'weight', label: 'Weight' },
+                        ]}
+                        onSubmit={addProduct}
+                    >
+                        <Button className="bg-accent-color-1">Edit Shipment</Button>
+                    </CustomDialog>
                     <div className="w-[70%] mx-auto">
                         <DataTable filterValue={filterValue} columns={columns} data={data} />
                     </div>
                 </>
+
             ) : (
                 // JSX for non-admin user
                 <h1 className="text-4xl text-background-color text-center mt-10">Not Admin</h1>
