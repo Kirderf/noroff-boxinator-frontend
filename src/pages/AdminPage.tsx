@@ -137,8 +137,8 @@ function AdminPage() {
                         <Button onClick={() => getShipment()} className="bg-accent-color-1 w-full"> Shipment</Button>
                     </div>
                     <CustomDialog
-                        title="Edit Shipment"
-                        description="Edit your Shipment details below."
+                        title="Add Product"
+                        description="Add product details below."
                         fields={[
                             { type: 'text', id: 'name', label: 'Name' },
                             { type: 'text', id: 'description', label: 'Description' },
@@ -152,7 +152,7 @@ function AdminPage() {
                         ]}
                         onSubmit={addProduct}
                     >
-                        <Button className="bg-accent-color-1">Edit Shipment</Button>
+                        <Button className="bg-accent-color-1 w-[50%]">Add Product</Button>
                     </CustomDialog>
                     <div className="w-[70%] mx-auto">
                         <DataTable filterValue={filterValue} columns={columns} data={data} />

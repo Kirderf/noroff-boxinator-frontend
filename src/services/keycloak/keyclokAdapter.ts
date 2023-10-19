@@ -54,6 +54,7 @@ function useKeyCloak() {
       }
     };
     if (keycloak?.tokenParsed) {
+      console.log("hei")
       post();
     }
   }, []);

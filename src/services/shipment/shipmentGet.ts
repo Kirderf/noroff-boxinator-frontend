@@ -39,10 +39,11 @@ const fetchShipmentById = async (id: number) => {
 
 async function fetchShipmentsFromUser(userId: string, token?: string) {
   try {
+    if(userId == "error"){
+      return 
+    }
     const response = await fetch(
-      "https://boxinator2.azurewebsites.net/api/v1/shipment/" +
-        userId +
-        fullShipmentParam,
+      "https://boxinator2.azurewebsites.net/api/v1/shipment/" + userId,
       {
         method: "GET",
         headers: {
@@ -55,9 +56,7 @@ async function fetchShipmentsFromUser(userId: string, token?: string) {
     if (!response.ok) {
       throw new Error("Failed to fetch Shipments");
     }
-
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     throw error;

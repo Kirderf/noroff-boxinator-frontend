@@ -76,11 +76,12 @@ function checkoutPage() {
             const user: any = await userData
             if (user) {
                 shipment.user = user.sub
-
             }
         }
         shipmentPostWithUser(shipment).then(async (r) => {
             if (!r.ok) {
+                console.log(r)
+                console.log(shipment)
                 toast({
                     variant: "error",
                     title: "Error",

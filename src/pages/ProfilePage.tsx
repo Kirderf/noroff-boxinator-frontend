@@ -13,17 +13,16 @@ function ProfilePage() {
     const [shipment, setShipment] = useState<Shipment[]>([])
     const [user, setUser] = useState<KeycloakProfile | undefined>(undefined)
 
-    const shipmentByUserHook = useGetShipmentsForUser(user?.id ?? "", true, keycloak.keycloak?.token ?? '')
+    const shipmentByUserHook = useGetShipmentsForUser(user?.id ?? "error", true, keycloak.keycloak?.token ?? '')
 
     useEffect(() => {
         keycloak.keycloak?.loadUserProfile().then((profile) => {
             setUser(profile)
         })
         if (!shipmentByUserHook.isLoading) {
-            console.log(shipmentByUserHook.data)
             setShipment(shipmentByUserHook.data as Shipment[])
         }
-    }, [keycloak.keycloak?.authenticated, shipmentByUserHook.data])
+    }, [shipmentByUserHook.data])
 
 
     function handleSave(values: Record<string, string>) {
