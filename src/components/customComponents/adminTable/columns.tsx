@@ -4,13 +4,11 @@ import { ArrowUpDown } from "lucide-react"
 import CustomDropDown from "../dropDown/CustomDropDown"
 import CustomDialog from "../CustomDialogForm/CustomDialogForm"
 import { updateShipment } from "@/services/shipment/shipmentPatch"
+import { updateProduct } from "@/services/product/productPatch"
 
 
-function handleProductSave(values: Record<string, string>, token?: string, shipment?: Shipment, product?: Product) {
-    console.log(product)
-    console.log(token)
-    console.log(values)
-    // updateProduct(token, product)
+function handleProductSave(productValues: Record<string, string>, token?: string, shipment?: Shipment, product?: Product) {
+    updateProduct(token, product, productValues)
 }
 
 function handleShipmentSave(shipmentValues: Record<string, string>, token?: string, shipment?: Shipment) {

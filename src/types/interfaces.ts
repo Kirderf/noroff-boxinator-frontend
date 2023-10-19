@@ -7,7 +7,7 @@ interface Product {
   description: string;
   stock: number;
   price: number;
-  isActive: boolean;
+  active: boolean;
   width: number;
   depth: number;
   height: number;

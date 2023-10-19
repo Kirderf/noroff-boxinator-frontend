@@ -9,6 +9,7 @@ import { useGetAllUsers } from "@/services/user/userGet"
 import { KeyCloakContext } from "@/context/KeyCloakContext"
 
 
+
 type DataItem = Product | Shipment | User
 
 type ColumnItem = ColumnDef<DataItem>
@@ -22,7 +23,7 @@ function AdminPage() {
 
     const [fetchUsers, setFetchUsers] = useState(false);
     const [fetchOrders, setFetchOrders] = useState(false);
-    const [filterValue, setFilterValue] = useState("")
+    const [filterValue, setFilterValue] = useState("");
 
     const token = keycloak.keycloak?.token || ''
 
@@ -66,7 +67,6 @@ function AdminPage() {
         if (!getAllProductsHook.isLoading) {
             getShipment()
         }
-        console.log(keycloak.keycloak?.hasRealmRole("ADMIN") || undefined);
     }, [getAllShipmentHook.isLoading])
 
     return (
