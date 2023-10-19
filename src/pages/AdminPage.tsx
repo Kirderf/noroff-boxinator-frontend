@@ -9,6 +9,7 @@ import { useGetAllUsers } from "@/services/user/userGet"
 import { KeyCloakContext } from "@/context/KeyCloakContext"
 
 
+
 type DataItem = Product | Shipment | User
 
 type ColumnItem = ColumnDef<DataItem>
@@ -22,6 +23,7 @@ function AdminPage() {
 
     const [fetchUsers, setFetchUsers] = useState(false);
     const [fetchOrders, setFetchOrders] = useState(false);
+    const [filterValue, setFilterValue] = useState("");
 
     const token = keycloak.keycloak?.token || ''
 
@@ -33,6 +35,7 @@ function AdminPage() {
         if (!getAllProductsHook.isLoading) {
             setData(getAllProductsHook.data as Product[])
             setColumns(productColumns as ColumnItem[])
+            setFilterValue("name")
         }
     }
 
@@ -41,6 +44,7 @@ function AdminPage() {
         if (!getAllUsersHook.isLoading) {
             setData(getAllUsersHook.data as User[])
             setColumns(userColumns as ColumnItem[])
+            setFilterValue("username")
         }
     }
 
@@ -49,6 +53,7 @@ function AdminPage() {
         if (!getAllShipmentHook.isLoading) {
             setData(getAllShipmentHook.data as Shipment[])
             setColumns(orderColumns as ColumnItem[])
+            setFilterValue("email")
         }
     }
 
@@ -62,7 +67,6 @@ function AdminPage() {
         if (!getAllProductsHook.isLoading) {
             getShipment()
         }
-        console.log(keycloak.keycloak?.hasRealmRole("ADMIN") || undefined);
     }, [getAllShipmentHook.isLoading])
 
     return (
@@ -77,7 +81,7 @@ function AdminPage() {
                         <Button onClick={() => getShipment()} className="bg-accent-color-1 w-full"> Shipment</Button>
                     </div>
                     <div className="w-[70%] mx-auto">
-                        <DataTable columns={columns} data={data} />
+                        <DataTable filterValue={filterValue} columns={columns} data={data} />
                     </div>
                 </>
             ) : (

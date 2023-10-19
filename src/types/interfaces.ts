@@ -7,7 +7,7 @@ interface Product {
   description: string;
   stock: number;
   price: number;
-  isActive: boolean;
+  active: boolean;
   width: number;
   depth: number;
   height: number;
@@ -50,6 +50,7 @@ interface Shipment {
   billingAddress: string;
   deliveryInstruction: string;
   shippingAddress: string;
+  countries: string;
   city: string;
   phoneNumber: string;
   postalCode: string;
@@ -61,6 +62,7 @@ interface Shipment {
 }
 
 interface ShipmentProducts {
+  shipmentId: number;
   productId: number;
   quantity: number;
 }

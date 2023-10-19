@@ -3,15 +3,16 @@ import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 import CustomDropDown from "../dropDown/CustomDropDown"
 import CustomDialog from "../CustomDialogForm/CustomDialogForm"
+import { updateShipment } from "@/services/shipment/shipmentPatch"
+import { updateProduct } from "@/services/product/productPatch"
 
 
-
-function handleProductSave(product: Record<string, string>) {
-    console.log(product)
+function handleProductSave(productValues: Record<string, string>, token?: string, shipment?: Shipment, product?: Product) {
+    updateProduct(token, product, productValues)
 }
 
-function handleShipmentSave(shipment: Record<string, string>) {
-    console.log(shipment)
+function handleShipmentSave(shipmentValues: Record<string, string>, token?: string, shipment?: Shipment) {
+    updateShipment(token, shipment, shipmentValues)
 }
 
 function deleteUser() {
@@ -27,7 +28,17 @@ function deleteShipment() {
 export const productColumns: ColumnDef<Product>[] = [
     {
         accessorKey: "id",
-        header: "Id",
+        header: ({ column }) => {
+            return (
+                <Button
+                    className="hover:bg-accent-color-2 px-0 hover:bg-opacity-[.50]"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Id
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
     },
     {
         accessorKey: "name",
@@ -75,14 +86,12 @@ export const productColumns: ColumnDef<Product>[] = [
                     <CustomDialog
                         title="Edit Product"
                         description="Edit your Product details below."
+                        product={product}
                         fields={[
                             { type: 'text', id: 'name', label: 'Name', defaultValue: product.name },
                             { type: 'text', id: 'description', label: 'Description', defaultValue: product.description },
+                            { type: 'text', id: 'price', label: 'Price', defaultValue: product.price.toString() },
                             { type: 'text', id: 'stock', label: 'Stock', defaultValue: product.stock.toString() },
-                            { type: 'text', id: 'width', label: 'Width', defaultValue: product.width.toString() },
-                            { type: 'text', id: 'depth', label: 'Depth', defaultValue: product.depth.toString() },
-                            { type: 'text', id: 'height', label: 'Height', defaultValue: product.height.toString() },
-                            { type: 'text', id: 'weight', label: 'Weight', defaultValue: product.weight.toString() },
                         ]}
                         onSubmit={handleProductSave}
                     >
@@ -101,7 +110,17 @@ export const productColumns: ColumnDef<Product>[] = [
 export const orderColumns: ColumnDef<Shipment>[] = [
     {
         accessorKey: "id",
-        header: "Id",
+        header: ({ column }) => {
+            return (
+                <Button
+                    className="hover:bg-accent-color-2 px-0 hover:bg-opacity-[.50]"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Id
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
     },
     {
         accessorKey: "email",
@@ -123,21 +142,22 @@ export const orderColumns: ColumnDef<Shipment>[] = [
         id: "actions",
         enableHiding: false,
         cell: ({ row }) => {
-
-            const order = row.original
+            const shipment = row.original
             return (
                 <CustomDropDown>
                     <CustomDialog
                         title="Edit Shipment"
                         description="Edit your Shipment details below."
+                        shipment={shipment}
                         fields={[
-                            { type: 'text', id: 'billingAddress', label: 'BillingAddress', defaultValue: order.billingAddress },
-                            { type: 'text', id: 'deliveryInstruction', label: 'DeliveryInstruction', defaultValue: order.deliveryInstruction },
-                            { type: 'text', id: 'city', label: 'City', defaultValue: order.city },
-                            { type: 'text', id: 'phoneNumber', label: 'PhoneNumber', defaultValue: order.phoneNumber },
-                            { type: 'text', id: 'postalCode', label: 'PostalCode', defaultValue: order.postalCode },
-                            { type: 'text', id: 'shippingAddress', label: 'ShippingAddress', defaultValue: order.shippingAddress },
-                            { type: 'text', id: 'status', label: 'Status', defaultValue: order.status },
+                            { type: 'text', id: 'billingAddress', label: 'BillingAddress', defaultValue: shipment.billingAddress },
+                            { type: 'text', id: 'deliveryInstruction', label: 'DeliveryInstruction', defaultValue: shipment.deliveryInstruction },
+                            { type: 'text', id: 'email', label: 'Email', defaultValue: shipment.email },
+                            { type: 'text', id: 'city', label: 'City', defaultValue: shipment.city },
+                            { type: 'text', id: 'countries', label: 'Countries', defaultValue: shipment.countries },
+                            { type: 'text', id: 'postalCode', label: 'PostalCode', defaultValue: shipment.postalCode },
+                            { type: 'text', id: 'phoneNumber', label: 'PhoneNumber', defaultValue: shipment.phoneNumber },
+                            { type: 'text', id: 'shippingAddress', label: 'ShippingAddress', defaultValue: shipment.shippingAddress },
                         ]}
                         onSubmit={handleShipmentSave}
                     >
@@ -155,7 +175,17 @@ export const orderColumns: ColumnDef<Shipment>[] = [
 export const userColumns: ColumnDef<User>[] = [
     {
         accessorKey: "id",
-        header: "Id",
+        header: ({ column }) => {
+            return (
+                <Button
+                    className="hover:bg-accent-color-2 px-0 hover:bg-opacity-[.50]"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Id
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
     },
     {
         accessorKey: "username",

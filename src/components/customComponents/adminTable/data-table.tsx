@@ -26,11 +26,13 @@ import { useState } from "react"
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
+    filterValue?: string
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
+    filterValue,
 }: DataTableProps<TData, TValue>) {
 
     const [sorting, setSorting] = useState<SortingState>([])
@@ -52,9 +54,10 @@ export function DataTable<TData, TValue>({
         <div className="">
             <div className="flex items-center py-4 text-primary-color">
                 <Input
-                    placeholder="Filter by name...."
+                    value={(table.getColumn(filterValue as string)?.getFilterValue() as string)}
+                    placeholder={`Filter by ${filterValue}`}
                     onChange={(event) =>
-                        table.getColumn("name" || "user" || "status")?.setFilterValue(event.target.value)
+                        table.getColumn(filterValue as string)?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
                 />
