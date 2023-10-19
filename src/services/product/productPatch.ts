@@ -9,8 +9,8 @@ export async function updateProduct(
   try {
     console.log({
       id: product?.id,
-      price: product?.price,
-      stock: product?.stock,
+      price: productValues?.price,
+      stock: productValues?.stock,
       description: productValues?.description,
       name: productValues?.name,
       image: product?.image,
