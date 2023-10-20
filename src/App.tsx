@@ -20,7 +20,7 @@ function App() {
 
 				<KeyCLoakProvider>
 					{window.location.pathname === "/signin" || window.location.pathname === "/signup" ? null : <Header />}
-					<div className="grow bg-background-color">
+					<div className="grow bg-primary-color">
 						<Routes>
 							<Route path="/" element={<LandingPage />} />
 							<Route path="/signin" element={<SignInPage />} />
