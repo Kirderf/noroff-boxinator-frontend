@@ -4,24 +4,22 @@ import { useState, useEffect } from "react";
 import Keycloak from "keycloak-js";
 
 function useKeyCloak() {
-   
   const [keycloak, setKeycloak] = useState<Keycloak>();
   useEffect(() => {
-    if(keycloak?.authenticated){
-      post()
+    if (keycloak?.authenticated) {
+      post();
     }
-  },[keycloak?.token])
-
+  }, [keycloak?.token]);
 
   const post = async () => {
     const user = (await keycloak?.loadUserInfo()) as any;
-    console.log(user.sub)
+    console.log(user.sub);
+
     const u: User = {
       id: user.sub,
       username: user.name,
       address: "",
       email: user.email,
-      roles: "",
     };
     try {
       await fetch("https://boxinator2.azurewebsites.net/api/v1/user", {

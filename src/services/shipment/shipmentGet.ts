@@ -29,6 +29,31 @@ async function fetchAllShipments(token?: string) {
   }
 }
 
+async function fetchAllGuestShipmentsByUserId(token?: string, userId?: string) {
+  try {
+    const response = await fetch(
+      "https://boxinator2.azurewebsites.net/api/v1/shipment/" +
+        userId +
+        "?guest=true",
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          authorization: "bearer " + token,
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch Shipments");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 const fetchShipmentById = async (id: number) => {
   return await fetch(
     "https://boxinator2.azurewebsites.net/api/v1/shipment/" +
@@ -39,8 +64,8 @@ const fetchShipmentById = async (id: number) => {
 
 async function fetchShipmentsFromUser(userId: string, token?: string) {
   try {
-    if(userId == "error"){
-      return 
+    if (userId == "error") {
+      return;
     }
     const response = await fetch(
       "https://boxinator2.azurewebsites.net/api/v1/shipment/" + userId,
@@ -79,6 +104,16 @@ export const useGetAllShipment = (
 export const useGetShipmenttById = (id: number, fullShipment?: boolean) => {
   if (fullShipment) fullShipmentParam = "?fullShipment=true";
   return useQuery(["getShipmentById", id], () => fetchShipmentById(id));
+};
+
+export const useGetAllGuestShipmentsByUserId = (
+  token?: string,
+  userId?: string
+) => {
+  return useQuery({
+    queryKey: ["getAllGuestShipmentsByUserId", userId],
+    queryFn: () => fetchAllGuestShipmentsByUserId(token as string, userId),
+  });
 };
 
 export const useGetShipmentsForUser = (
