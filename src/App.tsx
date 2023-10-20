@@ -10,7 +10,8 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import { KeyCLoakProvider } from "./context/KeyCloakContext";
 import ProtectedElement from "./lib/ProtectedRoute";
-import ScrollToTop from "./lib/scrollToTop";
+import ScrollToTop from "./lib/ScrollToTop";
+
 
 
 function App() {
