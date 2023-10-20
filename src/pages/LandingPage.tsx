@@ -43,18 +43,19 @@ function LandingPage() {
                     </div>
                 </div>
             </div>
+            <div className="w-[100%] bg-background-color">
+                <div ref={productListRef} className=" h-auto w-[90%] mx-auto my-20 bg-primary-color rounded-lg">
+                    <h1 className="text-center pt-10 text-[2rem] font-bold"><span className="text-green-color">Top</span> Selling Products!</h1>
+                    <TopSellingCardList />
+                    <Separator className="my-20 bg-background-color" />
+                    <h1 className="text-center pt-10 text-[2rem] font-bold"><span className="text-green-color">Other</span> great Products to look at!</h1>
+                    {getAllProductsHook.isLoading ?
+                        <></>
+                        :
+                        <CardList product={products} />
+                    }
 
-            <div ref={productListRef} className=" h-auto w-[90%] mx-auto my-20 bg-primary-color rounded-lg">
-                <h1 className="text-center pt-10 text-[2rem] font-bold"><span className="text-green-color">Top</span> Selling Products!</h1>
-                <TopSellingCardList />
-                <Separator className="my-20 bg-background-color" />
-                <h1 className="text-center pt-10 text-[2rem] font-bold"><span className="text-green-color">Other</span> great Products to look at!</h1>
-                {getAllProductsHook.isLoading ?
-                    <></>
-                    :
-                    <CardList product={products} />
-                }
-
+                </div>
             </div>
 
         </main >
