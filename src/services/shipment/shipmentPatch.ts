@@ -44,3 +44,35 @@ export async function updateShipment(
     throw error;
   }
 }
+
+export async function updateShipmentByUser(
+  token?: string,
+  shipmentId?: number,
+  userId?: string
+) {
+  try {
+    const response = await fetch(
+      "https://boxinator2.azurewebsites.net/api/v1/shipment/" +
+        shipmentId +
+        "/" +
+        userId,
+      {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          authorization: "bearer " + token,
+        },
+      }
+    );
+    if (response.status === 401) {
+      throw new Error("Unauthorized");
+    }
+    if (!response.ok) {
+      throw new Error("Failed to update Shipment");
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
