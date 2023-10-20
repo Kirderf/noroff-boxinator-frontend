@@ -43,6 +43,25 @@ interface UserPost {
   roles: string;
   username: string;
 }
+
+interface UnclaimedShipment {
+  id: number;
+  email: string;
+  order: number;
+  billingAddress: string;
+  deliveryInstruction: string;
+  shippingAddress: string;
+  countries: string;
+  city: string;
+  phoneNumber: string;
+  postalCode: string;
+  status: string;
+  timestamp: string;
+  gift: boolean;
+  user: number;
+  shipmentProducts: { product: Product; quantity: number }[];
+}
+
 interface Shipment {
   id: number;
   email: string;
@@ -66,28 +85,28 @@ interface ShipmentProducts {
   productId: number;
   quantity: number;
 }
-interface ProductPost{
+interface ProductPost {
   name: string;
-  description: string; 
-  image: string; 
-  price: number; 
-  stock: number; 
-  active: boolean; 
+  description: string;
+  image: string;
+  price: number;
+  stock: number;
+  active: boolean;
   weight: number;
-  depth: number; 
+  depth: number;
   height: number;
 }
 interface ShipmentPost {
-  user?: string,
-  shipmentProducts: {productId: number, quantity: number}[],
-  email: string,
-  billingAddress: string,
-  deliveryInstruction: string,
-  shippingAddress: string,
-  countries: string,
-  city: string,
-  phoneNumber: string,
-  postalCode: number,
-  status: string,
-  gift: boolean
+  user?: string;
+  shipmentProducts: { productId: number; quantity: number }[];
+  email: string;
+  billingAddress: string;
+  deliveryInstruction: string;
+  shippingAddress: string;
+  countries: string;
+  city: string;
+  phoneNumber: string;
+  postalCode: number;
+  status: string;
+  gift: boolean;
 }
