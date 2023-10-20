@@ -10,6 +10,8 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import { KeyCLoakProvider } from "./context/KeyCloakContext";
 import ProtectedElement from "./lib/ProtectedRoute";
+import ScrollToTop from "./lib/ScrollToTop";
+
 
 
 function App() {
@@ -20,7 +22,7 @@ function App() {
 
 				<KeyCLoakProvider>
 					{window.location.pathname === "/signin" || window.location.pathname === "/signup" ? null : <Header />}
-					<div className="grow bg-background-color">
+					<div className="grow bg-primary-color">
 						<Routes>
 							<Route path="/" element={<LandingPage />} />
 							<Route path="/signin" element={<SignInPage />} />
@@ -35,7 +37,7 @@ function App() {
 									<AdminPage />
 								</ProtectedElement>
 							} />
-							<Route path="/product/:id" element={<ProductDetailPage />} />
+							<Route path="/product/:id" element={<><ScrollToTop /><ProductDetailPage /></>} />
 							<Route path="/checkout" element={<CheckoutPage />} />
 							<Route path="/not-authorized" element={<h1 className="font-bold text-3xl text-primary-color flex w-full justify-center items-center pt-10">No permission!</h1>} />
 						</Routes>
