@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { Accordion } from "@/components/ui/accordion";
 import { updateShipmentByUser } from "@/services/shipment/shipmentPatch";
 import ShipmentClaimCard from "@/components/customComponents/shipmentClaim/ShipmentClaimCard";
+import { updateUser } from "@/services/user/userPatch";
 
 function ProfilePage() {
     const keycloak = useContext(KeyCloakContext);
@@ -32,6 +33,10 @@ function ProfilePage() {
 
     }
 
+    function handleEditUser(values: Record<string, string>) {
+        updateUser(keycloak.keycloak?.token ?? '', user, values)
+    }
+
     useEffect(() => {
         keycloak.keycloak?.loadUserProfile().then((profile) => {
             setUser(profile)
@@ -46,9 +51,7 @@ function ProfilePage() {
     }, [shipmentByUserHook.data, guestShipmentByUserIdHook.data])
 
 
-    function handleSave(values: Record<string, string>) {
-        console.log(values)
-    }
+
 
     return (
         <div>
@@ -61,11 +64,9 @@ function ProfilePage() {
                             title="Edit User"
                             description="Edit your User details below."
                             fields={[
-                                { type: 'text', id: 'name', label: 'Name', defaultValue: keycloak.keycloak.profile?.username as string },
-                                { type: 'text', id: 'email', label: 'Email', defaultValue: keycloak.keycloak.profile?.email as string },
                                 { type: 'text', id: 'address', label: 'Address', defaultValue: '' },
                             ]}
-                            onSubmit={handleSave}
+                            onSubmit={handleEditUser}
                         >
                             <Button variant="outline">Edit Profile</Button>
                         </CustomDialog>
@@ -78,14 +79,15 @@ function ProfilePage() {
                         <CustomTable shipments={shipment} />
                     </div>
                     <div className="w-[70%] mx-auto">
-                        <h1 className="font-bold text-2xl text-left pb-5">Unclaimed shipments:</h1>
                         {
-                            unclaimedShipments.map((shipment, index) => (
-                                <Accordion key={index} type='single' collapsible className='w-full'>
-                                    <ShipmentClaimCard shipment={shipment} handleSaveShipmentToUser={handleSaveShipmentToUser} />
-                                </Accordion>
-
-                            ))
+                            unclaimedShipments.length === 0 ?
+                                <div></div>
+                                :
+                                unclaimedShipments.map((shipment, index) => (
+                                    <Accordion key={index} type='single' collapsible className='w-full'>
+                                        <ShipmentClaimCard shipment={shipment} handleSaveShipmentToUser={handleSaveShipmentToUser} />
+                                    </Accordion>
+                                ))
                         }
                     </div>
                 </main>
