@@ -44,7 +44,7 @@ function LandingPage() {
                 </div>
             </div>
             <div className="w-[100%] bg-background-color">
-                <div ref={productListRef} className=" h-auto w-[90%] mx-auto my-20 bg-primary-color rounded-lg">
+                <div ref={productListRef} className="pb-5 h-auto w-[90%] mx-auto my-20 bg-primary-color rounded-lg">
                     <h1 className="text-center pt-10 text-[2rem] font-bold"><span className="text-green-color">Top</span> Selling Products!</h1>
                     <TopSellingCardList />
                     <Separator className="my-20 bg-background-color" />
