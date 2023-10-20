@@ -6,11 +6,9 @@ import { KeycloakProfile } from "keycloak-js";
 import { useGetAllGuestShipmentsByUserId, useGetShipmentsForUser } from "@/services/shipment/shipmentGet";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import ShipmentClaimCard from "@/components/customComponents/shipmentClaim/shipmentClaimCard";
 import { Accordion } from "@/components/ui/accordion";
 import { updateShipmentByUser } from "@/services/shipment/shipmentPatch";
-
-
+import ShipmentClaimCard from "@/components/customComponents/shipmentClaim/ShipmentClaimCard";
 
 function ProfilePage() {
     const keycloak = useContext(KeyCloakContext);
