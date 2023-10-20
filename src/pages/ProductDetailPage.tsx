@@ -24,11 +24,6 @@ function ProductDetailPage() {
         if (!getProductByIdHook.isLoading)
             setProduct(getProductByIdHook.data as Product)
     }, [getProductByIdHook.isLoading])
-    const pdesEx = `:Contents:
-    Exploration gear for the rugged adventurer, including a thermos, pocket knife, compass, warm gloves, and a guidebook to Arctic wildlife.
-   
-   :Surprise Element: 
-   A collection of stunning Northern Lights photographs or a video message from a Scandinavian adventurer.`
     return (
         <main className="bg-primary-color flex justify-center w-full items-center h-auto">
             <div className="bg-background-color max-w-[70rem] w-fit h-auto flex items-center rounded-lg text-primary-color p-4 m-10 flex-wrap-reverse justify-center">
