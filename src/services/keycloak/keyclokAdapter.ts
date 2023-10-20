@@ -14,6 +14,7 @@ function useKeyCloak() {
   const post = async () => {
     const user = (await keycloak?.loadUserInfo()) as any;
     console.log(user.sub);
+
     const u: User = {
       id: user.sub,
       username: user.name,
