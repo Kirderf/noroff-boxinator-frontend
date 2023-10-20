@@ -30,7 +30,6 @@ function ProfilePage() {
                 window.location.reload()
                 console.log(res)
             })
-
     }
 
     function handleEditUser(values: Record<string, string>) {
