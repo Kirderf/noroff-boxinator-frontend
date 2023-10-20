@@ -27,7 +27,7 @@ function LandingPage() {
         <main className="flex flex-col">
             <div className='min-h-screen  w-full flex flex-col items-center justify-center bg-primary-color'>
                 <div className='flex gap-32 bg-primary-color flex-wrap items-center pb-52 justify-center'>
-                    <div className="blob-cont bg-green-color w-[15rem] sm:w-[30rem]">
+                    <div className="blob-cont bg-green-color w-[15rem] sm:w-[30rem] mt-10">
                         <img src="./images/gif.gif" className=' rounded-full object-fit  animate-fade-up' alt="" />
                     </div>
                     <div className='flex flex-col items-center justify-center max-w-[20rem] text-center gap-10 animate-fade-left'>
@@ -44,7 +44,7 @@ function LandingPage() {
                 </div>
             </div>
             <div className="w-[100%] bg-background-color">
-                <div ref={productListRef} className="pb-5 h-auto w-[90%] mx-auto my-20 bg-primary-color rounded-lg">
+                <div ref={productListRef} className="pb-5 h-auto md:w-[90%] mx-auto my-20 bg-primary-color rounded-lg">
                     <h1 className="text-center pt-10 text-[2rem] font-bold"><span className="text-green-color">Top</span> Selling Products!</h1>
                     <TopSellingCardList />
                     <Separator className="my-20 bg-background-color" />
