@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Keycloak from "keycloak-js";
 
 function useKeyCloak() {
+   
   const [keycloak, setKeycloak] = useState<Keycloak>();
   //TODO må va ein annæ måte :/
   useEffect(() => {
@@ -12,14 +13,19 @@ function useKeyCloak() {
       realm: "boxinator2",
       clientId: "clientazure",
     });
-    _keycloak.init({ onLoad: "login-required" }).then(() => {
-      setKeycloak(_keycloak);
-    });
+    _keycloak
+      .init({
+        checkLoginIframe: false,
+        onLoad: "check-sso",
+      })
+      .then(() => {
+        setKeycloak(_keycloak);
+      });
 
     const post = async () => {
       const user = (await keycloak?.loadUserInfo()) as any;
 
-      const u: UserPost = {
+      const u: User = {
         id: user.sub,
         username: user.name,
         address: "",
@@ -47,7 +53,8 @@ function useKeyCloak() {
         console.log(e);
       }
     };
-    if (keycloak) {
+    if (keycloak?.tokenParsed) {
+      console.log("hei")
       post();
     }
   }, []);

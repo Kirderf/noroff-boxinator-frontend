@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useToast } from '@/components/ui/use-toast'
 import CustomPopOver from "./CustomPopOver"
 import { useEffect } from "react"
 
@@ -30,7 +29,7 @@ const formSchema = z.object({
     postalCode: z.string().min(4, {
         message: "Please enter a valid postal code.",
     }),
-    phoneNumber: z.string().regex(/^\d{8,}$/, {
+    phoneNumber: z.string().regex(/^[0-9]{10,}$/, {
         message: "Please enter a valid phone number.",
     }),
     deliveryInstruction: z.string().min(3, {
@@ -40,6 +39,8 @@ const formSchema = z.object({
 interface Props {
     country: Country[],
     setShippingCost: React.Dispatch<React.SetStateAction<number>>
+    onFormSubmit: (data: any) => void
+    user?: any
 }
 function CustomCheckoutForm(props: Props) {
 
@@ -64,17 +65,18 @@ function CustomCheckoutForm(props: Props) {
         }
 
     }, [form.watch("country")])
-    const { toast } = useToast()
+
+    //TODO lægg tel felt
+    useEffect(() => {
+        const putUserData = async () => {
+            const userData = await props.user
+            form.setValue("email", userData.email)
+        }
+        if (props.user) putUserData()
+    }, [props.user])
 
     function onSubmit(data: z.infer<typeof formSchema>) {
-        toast({
-            title: "You submitted the following values:",
-            description: (
-                <pre className="mt-2 w-[340px] rounded-md bg-secondary-color p-4">
-                    <code className="text-black">{JSON.stringify(data, null, 2)}</code>
-                </pre>
-            ),
-        })
+        props.onFormSubmit(data)
     }
 
     return (
@@ -177,7 +179,7 @@ function CustomCheckoutForm(props: Props) {
                         </FormItem>
                     )}
                 />
-                <Button className='bg-accent-color-1 w-full' type="submit">Continue to Payment</Button>
+                <Button className='bg-accent-color-1 w-full hover:bg-accent-color-1-focus hover:animate-pop-up' type="submit">Continue to Payment</Button>
             </form>
         </Form>
     )

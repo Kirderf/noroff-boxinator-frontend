@@ -15,7 +15,7 @@ function CustomDropDown(props: { children: React.ReactNode }) {
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                 <DropdownMenuSeparator />
 
-                <div className='flex flex-col gap-3 m-2'>
+                <div className='flex flex-col g-3 m-2'>
                     {props.children}
                 </div>
 

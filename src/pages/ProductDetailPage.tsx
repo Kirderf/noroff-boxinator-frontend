@@ -43,15 +43,19 @@ function ProductDetailPage() {
                         <TableBody className="odd:bg-">
                             <TableRow >
                                 <TableCell>Weight</TableCell>
-                                <TableCell>10 kg</TableCell>
+                                <TableCell>{product?.weight}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>Height</TableCell>
-                                <TableCell>10 cm</TableCell>
+                                <TableCell>{product?.height}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>Width</TableCell>
-                                <TableCell>20 cm</TableCell>
+                                <TableCell>{product?.width}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>Depth</TableCell>
+                                <TableCell>{product?.depth}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -60,7 +64,6 @@ function ProductDetailPage() {
                     <div className="text-center mb-20">
                         <h1 className="text-2xl mb-2 font-bold">{product?.name}</h1>
                         <p className="">{pdesEx.split(":").map((word, index) => {
-                            console.log(word)
                             if (word == "Contents" || word == "Surprise Element") {
                                 return <span key={index} className=" text-green-color text-lg"><br />{word}:<br /></span>
                             } else {
@@ -70,12 +73,12 @@ function ProductDetailPage() {
                         })}</p>
                     </div>
                     <div className="flex gap-10 w-full mt-10 text-background-color">
-                        <Button className="bg-accent-color-1 w-full font-bold" onClick={() => {
+                        <Button className="hover:animate-pop-up bg-accent-color-1 hover:bg-accent-color-1-focus w-full font-bold" onClick={() => {
                             dispatch(addToCart({
                                 product
                             }))
                         }} > Add to cart</Button>
-                        <Button className="bg-error-color w-full font-bold" onClick={() => {
+                        <Button className="hover:animate-pop-up bg-error-color hover:bg-error-color-focus w-full font-bold" onClick={() => {
                             dispatch(addToCart({
                                 product
                             }))

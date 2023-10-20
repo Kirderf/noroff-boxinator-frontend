@@ -9,7 +9,8 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { useEffect } from "react"
 
-function ShipmentDialog(props: Order) {
+
+function ShipmentDialog(props: Shipment) {
 
 
 
@@ -38,7 +39,7 @@ function ShipmentDialog(props: Order) {
                         </div>
                         <div className="flex flex-col">
                             <h1 className="font-bold">Purchase Date</h1>
-                            <h2>{props.timeStamp}</h2>
+                            <h2>{props.timestamp}</h2>
                         </div>
                         <div className="flex flex-col">
                             <h1 className="font-bold">From</h1>

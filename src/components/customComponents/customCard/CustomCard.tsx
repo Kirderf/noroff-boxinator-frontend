@@ -28,32 +28,35 @@ function CustomCard(props: Props) {
     }
 
     return (
-        <Card ref={ref} onClick={() => handleCardClick()} className={` flex flex-col w-full justify-between h-auto shadow-lg hover:scale-105 max-w-[20rem] ${inView ? 'animate-fade-up' : 'opacity-0'} `}>
-            <CardHeader>
-                <img src={props.product.image} className='object-cover h-[10rem]' alt="Product" />
-            </CardHeader>
-            <CardContent>
-                <CardTitle>
-                    {props.product.name}
-                </CardTitle>
-                <CardDescription className='mt-2'>
-                    {props.product.description}
+        <div className={`${inView ? 'animate-fade-up' : 'opacity-0'}`}>
+            <Card ref={ref} onClick={() => handleCardClick()} className=" hover:animate-pop-up  flex flex-col  justify-between h-auto  max-w-[25rem] w-[20rem]">
+                <CardHeader>
+                    <img src={props.product.image} className='  object-cover h-[10rem]' alt="Product" />
+                </CardHeader>
+                <CardContent>
+                    <CardTitle>
+                        {props.product.name}
+                    </CardTitle>
+                    <CardDescription className='mt-2 '>
+                        <p className=' line-clamp-2 hover:line-clamp-none'>{props.product.description}</p>
 
-                </CardDescription>
-                <div className='text-2xl mt-3'>NOK {props.product.price}</div>
-            </CardContent>
-            <CardFooter className=''>
-                <Button onClick={(event: any) => {
-                    event.stopPropagation();
-                    dispatch(addToCart(
-                        { product }
-                    ))
-                }}
-                    className="bg-accent-color-1 z-20 w-full mx-auto" >
-                    Add to cart
-                </Button>
-            </CardFooter>
-        </Card>
+                    </CardDescription>
+                    <div className='text-2xl mt-3'>NOK {props.product.price}</div>
+                </CardContent>
+                <CardFooter className=''>
+                    <Button
+                        onClick={(event: any) => {
+                            event.stopPropagation();
+                            dispatch(addToCart(
+                                { product }
+                            ))
+                        }}
+                        className="hover:animate-pop-up bg-accent-color-1 z-20 w-full mx-auto hover:bg-accent-color-1-focus" >
+                        Add to cart
+                    </Button>
+                </CardFooter>
+            </Card>
+        </div>
     )
 }
 
