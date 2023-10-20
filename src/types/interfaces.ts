@@ -33,7 +33,6 @@ interface User {
   id: number;
   address: string;
   email: string;
-  roles: string;
   username: string;
 }
 interface UserPost {
