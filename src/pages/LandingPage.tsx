@@ -1,5 +1,4 @@
 import CardList from "@/components/customComponents/customCard/CardList";
-import TopSellingCardList from "@/components/customComponents/customCard/TopSellingCardList";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useGetAllProducts } from "@/services/product/productGet";
