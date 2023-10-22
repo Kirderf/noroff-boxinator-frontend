@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Keycloak from "keycloak-js";
+import { api } from "../config";
 
 function useKeyCloak() {
   const [keycloak, setKeycloak] = useState<Keycloak>();
@@ -22,7 +23,7 @@ function useKeyCloak() {
       email: user.email,
     };
     try {
-      await fetch("https://boxinator2.azurewebsites.net/api/v1/user", {
+      await fetch(api + "user", {
         method: "POST",
         //  mode: 'no-cors',
         headers: {

@@ -1,30 +1,27 @@
 /** @format */
 
 import { KeycloakProfile } from "keycloak-js";
-
+import { api } from "../config";
 export async function updateUser(
-  token?: string,
-  user?: KeycloakProfile,
+  token: string,
+  user: KeycloakProfile,
   userValues?: Record<string, string>
 ) {
   try {
-    const response = await fetch(
-      "https://boxinator2.azurewebsites.net/api/v1/user",
-      {
-        method: "PATCH",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          authorization: "bearer " + token,
-        },
-        body: JSON.stringify({
-          id: user?.id,
-          address: userValues?.address,
-          email: user?.email,
-          username: user?.username,
-        }),
-      }
-    );
+    const response = await fetch(api + "/user", {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        authorization: "bearer " + token,
+      },
+      body: JSON.stringify({
+        id: user?.id,
+        address: userValues?.address,
+        email: user?.email,
+        username: user?.username,
+      }),
+    });
     if (response.status === 401) {
       throw new Error("Unauthorized");
     }
