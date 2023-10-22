@@ -165,6 +165,7 @@ export const orderColumns: ColumnDef<Shipment>[] = [
                             { type: 'text', id: 'deliveryInstruction', label: 'DeliveryInstruction', defaultValue: shipment.deliveryInstruction },
                             { type: 'text', id: 'email', label: 'Email', defaultValue: shipment.email },
                             { type: 'text', id: 'city', label: 'City', defaultValue: shipment.city },
+                            { type: 'text', id: 'status', label: 'Status', defaultValue: shipment.status },
                             { type: 'text', id: 'countries', label: 'Countries', defaultValue: shipment.countries },
                             { type: 'text', id: 'postalCode', label: 'PostalCode', defaultValue: shipment.postalCode },
                             { type: 'text', id: 'phoneNumber', label: 'PhoneNumber', defaultValue: shipment.phoneNumber },

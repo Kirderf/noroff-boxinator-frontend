@@ -55,6 +55,12 @@ const fetchShipmentById = async (id: number) => {
     data.json()
   );
 };
+const fetchShipmentHistory = async (id: number) => {
+  return await fetch(
+    "https://boxinator2.azurewebsites.net/api/v1/shipment/" +
+      id + "/history"
+  ).then((data) => data.json());
+};
 
 async function fetchShipmentsFromUser(userId: string, token: string) {
   try {
@@ -121,4 +127,12 @@ export const useGetShipmentsForUser = (
     queryKey: ["getShipmentsFromUser", userId],
     queryFn: () => fetchShipmentsFromUser(userId, token as string),
   });
+};
+
+export const useGetShipmentHistory = (
+  shipmentId: number,
+) => {
+  return useQuery(["useGetShipmentHistory", shipmentId], () =>
+  fetchShipmentHistory(shipmentId)
+  );
 };

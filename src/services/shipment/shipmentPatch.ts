@@ -6,48 +6,24 @@ export async function updateShipment(
   shipmentValues?: Record<string, string>
 ) {
   try {
-    const response = await fetch(api + "shipment", {
-      method: "PATCH",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        authorization: "bearer " + token,
-      },
-      body: JSON.stringify({
-        id: shipment?.id,
-        email: shipmentValues?.email,
-        billingAddress: shipmentValues?.billingAddress,
-        deliveryInstruction: shipmentValues?.deliveryInstruction,
-        shippingAddress: shipmentValues?.shippingAddress,
-        countries: shipmentValues?.countries,
-        city: shipmentValues?.city,
-        phoneNumber: shipmentValues?.phoneNumber,
-        postalCode: shipmentValues?.postalCode,
-        status: shipment?.status,
-        timestamp: shipment?.timestamp,
-        gift: shipment?.gift,
-        user: shipment?.user,
-        shipmentProducts: shipment?.shipmentProducts,
-      }),
-    });
-    if (response.status === 401) {
-      throw new Error("Unauthorized");
+    const data = {
+      id: shipment?.id,
+      email: shipmentValues?.email,
+      billingAddress: shipmentValues?.billingAddress,
+      deliveryInstruction: shipmentValues?.deliveryInstruction,
+      shippingAddress: shipmentValues?.shippingAddress,
+      countries: shipmentValues?.countries,
+      city: shipmentValues?.city,
+      phoneNumber: shipmentValues?.phoneNumber,
+      postalCode: shipmentValues?.postalCode,
+      status: shipmentValues?.status,
+      timestamp: shipment?.timestamp,
+      gift: shipment?.gift,
+      user: shipment?.user,
+    //  shipmentProducts: shipment?.shipmentProducts,
     }
-    if (!response.ok) {
-      throw new Error("Failed to update Shipment");
-    }
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-}
+    console.log(data)
 
-export async function updateShipmentByUser(
-  token?: string,
-  shipmentId?: number,
-  userId?: string
-) {
-  try {
     const response = await fetch(
       api + "shipment/" + shipmentId + "/" + userId,
       {
@@ -57,6 +33,7 @@ export async function updateShipmentByUser(
           "Content-Type": "application/json",
           authorization: "bearer " + token,
         },
+        body: JSON.stringify(data),
       }
     );
     if (response.status === 401) {

@@ -24,7 +24,7 @@ function App() {
 					{window.location.pathname === "/signin" || window.location.pathname === "/signup" ? null : <Header />}
 					<div className="grow bg-primary-color">
 						<Routes>
-							<Route path="/" element={<LandingPage />} />
+							<Route path="/" element={<><ScrollToTop /><LandingPage /></>} />
 							<Route path="/signin" element={<SignInPage />} />
 							<Route path="/signup" element={<SignUpPage />} />
 							<Route path="/profile" element={
