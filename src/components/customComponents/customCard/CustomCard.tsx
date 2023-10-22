@@ -38,7 +38,7 @@ function CustomCard(props: Props) {
                         {props.product.name}
                     </CardTitle>
                     <CardDescription className='mt-2 '>
-                        <p className=' line-clamp-2 hover:line-clamp-none'>{props.product.description}</p>
+                        <div className=' line-clamp-2 hover:line-clamp-none'>{props.product.description}</div>
 
                     </CardDescription>
                     <div className='text-2xl mt-3'>NOK {props.product.price}</div>

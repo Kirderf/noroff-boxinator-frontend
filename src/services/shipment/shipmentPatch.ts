@@ -1,5 +1,5 @@
 /** @format */
-
+import { api } from "../config";
 export async function updateShipment(
   token?: string,
   shipment?: Shipment,
@@ -23,8 +23,9 @@ export async function updateShipment(
     //  shipmentProducts: shipment?.shipmentProducts,
     }
     console.log(data)
+
     const response = await fetch(
-      "https://boxinator2.azurewebsites.net/api/v1/shipment",
+      api + "shipment/" + shipmentId + "/" + userId,
       {
         method: "PATCH",
         headers: {

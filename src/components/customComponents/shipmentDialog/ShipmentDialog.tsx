@@ -13,8 +13,6 @@ import ShipmentDialogData from "./ShipmentDialogData"
 
 function ShipmentDialog(props: Shipment) {
 
-
-
     useEffect(() => {
         const timer = setTimeout(() => 66, 500)
         return () => clearTimeout(timer)
