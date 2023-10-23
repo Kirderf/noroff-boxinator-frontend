@@ -1,11 +1,28 @@
+<!-- @format -->
+
 # How to Run My Frontend Application
 
 1. **Clone the repository**
+
    ```bash
-   git clone [YOUR_LINK_HERE]
+   git clone https://github.com/Kirderf/noroff-boxinator-frontend.git
+   ```
 
+2. **Install dependencies**
 
+   ```bash
+   npm install
+   ```
 
+3. **Run the application**
+   ```bash
+    npm run dev
+   ```
+4. **Open the application in your browser**
+   ```bash
+   http://localhost:3000/
+   ```
+5. **Enjoy!**
 
 <!-- @format -->
 
