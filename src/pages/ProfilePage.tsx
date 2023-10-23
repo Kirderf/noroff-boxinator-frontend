@@ -40,16 +40,19 @@ function ProfilePage() {
         keycloak.keycloak?.loadUserProfile().then((profile) => {
             setUser(profile)
         })
+    }, [])
+
+    useEffect(() => {
         if (!shipmentByUserHook.isLoading) {
             setShipment(shipmentByUserHook.data as Shipment[])
         }
+    }, [shipmentByUserHook.data])
 
+    useEffect(() => {
         if (!guestShipmentByUserIdHook.isLoading) {
             setUnclaimedShipments(guestShipmentByUserIdHook.data as UnclaimedShipment[])
         }
-    }, [shipmentByUserHook.data, guestShipmentByUserIdHook.data])
-
-
+    }, [guestShipmentByUserIdHook.data])
 
 
     return (
