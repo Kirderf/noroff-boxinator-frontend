@@ -132,7 +132,7 @@ export const useGetShipmentsForUser = (
 export const useGetShipmentHistory = (
   shipmentId: number,
 ) => {
-  useQuery({
+  return useQuery({
     queryKey: ["useGetShipmentHistory", shipmentId],
     queryFn: () => fetchShipmentHistory(shipmentId),
   });
