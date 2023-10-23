@@ -25,7 +25,7 @@ export async function updateShipment(
     console.log(data)
 
     const response = await fetch(
-      api + "shipment/" + shipmentId + "/" + userId,
+      api + "shipment/" + shipment?.id + "/" + shipment?.user,
       {
         method: "PATCH",
         headers: {

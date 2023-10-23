@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Accordion } from "@/components/ui/accordion";
-import { updateShipmentByUser } from "@/services/shipment/shipmentPatch";
+import { updateShipment } from "@/services/shipment/shipmentPatch";
 import ShipmentClaimCard from "@/components/customComponents/shipmentClaim/ShipmentClaimCard";
 import { updateUser } from "@/services/user/userPatch";
 
@@ -35,12 +35,11 @@ function ProfilePage() {
     user?.id ?? ""
   );
 
-  function handleSaveShipmentToUser(shipmentId: number) {
-    updateShipmentByUser(
+  function handleSaveShipmentToUser(shipment: Shipment) {
+    updateShipment(
       keycloak.keycloak?.token ?? "",
-      shipmentId,
-      user?.id ?? ""
-    ).then((res) => {
+      shipment
+    ).then((res: any) => {
       window.location.reload();
       console.log(res);
     });
