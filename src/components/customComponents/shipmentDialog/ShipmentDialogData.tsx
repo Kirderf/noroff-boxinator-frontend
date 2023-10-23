@@ -7,7 +7,7 @@ interface Props {
 }
 const ShipmentDialogData = (props: Props) => {
     const [shipmentHistory, setShipmentHistory] = useState<{ id: number, status: String, timestamp: string }[]>([])
-    const useD = useGetShipmentHistory(props.shipment.id) as any
+    const useD = useGetShipmentHistory(props.shipment.id)
 
     useEffect(() => {
         if (!useD.isLoading) {
