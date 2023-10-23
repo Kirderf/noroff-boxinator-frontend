@@ -38,12 +38,11 @@ async function fetchAllGuestShipmentsByUserId(token: string, userId: string) {
         "Content-Type": "application/json",
         authorization: "bearer " + token,
       },
-    }).then((data) => data.json());
+    });
     if (!response.ok) {
       throw new Error("Failed to fetch Shipments");
     }
-
-    const data = await response;
+    const data = await response.json();
     return data;
   } catch (error) {
     throw error;

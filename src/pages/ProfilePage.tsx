@@ -70,38 +70,6 @@ function ProfilePage() {
     }
   }, [shipmentByUserHook.data, guestShipmentByUserIdHook.data]);
 
-    useEffect(() => {
-        keycloak.keycloak?.loadUserProfile().then((profile) => {
-            setUser(profile)
-        })
-    }, [])
-
-    useEffect(() => {
-        if (!shipmentByUserHook.isLoading) {
-            setShipment(shipmentByUserHook.data as Shipment[])
-        }
-    }, [shipmentByUserHook.data])
-  useEffect(() => {
-    keycloak.keycloak?.loadUserProfile().then((profile) => {
-      setUser(profile);
-    });
-    if (!shipmentByUserHook.isLoading) {
-      setShipment(shipmentByUserHook.data as Shipment[]);
-    }
-
-    useEffect(() => {
-        if (!guestShipmentByUserIdHook.isLoading) {
-            setUnclaimedShipments(guestShipmentByUserIdHook.data as UnclaimedShipment[])
-        }
-    }, [guestShipmentByUserIdHook.data])
-
-    if (!guestShipmentByUserIdHook.isLoading) {
-      setUnclaimedShipments(
-        guestShipmentByUserIdHook.data as UnclaimedShipment[]
-      );
-    }
-  }, [shipmentByUserHook.data, guestShipmentByUserIdHook.data]);
-
     return (
         <div>
             {keycloak.keycloak && keycloak.keycloak?.authenticated && (
