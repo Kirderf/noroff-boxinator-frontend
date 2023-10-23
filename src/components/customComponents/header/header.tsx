@@ -23,7 +23,7 @@ function Header() {
                         keycloak.keycloak?.authenticated ? (
                             <div className="hover:animate-pop-up">
                                 <a onClick={() => navigate("/profile")} className="hover:cursor-pointer flex  gap-4 items-center">
-                                    <h1 className="text-lg ">PROFILE</h1>
+                                    <h1 className="text-lg max-[400px]:hidden ">PROFILE</h1>
                                     <Avatar className="border">
                                         <AvatarImage src="../images/freddy.png" alt="@shadcn" />
                                         <AvatarFallback>{keycloak.keycloak.profile?.username?.substring(0, 1)}</AvatarFallback>
