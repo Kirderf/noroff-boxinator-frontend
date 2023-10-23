@@ -39,7 +39,7 @@ function ProfilePage() {
     updateShipment(
       keycloak.keycloak?.token ?? "",
       shipment
-    ).then((res: any) => {
+    ).then((res) => {
       window.location.reload();
       console.log(res);
     });
@@ -70,75 +70,79 @@ function ProfilePage() {
     }
   }, [shipmentByUserHook.data, guestShipmentByUserIdHook.data]);
 
-  return (
-    <div>
-      {keycloak.keycloak && keycloak.keycloak?.authenticated && (
-        <main className="flex flex-col justify-start items-center pt-20 text-background-color bg-primary-color min-h-screen">
-          <div className="min-w-[10rem] flex flex-col items-center justify-center">
-            <img className="rounded-full" src="./images/freddy.png" alt="" />
-            <h1 className="my-6 font-bold text-2xl">
-              {user?.firstName + " " + user?.lastName}
-            </h1>
-            <CustomDialog
-              title="Edit User"
-              description="Edit your User details below."
-              fields={[
-                {
-                  type: "text",
-                  id: "address",
-                  label: "Address",
-                  defaultValue: "",
-                },
-              ]}
-              onSubmit={handleEditUser}
-            >
-              <Button variant="outline">Edit Profile</Button>
-            </CustomDialog>
-            <Button
-              onClick={() => keycloak.keycloak?.logout()}
-              className="bg-error-color w-full mt-5"
-            >
-              Logout
-            </Button>
-            {keycloak.keycloak?.hasRealmRole("ADMIN") && (
-              <Button
-                onClick={() => navigate("/admin")}
-                className="bg-error-color w-full mt-5"
-              >
-                Admin
-              </Button>
+    useEffect(() => {
+        keycloak.keycloak?.loadUserProfile().then((profile) => {
+            setUser(profile)
+        })
+    }, [])
+
+    useEffect(() => {
+        if (!shipmentByUserHook.isLoading) {
+            setShipment(shipmentByUserHook.data as Shipment[])
+        }
+    }, [shipmentByUserHook.data])
+  useEffect(() => {
+    keycloak.keycloak?.loadUserProfile().then((profile) => {
+      setUser(profile);
+    });
+    if (!shipmentByUserHook.isLoading) {
+      setShipment(shipmentByUserHook.data as Shipment[]);
+    }
+
+    useEffect(() => {
+        if (!guestShipmentByUserIdHook.isLoading) {
+            setUnclaimedShipments(guestShipmentByUserIdHook.data as UnclaimedShipment[])
+        }
+    }, [guestShipmentByUserIdHook.data])
+
+    if (!guestShipmentByUserIdHook.isLoading) {
+      setUnclaimedShipments(
+        guestShipmentByUserIdHook.data as UnclaimedShipment[]
+      );
+    }
+  }, [shipmentByUserHook.data, guestShipmentByUserIdHook.data]);
+
+    return (
+        <div>
+            {keycloak.keycloak && keycloak.keycloak?.authenticated && (
+                <main className='flex flex-col justify-start items-center pt-20 text-background-color bg-primary-color min-h-screen'>
+                    <div className="min-w-[10rem] flex flex-col items-center justify-center">
+                        <img className='rounded-full' src="./images/freddy.png" alt="" />
+                        <h1 className='my-6 font-bold text-2xl'>{user?.username}</h1>
+                        <CustomDialog
+                            title="Edit User"
+                            description="Edit your User details below."
+                            fields={[
+                                { type: 'text', id: 'address', label: 'Address', defaultValue: '' },
+                            ]}
+                            onSubmit={handleEditUser}
+                        >
+                            <Button variant="outline">Edit Profile</Button>
+                        </CustomDialog>
+                        <Button onClick={() => keycloak.keycloak?.logout()} className="bg-error-color w-full mt-5">Logout</Button>
+                        {keycloak.keycloak?.hasRealmRole("ADMIN") && (
+                            <Button onClick={() => navigate('/admin')} className="bg-error-color w-full mt-5">Admin</Button>
+                        )}
+                    </div>
+                    <div className="w-[70%] mx-auto">
+                        <CustomTable shipments={shipment} />
+                    </div>
+                    <div className="w-[70%] mx-auto">
+                        {
+                            unclaimedShipments.length === 0 ?
+                                <div></div>
+                                :
+                                unclaimedShipments.map((shipment, index) => (
+                                    <Accordion key={index} type='single' collapsible className='w-full'>
+                                        <ShipmentClaimCard shipment={shipment} handleSaveShipmentToUser={handleSaveShipmentToUser} />
+                                    </Accordion>
+                                ))
+                        }
+                    </div>
+                </main>
             )}
-          </div>
-          <div className="w-[70%] mx-auto">
-            {shipment.length === 0 ? (
-              <div></div>
-            ) : (
-              <CustomTable shipments={shipment} />
-            )}
-          </div>
-          <div className="w-[70%] mx-auto">
-            {unclaimedShipments.length === 0 ? (
-              <div></div>
-            ) : (
-              unclaimedShipments.map((shipment, index) => (
-                <Accordion
-                  key={index}
-                  type="single"
-                  collapsible
-                  className="w-full"
-                >
-                  <ShipmentClaimCard
-                    shipment={shipment}
-                    handleSaveShipmentToUser={handleSaveShipmentToUser}
-                  />
-                </Accordion>
-              ))
-            )}
-          </div>
-        </main>
-      )}
-    </div>
-  );
+        </div>
+    )
 }
 
 export default ProfilePage;
