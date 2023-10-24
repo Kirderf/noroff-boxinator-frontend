@@ -1,5 +1,31 @@
 <!-- @format -->
 
+# How to Run Boxinator Frontend
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/Kirderf/noroff-boxinator-frontend.git
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the application**
+   ```bash
+   npm run dev
+   ```
+4. **Open the application in your browser**
+   ```bash
+   http://localhost:5173/
+   ```
+5. **Enjoy!**
+
+<!-- @format -->
+
 # Colour Palette
 
 Boxinator's colour palette revolves around subtle and practical shades that evoke a sense of reliability and efficiency. The primary colour is a muted and refined shade of navy blue, symbolising trust and stability. Complementary colours include a subtle shade of grey, representing professionalism and precision. These colours unite to create a visually coherent and user-friendly interface.
