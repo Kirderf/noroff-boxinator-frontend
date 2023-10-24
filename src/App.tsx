@@ -11,6 +11,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import { KeyCLoakProvider } from "./context/KeyCloakContext";
 import ProtectedElement from "./lib/ProtectedRoute";
 import ScrollToTop from "./lib/ScrollToTop";
+import Stripe from "./pages/Stripe";
 
 
 
@@ -27,6 +28,7 @@ function App() {
 							<Route path="/" element={<><ScrollToTop /><LandingPage /></>} />
 							<Route path="/signin" element={<SignInPage />} />
 							<Route path="/signup" element={<SignUpPage />} />
+							<Route path="/stripe" element={<Stripe />} />
 							<Route path="/profile" element={
 								<ProtectedElement>
 									<ProfilePage />
