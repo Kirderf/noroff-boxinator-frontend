@@ -75,8 +75,8 @@ function ProfilePage() {
       {keycloak.keycloak && keycloak.keycloak?.authenticated && (
         <main className='flex flex-col justify-start items-center pt-20 text-background-color bg-primary-color min-h-screen'>
           <div className="min-w-[10rem] flex flex-col items-center justify-center">
-            <img className='rounded-full' src="./images/freddy.png" alt="" />
-            <h1 className='my-6 font-bold text-2xl'>{user?.username}</h1>
+            <img className='rounded-full border-4 ' src="./images/freddy.png" alt="" />
+            <h1 className='my-6 font-bold text-2xl'>{user?.firstName + " " + user?.lastName}</h1>
             <CustomDialog
               title="Edit User"
               description="Edit your User details below."

@@ -2,11 +2,10 @@
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
-    TableRow,
+    TableRow
 } from "@/components/ui/table"
 import ShipmentDialog from "../shipmentDialog/ShipmentDialog"
 
@@ -19,7 +18,6 @@ export function CustomTable(props: CustomTableProps) {
 
     return (
         <Table className="rounded-md border h-auto bg-accent-color-1 my-20">
-            <TableCaption>Order history</TableCaption>
             <TableHeader >
                 <TableRow className="bg-accent-color-2">
                     <TableHead className="">Id</TableHead>
@@ -30,7 +28,13 @@ export function CustomTable(props: CustomTableProps) {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {props.shipments?.map((shipment) => (
+                {
+                    props.shipments?.length === 0 ?
+                        <TableRow>
+                            <TableCell className="text-center" colSpan={5}>No Shipments</TableCell>
+                        </TableRow>
+                        :
+                        <>{props.shipments?.map((shipment) => (
                     <TableRow key={shipment?.id}>
                         <TableCell className="font-medium">{shipment?.id}</TableCell>
                         <TableCell>{shipment?.status}</TableCell>
@@ -39,6 +43,9 @@ export function CustomTable(props: CustomTableProps) {
                         <TableCell className="">{<ShipmentDialog {...shipment} />} </TableCell>
                     </TableRow>
                 ))}
+                </>
+                }
+                
             </TableBody>
         </Table>
     )
