@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 
 interface ShipmentClaimCardProps {
     shipment?: UnclaimedShipment
-    handleSaveShipmentToUser: (Shipment: any) => void
+    handleSaveShipmentToUser: (shipmentId: number) => void
 }
 
 
@@ -25,7 +25,7 @@ function ShipmentClaimCard(props: ShipmentClaimCardProps) {
                         </div>
                     </div>
                 </AccordionTrigger>
-                <Button onClick={() => props.handleSaveShipmentToUser(props.shipment)} className='bg-accent-color-2 z-10'>
+                <Button onClick={() => props.handleSaveShipmentToUser(props.shipment?.id!)} className='bg-accent-color-2 z-10'>
                     Claim
                 </Button>
             </div>

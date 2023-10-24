@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Accordion } from "@/components/ui/accordion";
-import { updateShipment } from "@/services/shipment/shipmentPatch";
+import { updateShipment, updateShipmentByUser } from "@/services/shipment/shipmentPatch";
 import ShipmentClaimCard from "@/components/customComponents/shipmentClaim/ShipmentClaimCard";
 import { updateUser } from "@/services/user/userPatch";
 
@@ -35,14 +35,14 @@ function ProfilePage() {
     user?.id ?? ""
   );
 
-  function handleSaveShipmentToUser(shipment: Shipment) {
-    updateShipment(
-      keycloak.keycloak?.token ?? "",
-      shipment
-    ).then((res) => {
-      window.location.reload();
-      console.log(res);
-    });
+  function handleSaveShipmentToUser(shipmentId: number) {
+
+    updateShipmentByUser(keycloak.keycloak?.token ?? '', shipmentId, user?.id ?? '')
+      .then((res) => {
+        window.location.reload()
+        console.log(res)
+      })
+
   }
 
   function handleEditUser(values: Record<string, string>) {
@@ -70,47 +70,47 @@ function ProfilePage() {
     }
   }, [shipmentByUserHook.data, guestShipmentByUserIdHook.data]);
 
-    return (
-        <div>
-            {keycloak.keycloak && keycloak.keycloak?.authenticated && (
-                <main className='flex flex-col justify-start items-center pt-20 text-background-color bg-primary-color min-h-screen'>
-                    <div className="min-w-[10rem] flex flex-col items-center justify-center">
-                        <img className='rounded-full' src="./images/freddy.png" alt="" />
-                        <h1 className='my-6 font-bold text-2xl'>{user?.username}</h1>
-                        <CustomDialog
-                            title="Edit User"
-                            description="Edit your User details below."
-                            fields={[
-                                { type: 'text', id: 'address', label: 'Address', defaultValue: '' },
-                            ]}
-                            onSubmit={handleEditUser}
-                        >
-                            <Button variant="outline">Edit Profile</Button>
-                        </CustomDialog>
-                        <Button onClick={() => keycloak.keycloak?.logout()} className="bg-error-color w-full mt-5">Logout</Button>
-                        {keycloak.keycloak?.hasRealmRole("ADMIN") && (
-                            <Button onClick={() => navigate('/admin')} className="bg-error-color w-full mt-5">Admin</Button>
-                        )}
-                    </div>
-                    <div className="w-[70%] mx-auto">
-                        <CustomTable shipments={shipment} />
-                    </div>
-                    <div className="w-[70%] mx-auto">
-                        {
-                            unclaimedShipments.length === 0 ?
-                                <div></div>
-                                :
-                                unclaimedShipments.map((shipment, index) => (
-                                    <Accordion key={index} type='single' collapsible className='w-full'>
-                                        <ShipmentClaimCard shipment={shipment} handleSaveShipmentToUser={handleSaveShipmentToUser} />
-                                    </Accordion>
-                                ))
-                        }
-                    </div>
-                </main>
+  return (
+    <div>
+      {keycloak.keycloak && keycloak.keycloak?.authenticated && (
+        <main className='flex flex-col justify-start items-center pt-20 text-background-color bg-primary-color min-h-screen'>
+          <div className="min-w-[10rem] flex flex-col items-center justify-center">
+            <img className='rounded-full' src="./images/freddy.png" alt="" />
+            <h1 className='my-6 font-bold text-2xl'>{user?.username}</h1>
+            <CustomDialog
+              title="Edit User"
+              description="Edit your User details below."
+              fields={[
+                { type: 'text', id: 'address', label: 'Address', defaultValue: '' },
+              ]}
+              onSubmit={handleEditUser}
+            >
+              <Button variant="outline">Edit Profile</Button>
+            </CustomDialog>
+            <Button onClick={() => keycloak.keycloak?.logout()} className="bg-error-color w-full mt-5">Logout</Button>
+            {keycloak.keycloak?.hasRealmRole("ADMIN") && (
+              <Button onClick={() => navigate('/admin')} className="bg-error-color w-full mt-5">Admin</Button>
             )}
-        </div>
-    )
+          </div>
+          <div className="w-[70%] mx-auto">
+            <CustomTable shipments={shipment} />
+          </div>
+          <div className="w-[70%] mx-auto">
+            {
+              unclaimedShipments.length === 0 ?
+                <div></div>
+                :
+                unclaimedShipments.map((shipment, index) => (
+                  <Accordion key={index} type='single' collapsible className='w-full'>
+                    <ShipmentClaimCard shipment={shipment} handleSaveShipmentToUser={handleSaveShipmentToUser} />
+                  </Accordion>
+                ))
+            }
+          </div>
+        </main>
+      )}
+    </div>
+  )
 }
 
 export default ProfilePage;
