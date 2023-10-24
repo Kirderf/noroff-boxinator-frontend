@@ -1,3 +1,12 @@
+# How to Run My Frontend Application
+
+1. **Clone the repository**
+   ```bash
+   git clone [YOUR_LINK_HERE]
+
+
+
+
 <!-- @format -->
 
 # Colour Palette
