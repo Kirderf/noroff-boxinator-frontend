@@ -24,7 +24,7 @@ export function CustomTable(props: CustomTableProps) {
                 <TableRow className="bg-accent-color-2">
                     <TableHead className="">Id</TableHead>
                     <TableHead>Status</TableHead>
-                    <TableHead>ProductQuantity</TableHead>
+                    <TableHead>Products</TableHead>
                     <TableHead className="">User</TableHead>
                     <TableHead className="text-center">Action</TableHead>
                 </TableRow>
