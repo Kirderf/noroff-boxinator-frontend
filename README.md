@@ -1,6 +1,6 @@
 <!-- @format -->
 
-# How to Run My Frontend Application
+# How to Run Boxinator Frontend
 
 1. **Clone the repository**
 
@@ -16,11 +16,11 @@
 
 3. **Run the application**
    ```bash
-    npm run dev
+   npm run dev
    ```
 4. **Open the application in your browser**
    ```bash
-   http://localhost:3000/
+   http://localhost:5173/
    ```
 5. **Enjoy!**
 
