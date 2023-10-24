@@ -133,29 +133,32 @@ function AdminPage() {
                 // JSX for admin user
                 <>
                     <h1 className="text-4xl text-background-color text-center mt-10">Welcome Admin!</h1>
-                    <div className="flex md:flex-nowrap flex-wrap gap-10 max-w-md w-[50%] mx-auto">
-                        <Button onClick={() => getProducts()} className="bg-accent-color-1 w-full"> Products</Button>
-                        <Button onClick={() => getUsers()} className="bg-accent-color-1 w-full"> User</Button>
-                        <Button onClick={() => getShipment()} className="bg-accent-color-1 w-full"> Shipment</Button>
+
+                    <div className="flex w-[50%] justify-center  flex-wrap gap-10 max-w-md  mx-auto">
+                        <Button onClick={() => getProducts()} className="bg-accent-color-1 w-[100px]"> Products</Button>
+                        <Button onClick={() => getUsers()} className="bg-accent-color-1 w-[100px]"> User</Button>
+                        <Button onClick={() => getShipment()} className="bg-accent-color-1 w-[100px]"> Shipment</Button>
+                        <div className="w-[30em] self-center">
+                            <CustomDialog
+                                title="Add Product"
+                                description="Add product details below."
+                                fields={[
+                                    { type: 'text', id: 'name', label: 'Name' },
+                                    { type: 'text', id: 'description', label: 'Description' },
+                                    { type: 'url', id: 'image', label: 'Image' },
+                                    { type: 'number', id: 'price', label: 'Price' },
+                                    { type: 'number', id: 'stock', label: 'Stock' },
+                                    { type: 'checkbox', id: 'active', label: 'Active' },
+                                    { type: 'number', id: 'height', label: 'Height' },
+                                    { type: 'number', id: 'depth', label: 'Depth' },
+                                    { type: 'number', id: 'weight', label: 'Weight' },
+                                ]}
+                                onSubmit={addProduct}
+                            >
+                                <Button className="bg-accent-color-1">Add Product</Button>
+                            </CustomDialog>
+                        </div>
                     </div>
-                    <CustomDialog
-                        title="Add Product"
-                        description="Add product details below."
-                        fields={[
-                            { type: 'text', id: 'name', label: 'Name' },
-                            { type: 'text', id: 'description', label: 'Description' },
-                            { type: 'url', id: 'image', label: 'Image' },
-                            { type: 'number', id: 'price', label: 'Price' },
-                            { type: 'number', id: 'stock', label: 'Stock' },
-                            { type: 'checkbox', id: 'active', label: 'Active' },
-                            { type: 'number', id: 'height', label: 'Height' },
-                            { type: 'number', id: 'depth', label: 'Depth' },
-                            { type: 'number', id: 'weight', label: 'Weight' },
-                        ]}
-                        onSubmit={addProduct}
-                    >
-                        <Button className="bg-accent-color-1 w-[50%]">Add Product</Button>
-                    </CustomDialog>
                     <div className="w-[70%] mx-auto">
                         <DataTable filterValue={filterValue} columns={columns} data={data} />
                     </div>
@@ -164,8 +167,9 @@ function AdminPage() {
             ) : (
                 // JSX for non-admin user
                 <h1 className="text-4xl text-background-color text-center mt-10">Not Admin</h1>
-            )}
-        </main>
+            )
+            }
+        </main >
     )
 
 

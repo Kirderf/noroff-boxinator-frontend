@@ -50,12 +50,24 @@ const CustomDialog: FunctionComponent<CustomDialogProps> = ({ title, description
                             <Label htmlFor={field.id} className="text-right">
                                 {field.label}
                             </Label>
-                            <Input
-                                type={field.type}
-                                id={field.id}
-                                defaultValue={field.defaultValue}
-                                className={`col-span-3 text-primary-color ${field.className}`}
-                            />
+                            {field.label == "Status" ?
+                                <>
+                                    <select id={field.id} defaultValue={field.defaultValue} className="col-span-3 text-primary-color">
+                                        <option value="ORDER_PLACED">ORDER_PLACED</option>
+                                        <option value="ORDER_PROCESSING">ORDER_PROCESSING</option>
+                                        <option value="SHIPPED">SHIPPED</option>
+                                        <option value="DELIVERED">DELIVERED</option>
+                                    </select>
+                                </>
+                                :
+                                <Input
+                                    type={field.type}
+                                    id={field.id}
+                                    defaultValue={field.defaultValue}
+                                    className={`col-span-3 text-primary-color ${field.className}`}
+                                />
+                            }
+
                         </div>
                     ))}
                 </div>
@@ -67,7 +79,7 @@ const CustomDialog: FunctionComponent<CustomDialogProps> = ({ title, description
                                 console.log(element.checked)
                                 acc[field.id] = `${element.checked}`
                             } else acc[field.id] = element.value;
-
+                            console.log(acc)
                             return acc;
                         }, {} as Record<string, string>);
                         onSubmit(values, keycloak.keycloak?.token as string, shipment, product);

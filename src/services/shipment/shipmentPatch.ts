@@ -25,8 +25,7 @@ export async function updateShipment(
     console.log(data)
 
     const response = await fetch(
-      api + "shipment/" + shipment?.id + "/" + shipment?.user,
-      {
+      api + "shipment" ,      {
         method: "PATCH",
         headers: {
           Accept: "application/json",
@@ -40,8 +39,10 @@ export async function updateShipment(
       throw new Error("Unauthorized");
     }
     if (!response.ok) {
+      console.log(response)
       throw new Error("Failed to update Shipment");
     }
+    console.log(response)
   } catch (error) {
     console.log(error);
     throw error;
