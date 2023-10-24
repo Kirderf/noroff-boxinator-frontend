@@ -29,7 +29,7 @@ const formSchema = z.object({
     postalCode: z.string().min(4, {
         message: "Please enter a valid postal code.",
     }),
-    phoneNumber: z.string().regex(/^[0-9]{10,}$/, {
+    phoneNumber: z.string().regex(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im, {
         message: "Please enter a valid phone number.",
     }),
     deliveryInstruction: z.string().min(3, {
