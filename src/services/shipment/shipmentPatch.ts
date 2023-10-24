@@ -20,29 +20,56 @@ export async function updateShipment(
       timestamp: shipment?.timestamp,
       gift: shipment?.gift,
       user: shipment?.user,
-    //  shipmentProducts: shipment?.shipmentProducts,
-    }
-    console.log(data)
+      //  shipmentProducts: shipment?.shipmentProducts,
+    };
+    console.log(data);
 
+    const response = await fetch(api + "shipment", {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        authorization: "bearer " + token,
+      },
+      body: JSON.stringify(data),
+    });
+    if (response.status === 401) {
+      throw new Error("Unauthorized");
+    }
+    if (!response.ok) {
+      console.log(response);
+      throw new Error("Failed to update Shipment");
+    }
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function updateShipmentByUser(
+  token?: string,
+  shipmentId?: number,
+  userId?: string
+) {
+  try {
     const response = await fetch(
-      api + "shipment" ,      {
+      api + "shipment/" + shipmentId + "/" + userId,
+      {
         method: "PATCH",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
           authorization: "bearer " + token,
         },
-        body: JSON.stringify(data),
       }
     );
     if (response.status === 401) {
       throw new Error("Unauthorized");
     }
     if (!response.ok) {
-      console.log(response)
       throw new Error("Failed to update Shipment");
     }
-    console.log(response)
   } catch (error) {
     console.log(error);
     throw error;
