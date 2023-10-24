@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Accordion } from "@/components/ui/accordion";
-import { updateShipment, updateShipmentByUser } from "@/services/shipment/shipmentPatch";
+import { updateShipmentByUser } from "@/services/shipment/shipmentPatch";
 import ShipmentClaimCard from "@/components/customComponents/shipmentClaim/ShipmentClaimCard";
 import { updateUser } from "@/services/user/userPatch";
 
