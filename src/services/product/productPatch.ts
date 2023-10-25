@@ -69,8 +69,7 @@ export async function updateProductActive(
     if (!response.ok) {
       throw new Error("Failed to update Shipment");
     }
-    const data = await response.json();
-    return data;
+    return response;
   } catch (error) {
     throw error;
   }

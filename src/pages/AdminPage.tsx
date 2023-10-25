@@ -70,27 +70,26 @@ function AdminPage() {
             weight: Number(values.weight),
             depth: Number(values.depth),
         }
-        console.log(productPost)
         if (isProductValid(productPost)) {
-            await productPostWithAdmin(productPost, token).then((r) => {
-                console.log(r)
-                if (r.ok) {
+            await productPostWithAdmin(productPost, token).then((result) => {
+                if (result.ok) {
                     toast({
                         variant: "success",
                         title: "Success <3",
                         description: (
                             <div className="mt-2 w-[340px] rounded-md p-4">
-                                The shipment was successfully placed, and will soon arrive. ^_^
+                                Product was successfully made, money farm activated. ^_^
                             </div>
                         ),
                     })
+                    window.location.reload()
                 } else {
                     toast({
                         variant: "error",
                         title: "Error",
                         description: (
                             <div className="mt-2 w-[340px] rounded-md  p-4">
-                                Oops! It seems our magical ordering elves are taking an unexpected nap. ^_^
+                                Oops! It seems our magical product elves are taking an unexpected nap. ^_^
                             </div>
                         ),
                     })
@@ -148,10 +147,10 @@ function AdminPage() {
                                     { type: 'url', id: 'image', label: 'Image' },
                                     { type: 'number', id: 'price', label: 'Price' },
                                     { type: 'number', id: 'stock', label: 'Stock' },
-                                    { type: 'checkbox', id: 'active', label: 'Active' },
                                     { type: 'number', id: 'height', label: 'Height' },
                                     { type: 'number', id: 'depth', label: 'Depth' },
                                     { type: 'number', id: 'weight', label: 'Weight' },
+                                    { type: 'checkbox', id: 'active', label: 'Active' },
                                 ]}
                                 onSubmit={addProduct}
                             >
