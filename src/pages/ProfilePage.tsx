@@ -100,11 +100,17 @@ function ProfilePage() {
               unclaimedShipments.length === 0 ?
                 <div></div>
                 :
-                unclaimedShipments.map((shipment, index) => (
-                  <Accordion key={index} type='single' collapsible className='w-full'>
-                    <ShipmentClaimCard shipment={shipment} handleSaveShipmentToUser={handleSaveShipmentToUser} />
-                  </Accordion>
-                ))
+                <>
+                  <h1 className='text-2xl font-bold mb-5'>Unclaimed Shipments</h1>
+                  {
+                    unclaimedShipments.map((shipment, index) => (
+                      <Accordion key={index} type='single' collapsible className='w-full'>
+                        <ShipmentClaimCard shipment={shipment} handleSaveShipmentToUser={handleSaveShipmentToUser} />
+                      </Accordion>
+                    ))
+                  }
+
+                </>
             }
           </div>
         </main>
