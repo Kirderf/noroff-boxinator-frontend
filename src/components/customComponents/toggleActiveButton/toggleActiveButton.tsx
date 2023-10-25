@@ -15,8 +15,11 @@ const ToggleActiveButton: React.FC<ToggleActiveButtonProps> = ({ active: prevAct
     const keycloak = useContext(KeyCloakContext);
 
     function handleActiveProduct() {
-        updateProductActive(keycloak.keycloak?.token, product, active);
-        window.location.reload();
+        updateProductActive(keycloak.keycloak?.token, product, active).then((res) => {
+            if (res.ok) {
+                window.location.reload();
+            }
+        })
     }
 
     useEffect(() => {
