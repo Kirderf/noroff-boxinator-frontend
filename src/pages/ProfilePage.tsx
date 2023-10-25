@@ -1,4 +1,4 @@
-import CustomDialog from "@/components/customComponents/CustomDialogForm/CustomDialogForm";
+
 import { CustomTable } from "@/components/customComponents/table/CustomTable";
 import { KeyCloakContext } from "@/context/KeyCloakContext";
 import { useContext, useEffect, useState } from "react";
