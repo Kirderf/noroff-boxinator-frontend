@@ -52,7 +52,7 @@ const CustomDialog: FunctionComponent<CustomDialogProps> = ({ title, description
                             </Label>
                             {field.label == "Status" ?
                                 <>
-                                    <select id={field.id} defaultValue={field.defaultValue} className="col-span-3 text-primary-color">
+                                    <select id={field.id} defaultValue={field.defaultValue} className="col-span-3 text-primary-color p-2 rounded-md">
                                         <option value="ORDER_PLACED">ORDER_PLACED</option>
                                         <option value="ORDER_PROCESSING">ORDER_PROCESSING</option>
                                         <option value="SHIPPED">SHIPPED</option>
