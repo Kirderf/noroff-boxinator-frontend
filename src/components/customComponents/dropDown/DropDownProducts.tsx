@@ -35,8 +35,11 @@ const DropDownProducts = () => {
                 <DropdownMenuGroup>
                     {cart?.map((item, index) => (
                         <DropdownMenuItem key={index}>
-                            <div className="flex flex-row gap-10" >
-                                <a href={"/product/" + item.product?.id}>{item.product?.name}</a>
+                            <div className="">
+                                <img src={item.product?.image} alt="" className="object-fill w-10 h-10" />
+                            </div>
+                            <div className="flex flex-row gap-5 items-center justify-between ml-2" >
+                                <a className="max-w-[6rem] w-full" href={"/product/" + item.product?.id}>{item.product?.name}</a>
                                 <div className="flex flex-row justify-center h-[20px] text-center content-center top-0 right-0 bg-accent-color-1 rounded-xl" onClick={(e: any) => e.preventDefault()}>
                                     <Button className="h-[20px]" onClick={() => {
                                         dispatch(incrementQuantity(
@@ -51,10 +54,10 @@ const DropDownProducts = () => {
                                     }}>-</Button>
                                 </div>
                                 <div>
-                                    Price : {(item.product.price).toFixed(2)}
+                                    Price: {(item.product.price).toFixed(2)}
                                 </div>
                                 <div>
-                                    Price Total : {(item.quantity * item.product.price).toFixed(2)}
+                                    Price Total: {(item.quantity * item.product.price).toFixed(2)}
                                 </div>
                             </div>
                         </DropdownMenuItem>
