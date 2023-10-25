@@ -3,7 +3,6 @@
 import {
     ColumnDef,
     SortingState,
-    SortingTableState,
     flexRender,
     getCoreRowModel,
     getFilteredRowModel,
