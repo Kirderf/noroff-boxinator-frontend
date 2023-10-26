@@ -1,4 +1,4 @@
-import CustomDialog from "@/components/customComponents/CustomDialogForm/CustomDialogForm";
+
 import { CustomTable } from "@/components/customComponents/table/CustomTable";
 import { KeyCloakContext } from "@/context/KeyCloakContext";
 import { useContext, useEffect, useState } from "react";
@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import { Accordion } from "@/components/ui/accordion";
 import { updateShipmentByUser } from "@/services/shipment/shipmentPatch";
 import ShipmentClaimCard from "@/components/customComponents/shipmentClaim/ShipmentClaimCard";
-import { updateUser } from "@/services/user/userPatch";
 
 function ProfilePage() {
   const keycloak = useContext(KeyCloakContext);
@@ -45,16 +44,6 @@ function ProfilePage() {
 
   }
 
-  function handleEditUser(values: Record<string, string>) {
-    if (values.address === "") {
-      window.location.reload();
-    }
-    updateUser(keycloak.keycloak?.token!, user!, values).then((res) => {
-      window.location.reload();
-      console.log(res);
-    });
-  }
-
   useEffect(() => {
     keycloak.keycloak?.loadUserProfile().then((profile) => {
       setUser(profile);
@@ -68,6 +57,8 @@ function ProfilePage() {
         guestShipmentByUserIdHook.data as UnclaimedShipment[]
       );
     }
+
+
   }, [shipmentByUserHook.data, guestShipmentByUserIdHook.data]);
 
   return (
@@ -77,16 +68,6 @@ function ProfilePage() {
           <div className="min-w-[10rem] flex flex-col items-center justify-center">
             <img className='rounded-full border-4 ' src="./images/freddy.png" alt="" />
             <h1 className='my-6 font-bold text-2xl'>{user?.firstName + " " + user?.lastName}</h1>
-            <CustomDialog
-              title="Edit User"
-              description="Edit your User details below."
-              fields={[
-                { type: 'text', id: 'address', label: 'Address', defaultValue: '' },
-              ]}
-              onSubmit={handleEditUser}
-            >
-              <Button variant="outline">Edit Profile</Button>
-            </CustomDialog>
             <Button onClick={() => keycloak.keycloak?.logout()} className="bg-error-color w-full mt-5">Logout</Button>
             {keycloak.keycloak?.hasRealmRole("ADMIN") && (
               <Button onClick={() => navigate('/admin')} className="bg-error-color w-full mt-5">Admin</Button>
